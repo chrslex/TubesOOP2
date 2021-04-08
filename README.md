@@ -20,7 +20,7 @@ Ngga wajib tapi disarankan biar seragam
 |   Inventory        | ❌         |                    |                                                   |
 |   Occupier         | ❌         |   Method           |   kasih method abstrak baru getImage              |
 |   ActiveEngimon    | ❌         |   Method           |   implementasi getImage dari atribut Engimon aktif   |
-|   Player           | ❌         |   Method & GUI     |   atribut UmageViewer, implementasi getImage dari atribut ini   |
+|   Player           | ❌         |   Method & GUI     |   atribut ImageViewer, implementasi getImage dari atribut ini   |
 |   Enemy            | ❌         |   Method           |   implementasi getImage dari atribut Engimon      |
 |   Breeding         | ❌         |                    |   Menunggu semua di atas selesai ditranslasi      |
 |   Battle           | ❌         |                    |   Menunggu semua di atas selesai ditranslasi      |

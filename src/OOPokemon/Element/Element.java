@@ -6,7 +6,7 @@ import java.util.AbstractMap;
 import java.util.HashMap;
 
 public class Element{
-    public ElementType elementType;
+    private ElementType elementType;
     private static final HashMap<Tuple<ElementType, ElementType>, Float> tableElementAdv = new HashMap<>();
 
 
@@ -17,8 +17,12 @@ public class Element{
         this.elementType = elementType;
     }
 
-    public float compareElemenet(Element elementKiri, Element elementKanan) {
+    public static float getElementAdv(Element elementKiri, Element elementKanan) {
         return tableElementAdv.get(new Tuple<>(elementKiri.elementType, elementKanan.elementType));
+    }
+
+    public void setElementType(ElementType elementType) {
+        this.elementType = elementType;
     }
 
     @Override

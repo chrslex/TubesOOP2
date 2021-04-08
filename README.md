@@ -27,9 +27,9 @@ Tidak wajib tapi disarankan
 |   Cell             | ✅         |   GUI              | Inherit dari Rectangle biar bisa di render di GUI atau mempunyai atribut ImageViewer biar bisa render gambar di layar  |
 |   Map              | ❌         |                    | kontruktornya saja                                  |
 |   Engimon          | ❌         |   GUI              | Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
-|   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon Punya Gambar unik beri        |
+|   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon Punya Gambar unik            |
 |   Skill            | ❌         |   GUI              | Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
-|   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill Punya Gambar unik beri        |
+|   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill Punya Gambar unik             |
 |   Inventory        | ❌         |   GUI              | Ini agak tricky karena akan membuat layout dan panel baru   |
 |   Occupier         | ❌         |   Method           | kasih method abstrak baru getImage              |
 |   ActiveEngimon    | ❌         |   Method           | implementasi getImage dari atribut Engimon aktif   |

@@ -2,7 +2,7 @@
 Tubes 2 OOP PBO ITB Willy Wangky pake Java
 
 # Build
-Pastikan Java JDK 8 (java SE-1.8)
+Pastikan Java JDK 8 (java SE-1.8) terinstall
 
 Buka Project structure pada intelliJ `ctrl + shift + alt + s` 
 

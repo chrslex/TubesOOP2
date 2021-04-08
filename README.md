@@ -1,31 +1,29 @@
 # TubesOOP2
 Tubes 2 OOP PBO ITB Willy Wangky pake Java
 
-#Tools
+# Tools
 #### IntelliJ 
 Ngga wajib tapi disarankan biar seragam
 
 # TO DO LIST:
-translate Position
 
-translate Element
-
-translate Cell, inherit dari JavaFX.Rectangle
-
-translate Map -> List<Cell> aja dan Kontruktornya saja
-
-translate Engimon dan turunannya
-
-translate Skill dan Kelas turunananya
-
-translate Inventory
-
-untuk kelas Occupier dan turunannya seperti Player, ActiveEngimon dan Enemy(Engimon liar) pikirin nanti
-karena akan memakai mungkin gambar.png atau sejenis Sprite (kelas buatan sendiri) untuk setiap jenis Engimon
-
-translate Breeding
-
-translate Battle (agak belakang setelah Occupier dan turunannya jadi)
+|   TO DO            | Translate   |   Tambahan         |   Keterangan                                      |
+|---                 |---          |---                 |---                                                |
+|   Position         | ✅         |                    |                                                   |
+|   Element          | ✅         |                    |                                                   |
+|   Cell             | ✅         |   GUI              |   Inherit dari Rectangle biar bisa di render di GUI  |
+|   Map              | ❌         |                    |                                                   |
+|   Engimon          | ❌         |   GUI              |   Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
+|   Turunan Engimon  | ❌         |   GUI              |   Tiap Tiap Engimon Punya Gambar unik             |
+|   Skill            | ❌         |                    |                                                   |
+|   Turunan Skill    | ❌         |                    |                                                   |
+|   Inventory        | ❌         |                    |                                                   |
+|   Occupier         | ❌         |   Method           |   kasih method abstrak baru getImage              |
+|   ActiveEngimon    | ❌         |   Method           |   implementasi getImage dari atribut Engimon aktif   |
+|   Player           | ❌         |   Method & GUI     |   atribut UmageViewer, implementasi getImage dari atribut ini   |
+|   Enemy            | ❌         |   Method           |   implementasi getImage dari atribut Engimon      |
+|   Breeding         | ❌         |                    |   Menunggu semua di atas selesai ditranslasi      |
+|   Battle           | ❌         |                    |   Menunggu semua di atas selesai ditranslasi      |
 
 ### NOTE: 
 

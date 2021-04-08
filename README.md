@@ -12,7 +12,7 @@ Ngga wajib tapi disarankan biar seragam
 |   Position         | ✅         |                    |                                                   |
 |   Element          | ✅         |                    |                                                   |
 |   Cell             | ✅         |   GUI              |   Inherit dari Rectangle biar bisa di render di GUI  |
-|   Map              | ❌         |                    |                                                   |
+|   Map              | ❌         |                    |   kontruknya saja                                  |
 |   Engimon          | ❌         |   GUI              |   Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
 |   Turunan Engimon  | ❌         |   GUI              |   Tiap Tiap Engimon Punya Gambar unik             |
 |   Skill            | ❌         |                    |                                                   |

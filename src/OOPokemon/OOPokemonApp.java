@@ -1,9 +1,9 @@
 package OOPokemon;
+import OOPokemon.Map.Map;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class OOPokemonApp extends Application {
@@ -12,8 +12,9 @@ public class OOPokemonApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(root, 600, 800));
+        stage.setScene(new Scene(root));
         stage.setTitle("OOPokemon");
+        new Map("src/OOPokemon/Map/map1.txt", root);
         stage.show();
     }
 

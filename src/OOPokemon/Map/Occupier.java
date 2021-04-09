@@ -1,24 +1,18 @@
 package OOPokemon.Map;
 
-import javafx.application.Application;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
 
-
-public abstract class Occupier extends Rectangle {
+public abstract class Occupier extends ImageView {
     public OccupierType occupierType;
-
+    public Position position;
 
     Occupier() {
-        super(40,40, Color.BLACK);
-        setTranslateX(0);
-        setTranslateY(0);
+        super();
+
     }
+
+
 
 
 

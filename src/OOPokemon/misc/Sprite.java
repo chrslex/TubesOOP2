@@ -61,7 +61,7 @@ public class Sprite extends Pane {
         bottomRight.setY(height * 2/3);
 
 
-        this.getChildren().addAll(center,topLeft,bottomRight);
+        this.getChildren().addAll(center,topLeft, topRight, bottomLeft, bottomRight);
     }
 
 

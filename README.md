@@ -26,20 +26,20 @@ Tidak wajib tapi disarankan
 |   Element          | ✅         |                    |                                                 |
 |   Cell             | ✅         |   GUI              | Inherit dari Rectangle atau ImageView biar bisa di render di GUI   |
 |   Map              | ✅         |                    | kontruktornya saja                                  |
-|   Engimon          | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
+|   Engimon          | ❌         |   GUI              | Inherit dari Image atau punya atribut Image biar bisa render gambar di layar  |
 |   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
-|   Skill            | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
+|   Skill            | ❌         |   GUI              | Inherit dari Image atau punya atribut image biar bisa render gambar di layar  |
 |   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
 |   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
 |   Occupier         | ✅         |   GUI              |                                                  |
 |   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
 |   Player           | ❌         |   GUI              | atribut Image, setImage dari atribut ini   |
-|   Enemy            | ❌         |   Method           | setImage dari Engimon      |
+|   Enemy            | ❌         |   Method           | setCenterImage dari Image Engimon      |
 |   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   Battle           | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   GameState        |             |                    | Menyimpan semua keterangan game dari map player dan musuh2 |
 |   GameState save   |             |                    | Deserialize object gamestate jadi file eksternal seperti json |
-|   GameState load   |             |                    | Serialize file eksternal seperti json menjadi object GameState |   
+|   GameState load   |             |                    | Serialize file eksternal seperti json menjadi object GameState object|   
 
 
 ### NOTE: 

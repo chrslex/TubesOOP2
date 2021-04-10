@@ -31,12 +31,16 @@ Tidak wajib tapi disarankan
 |   Skill            | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
 |   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
 |   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
-|   Occupier         | ❌         |   GUI              | Inherit dari ImageView      |
+|   Occupier         | ✅         |   GUI              |                                                  |
 |   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
 |   Player           | ❌         |   GUI              | atribut Image, setImage dari atribut ini   |
 |   Enemy            | ❌         |   Method           | setImage dari Engimon      |
 |   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   Battle           | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
+|   GameState        |             |                    | Menyimpan semua keterangan game dari map player dan musuh2 |
+|   GameState save   |             |                    | Deserialize object gamestate jadi file eksternal seperti json |
+|   GameState load   |             |                    | Serialize file eksternal seperti json menjadi object GameState |   
+
 
 ### NOTE: 
 

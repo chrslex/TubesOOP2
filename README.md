@@ -24,17 +24,17 @@ Tidak wajib tapi disarankan
 |---                 |---          |---                 |---                                              |
 |   Position         | ✅         |                    |                                                 |
 |   Element          | ✅         |                    |                                                 |
-|   Cell             | ✅         |   GUI              | Inherit dari Rectangle biar bisa di render di GUI atau mempunyai atribut ImageViewer biar bisa render gambar di layar  |
+|   Cell             | ✅         |   GUI              | Inherit dari Rectangle atau ImageView biar bisa di render di GUI   |
 |   Map              | ❌         |                    | kontruktornya saja                                  |
-|   Engimon          | ❌         |   GUI              | Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
-|   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon Punya Gambar unik            |
-|   Skill            | ❌         |   GUI              | Punya Atribut baru ImageViewer biar bisa render gambar di layar  |
-|   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill Punya Gambar unik             |
-|   Inventory        | ❌         |   GUI              | Ini agak tricky karena akan membuat layout dan panel baru   |
-|   Occupier         | ❌         |   Method           | kasih method abstrak baru getImage              |
-|   ActiveEngimon    | ❌         |   Method           | implementasi getImage dari atribut Engimon aktif   |
-|   Player           | ❌         |   Method & GUI     | atribut ImageViewer, implementasi getImage dari atribut ini   |
-|   Enemy            | ❌         |   Method           | implementasi getImage dari atribut Engimon      |
+|   Engimon          | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
+|   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
+|   Skill            | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
+|   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
+|   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
+|   Occupier         | ❌         |   GUI              | Inherit dari ImageView      |
+|   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
+|   Player           | ❌         |   GUI              | atribut Image, setImage dari atribut ini   |
+|   Enemy            | ❌         |   Method           | setImage dari Engimon      |
 |   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   Battle           | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 

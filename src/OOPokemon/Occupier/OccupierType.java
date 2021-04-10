@@ -1,4 +1,4 @@
-package OOPokemon.Map;
+package OOPokemon.Occupier;
 
 public enum OccupierType {
     Player_Type,

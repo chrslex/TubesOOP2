@@ -1,4 +1,4 @@
-package OOPokemon;
+package OOPokemon.misc;
 
 public class Tuple<X, Y> {
     public final X x;

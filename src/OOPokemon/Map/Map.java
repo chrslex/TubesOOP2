@@ -1,6 +1,7 @@
 package OOPokemon.Map;
 
-import javafx.scene.Group;
+import OOPokemon.Occupier.Occupier;
+import javafx.scene.layout.Pane;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ public class Map {
     int MAX_Y = Position.MAX_Y;
 
 
-    public Map(Group root) {
+    public Map(Pane root) {
         cells = new ArrayList<>();
         for (int i = 0; i < MAX_X * MAX_Y; i++) {
             Cell cell = new Cell(i % MAX_X, i / MAX_X, CellType.Grassland_Cell);
@@ -23,7 +24,7 @@ public class Map {
         }
     }
 
-    public Map(String fileName, Group root) {
+    public Map(String fileName, Pane root) {
         cells = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -56,6 +57,20 @@ public class Map {
         }
     }
 
+    public Cell getCellAtPosition(Position position) {
+        return cells.get(position.x + position.y * MAX_X);
+    }
+
+    public boolean addOccupier(Occupier occupier) {
+        Cell temp = getCellAtPosition(occupier.position);
+        if (temp.occupier != null) return false;
+        temp.occupier = occupier;
+        return true;
+    }
+
+    public void removeOccupierAtPosition(Position position) {
+        getCellAtPosition(position).occupier = null;
+    }
 
 
 

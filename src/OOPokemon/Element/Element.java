@@ -1,8 +1,7 @@
 package OOPokemon.Element;
 
-import OOPokemon.Tuple;
+import OOPokemon.misc.Tuple;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 
 public class Element{

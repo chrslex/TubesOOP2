@@ -1,16 +1,17 @@
 package OOPokemon.Map;
 
+import OOPokemon.Occupier.Occupier;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
     public Position position;
-    public CellType cellType;
+    private final CellType cellType;
     public Occupier occupier;
 
     // Configuration parameter
-    public static int cellWidth = 20;
-    public static int cellHeight = 40;
+    public static float cellWidth = 100;
+    public static float cellHeight = 100;
 
 
     Cell() {

@@ -7,12 +7,12 @@ public class Position {
     public static int MAX_X = 30;
     public static int MAX_Y = 20;
 
-    Position() {
+    public Position() {
         x = 0;
         y = 0;
     }
 
-    Position(int _x, int _y) {
+    public Position(int _x, int _y) {
         x = _x;
         y = _y;
     }

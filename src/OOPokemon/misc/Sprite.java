@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 public class Sprite extends Pane {
     private final ImageView center;
     private final ImageView topLeft;
+    private final ImageView topRight;
+    private final ImageView bottomLeft;
     private final ImageView bottomRight;
 
     public Sprite() {
@@ -22,6 +24,7 @@ public class Sprite extends Pane {
         center = new ImageView();
         center.setFitHeight(width);
         center.setFitWidth(height);
+        center.setPreserveRatio(true);
         center.setX(0);
         center.setY(0);
 
@@ -29,13 +32,31 @@ public class Sprite extends Pane {
         topLeft = new ImageView();
         topLeft.setFitHeight(height / 3);
         topLeft.setFitWidth(width / 3);
+        center.setPreserveRatio(true);
         topLeft.setX(0);
         topLeft.setY(0);
+
+
+        topRight = new ImageView();
+        topRight.setFitHeight(height / 3);
+        topRight.setFitWidth(width / 3);
+        topRight.setPreserveRatio(true);
+        topRight.setX(width * 2/3);
+        topRight.setY(0);
+
+
+        bottomLeft = new ImageView();
+        bottomLeft.setFitHeight(height / 3);
+        bottomLeft.setFitWidth(width / 3);
+        bottomLeft.setPreserveRatio(true);
+        bottomLeft.setX(0);
+        bottomLeft.setY(height * 2/3);
 
 
         bottomRight = new ImageView();
         bottomRight.setFitHeight(height / 3);
         bottomRight.setFitWidth(width / 3);
+        bottomRight.setPreserveRatio(true);
         bottomRight.setX(width * 2/3);
         bottomRight.setY(height * 2/3);
 
@@ -51,6 +72,14 @@ public class Sprite extends Pane {
 
     public void setTopLefImage(Image image) {
         topLeft.setImage(image);
+    }
+
+    public void setTopRightImage(Image image) {
+        topRight.setImage(image);
+    }
+
+    public void setBottomLeftImage(Image image) {
+        bottomLeft.setImage(image);
     }
 
     public void setBottomRightImage(Image image) {

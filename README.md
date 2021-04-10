@@ -25,7 +25,7 @@ Tidak wajib tapi disarankan
 |   Position         | ✅         |                    |                                                 |
 |   Element          | ✅         |                    |                                                 |
 |   Cell             | ✅         |   GUI              | Inherit dari Rectangle atau ImageView biar bisa di render di GUI   |
-|   Map              | ❌         |                    | kontruktornya saja                                  |
+|   Map              | ✅         |                    | kontruktornya saja                                  |
 |   Engimon          | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |
 |   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
 |   Skill            | ❌         |   GUI              | Inherit dari Image biar bisa render gambar di layar  |

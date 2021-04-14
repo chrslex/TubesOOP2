@@ -1,4 +1,4 @@
-package OOPokemon;
+package OOPokemon.misc;
 
 import OOPokemon.Map.Map;
 import OOPokemon.Occupier.Player;
@@ -26,7 +26,7 @@ public class GameState {
 
 
     public GameState(Pane mapContainer){
-        String mapFile = "src/OOPokemon/Map/map1.txt";
+        String mapFile = "bin/map1.txt";
         map = new Map(mapFile, mapContainer);
         player = new Player(3,3, mapContainer, map);
     }

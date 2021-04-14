@@ -1,6 +1,6 @@
 package OOPokemon.Map;
 
-import OOPokemon.GameState;
+import OOPokemon.misc.GameState;
 import OOPokemon.Occupier.Occupier;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

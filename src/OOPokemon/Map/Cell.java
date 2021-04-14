@@ -1,5 +1,6 @@
 package OOPokemon.Map;
 
+import OOPokemon.GameState;
 import OOPokemon.Occupier.Occupier;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,8 +11,8 @@ public class Cell extends Rectangle {
     public Occupier occupier;
 
     // Configuration parameter
-    public static float cellWidth = 100;
-    public static float cellHeight = 100;
+    public static float cellWidth = GameState.getCellWidth();
+    public static float cellHeight = GameState.getCellHeight();
 
 
     Cell() {
@@ -32,6 +33,14 @@ public class Cell extends Rectangle {
                 break;
             case Sea_Cell:
                 setFill(Color.ROYALBLUE);
+                break;
+            case Mountain_Cell:
+                setFill(Color.valueOf("#FF8F0C"));
+                break;
+            case Tundra_Cell:
+                setFill(Color.valueOf("#C5DDFA"));
+                break;
+
         }
         occupier = null;
     }

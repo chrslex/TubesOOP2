@@ -36,7 +36,20 @@ public class Map {
                 for (int i = 0; i < MAX_X ; i++) {
                     try {
                         char c = line.charAt(i);
-                        CellType cellType = (c == 'o')? CellType.Sea_Cell : CellType.Grassland_Cell;
+                        CellType cellType;
+                        switch (c){
+                            case '^':
+                                cellType = CellType.Mountain_Cell;
+                                break;
+                            case '=':
+                                cellType = CellType.Tundra_Cell;
+                                break;
+                            case 'o':
+                                cellType = CellType.Sea_Cell;
+                                break;
+                            default:
+                                cellType = CellType.Grassland_Cell;
+                        }
                         Cell cell = new Cell(i, MAX_Y, cellType);
                         root.getChildren().add(cell);
                         cells.add(cell);

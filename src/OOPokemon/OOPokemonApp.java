@@ -2,6 +2,8 @@ package OOPokemon;
 import OOPokemon.Map.Map;
 
 import OOPokemon.Occupier.Player;
+import OOPokemon.misc.GameState;
+import OOPokemon.misc.MusicPlayer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,41 +12,53 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
+
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import static OOPokemon.GameState.*;
+
+import static OOPokemon.misc.GameState.*;
 
 public class OOPokemonApp extends Application {
 
     private BorderPane root;
     private Pane camera;
+    private MusicPlayer musicPlayer;
 
     private Map isekai;
     private Player myPlayer;
 
     private Parent newGame() {
-        root = new BorderPane();
-        camera = new Pane();
-
+        initPane();
         loadConfig();
         setUpCamera();
+        playBGM();
 
-        Pane mapPlaceHolder = new Pane();
-        Pane guiPlaceHolder = new Pane();
+        Pane mapContainer = new Pane();
+        Pane guiContainer = new Pane();
+        guiContainer.toFront();
 
-        GameState gameState = new GameState(mapPlaceHolder);
+        root.setTop(guiContainer);
+        root.setBottom(camera);
+        camera.getChildren().add(mapContainer);
 
+
+        GameState gameState = new GameState(mapContainer);
         isekai = gameState.map;
         myPlayer = gameState.player;
-        root.setTop(guiPlaceHolder);
-        root.setBottom(camera);
-        guiPlaceHolder.toFront();
-        camera.getChildren().addAll(mapPlaceHolder);
         cameraHandler();
         return root;
     }
 
+    private void playBGM() {
+        musicPlayer = new MusicPlayer("bin/music/freedomR3.mp3");
+        musicPlayer.start();
+    }
+
+    private void initPane() {
+        root = new BorderPane();
+        camera = new Pane();
+    }
 
 
     @Override
@@ -59,16 +73,12 @@ public class OOPokemonApp extends Application {
         Scene mainGame;
 
         if (mode == GameModeType.LoadGame) {
-            System.out.println("test1");
-
             mainGame = new Scene(newGame());
         }
         else {
-            System.out.println("test2");
             mainGame = new Scene(newGame());
         }
 
-        System.out.println("test3");
 
         mainGame.setFill(Color.BLACK);
 

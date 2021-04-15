@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Magnetize extends Skill {
     private String species;
     

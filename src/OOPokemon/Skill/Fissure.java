@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Fissure extends Skill {
     private String species;
     

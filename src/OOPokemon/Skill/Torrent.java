@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Torrent extends Skill {
     private String species;
     

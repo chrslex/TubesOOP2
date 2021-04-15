@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class StaticStorm extends Skill {
     private String species;
     

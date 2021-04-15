@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Skill {
     protected int basePower;
     public int masteryLevel;

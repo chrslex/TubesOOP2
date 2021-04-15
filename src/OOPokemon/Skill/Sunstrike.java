@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Sunstrike extends Skill {
     private String species;
     

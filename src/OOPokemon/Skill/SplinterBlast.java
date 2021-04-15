@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class SplinterBlast extends Skill {
     private String species;
     

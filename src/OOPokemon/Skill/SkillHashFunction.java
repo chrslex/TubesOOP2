@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class SkillHashFunction
 {
 	public int hash(final Skill s)

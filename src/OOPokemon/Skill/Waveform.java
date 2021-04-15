@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Waveform extends Skill {
     private String species;
     

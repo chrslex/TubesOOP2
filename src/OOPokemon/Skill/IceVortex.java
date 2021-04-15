@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class IceVortex extends Skill {
     private String species;
     

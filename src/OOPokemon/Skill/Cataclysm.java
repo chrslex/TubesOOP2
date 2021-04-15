@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Cataclysm extends Skill {
     private String species;
     

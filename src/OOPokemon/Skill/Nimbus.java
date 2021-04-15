@@ -1,3 +1,5 @@
+package OOPokemon.Skill;
+
 public class Nimbus extends Skill {
     private String species;
     

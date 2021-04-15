@@ -1,6 +1,11 @@
 # TubesOOP2
 Tubes 2 OOP PBO ITB Willy Wangky pake Java
 
+# Technologies
+Java SE-1.8
+
+Google gson-2.8.6
+
 # Build
 Pastikan Java JDK 8 (java SE-1.8) terinstall
 
@@ -26,10 +31,10 @@ Tidak wajib tapi disarankan
 |   Element          | ✅         |                    |                                                 |
 |   Cell             | ✅         |   GUI              | Inherit dari Rectangle atau ImageView biar bisa di render di GUI   |
 |   Map              | ✅         |                    | kontruktornya saja                                  |
-|   Engimon          | ❌         |   GUI              | Inherit dari Image atau punya atribut Image biar bisa render gambar di layar  |
-|   Turunan Engimon  | ❌         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
-|   Skill            | ❌         |   GUI              | Inherit dari Image atau punya atribut image biar bisa render gambar di layar  |
-|   Turunan Skill    | ❌         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
+|   Engimon          | ✅         |   GUI              | Inherit dari Image atau punya atribut Image biar bisa render gambar di layar  |
+|   Turunan Engimon  | ✅         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
+|   Skill            | ✅         |   GUI              | Inherit dari Image atau punya atribut image biar bisa render gambar di layar  |
+|   Turunan Skill    | ✅         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
 |   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
 |   Occupier         | ✅         |   GUI              |                                                  |
 |   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
@@ -41,10 +46,5 @@ Tidak wajib tapi disarankan
 |   GameState save   |             |                    | Deserialize object gamestate jadi file eksternal seperti json |
 |   GameState load   |             |                    | Serialize file eksternal seperti json menjadi object GameState object|   
 
+Progress: ~60%
 
-### NOTE: 
-
-Getter dan Setter tidak perlu di translate, attribut jadikan semua public
-
-# Technologies
-Java SE-1.8

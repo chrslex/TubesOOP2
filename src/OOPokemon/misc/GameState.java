@@ -2,16 +2,15 @@ package OOPokemon.misc;
 
 import OOPokemon.Map.Map;
 import OOPokemon.Occupier.Player;
+import OOPokemon.exception.NotInitializedException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.scene.layout.Pane;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.*;
 
 public class GameState {
 
@@ -25,10 +24,14 @@ public class GameState {
     public Player player;
 
 
-    public GameState(Pane mapContainer){
+    public GameState() {
         String mapFile = "bin/map1.txt";
-        map = new Map(mapFile, mapContainer);
-        player = new Player(3,3, mapContainer, map);
+        map = new Map(mapFile);
+        try {
+            player = new Player(3,3, map);
+        } catch (NotInitializedException e) {
+            System.err.println(e.getErrorMessage());
+        }
     }
 
 

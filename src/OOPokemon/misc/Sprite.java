@@ -54,11 +54,11 @@ public class Sprite extends Pane {
 
 
         bottomRight = new ImageView();
-        bottomRight.setFitHeight(height / 3);
-        bottomRight.setFitWidth(width / 3);
+        bottomRight.setFitHeight(height / 2);
+        bottomRight.setFitWidth(width / 2);
         bottomRight.setPreserveRatio(true);
-        bottomRight.setX(width * 2/3);
-        bottomRight.setY(height * 2/3);
+        bottomRight.setX(width * 1/2);
+        bottomRight.setY(height * 1/2);
 
 
         this.getChildren().addAll(center,topLeft, topRight, bottomLeft, bottomRight);

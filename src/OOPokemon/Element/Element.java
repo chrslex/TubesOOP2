@@ -16,8 +16,10 @@ public class Element{
         this.elementType = elementType;
     }
 
-    public static float getElementAdv(Element elementKiri, Element elementKanan) {
-        return tableElementAdv.get(new Tuple<>(elementKiri.elementType, elementKanan.elementType));
+    public ElementType getElementType() { return elementType; }
+
+    public static float getElementAdv(ElementType elementKiri, ElementType elementKanan) {
+        return tableElementAdv.get(new Tuple<>(elementKiri, elementKanan));
     }
 
     public void setElementType(ElementType elementType) {

@@ -3,11 +3,13 @@ package OOPokemon.Occupier;
 import OOPokemon.Map.Cell;
 import OOPokemon.Map.Map;
 import OOPokemon.Map.Position;
+import OOPokemon.exception.NotInitializedException;
+import OOPokemon.misc.Renderable;
 import OOPokemon.misc.Sprite;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Node;
 
-public abstract class Occupier {
+public abstract class Occupier implements Renderable {
     protected Sprite sprite;
     public OccupierType occupierType;
     public Position position;
@@ -16,24 +18,22 @@ public abstract class Occupier {
     private static final float cellHeight = Cell.cellHeight;
     private static final float cellWidth = Cell.cellWidth;
 
-    Occupier(Pane node, Map map) {
+    Occupier(Map map) throws NotInitializedException {
+        if (map == null) throw new NotInitializedException();
         sprite = new Sprite();
         occupierType = OccupierType.Enemy_Type;
         position = new Position();
         this.map = map;
-        node.getChildren().add(sprite);
         setPositionOcc(0,0);
-        updateImagePosition();
     }
 
-    Occupier(int x, int y, OccupierType occupierType, Pane node, Map map) {
+    Occupier(int x, int y, OccupierType occupierType, Map map) throws NotInitializedException {
+        if (map == null) throw new NotInitializedException();
         sprite = new Sprite();
         this.occupierType = occupierType;
         position = (Position.isValidCoordinate(x,y))? new Position(x,y) : new Position();
         this.map = map;
-        node.getChildren().add(sprite);
         setPositionOcc(position.x, position.y);
-        updateImagePosition();
     }
 
     protected void updateImagePosition() {
@@ -59,4 +59,8 @@ public abstract class Occupier {
         return false;
     }
 
+    @Override
+    public Node getToRender() {
+        return sprite;
+    }
 }

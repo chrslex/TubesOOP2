@@ -10,21 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-    List<Cell> cells;
+    private List<Cell> cells;
     int MAX_X = Position.MAX_X;
     int MAX_Y = Position.MAX_Y;
 
 
-    public Map(Pane root) {
+    public Map() {
         cells = new ArrayList<>();
         for (int i = 0; i < MAX_X * MAX_Y; i++) {
             Cell cell = new Cell(i % MAX_X, i / MAX_X, CellType.Grassland_Cell);
-            root.getChildren().add(cell);
             cells.add(cell);
         }
     }
 
-    public Map(String fileName, Pane root) {
+    public Map(String fileName) {
         cells = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -51,12 +50,10 @@ public class Map {
                                 cellType = CellType.Grassland_Cell;
                         }
                         Cell cell = new Cell(i, MAX_Y, cellType);
-                        root.getChildren().add(cell);
                         cells.add(cell);
                     }
                     catch (StringIndexOutOfBoundsException e){
                         Cell cell = new Cell(i, MAX_Y, CellType.Grassland_Cell);
-                        root.getChildren().add(cell);
                         cells.add(cell);
                     }
                 }
@@ -74,15 +71,18 @@ public class Map {
         return cells.get(position.x + position.y * MAX_X);
     }
 
-    public boolean addOccupier(Occupier occupier) {
+    public void addOccupier(Occupier occupier) {
         Cell temp = getCellAtPosition(occupier.position);
-        if (temp.occupier != null) return false;
+        if (temp.occupier != null) return;
         temp.occupier = occupier;
-        return true;
     }
 
     public void removeOccupierAtPosition(Position position) {
         getCellAtPosition(position).occupier = null;
+    }
+
+    public List<Cell> getMap(){
+        return cells;
     }
 
 

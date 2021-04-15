@@ -2,10 +2,12 @@ package OOPokemon.Map;
 
 import OOPokemon.misc.GameState;
 import OOPokemon.Occupier.Occupier;
+import OOPokemon.misc.Renderable;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Cell extends Rectangle {
+public class Cell extends Rectangle implements Renderable {
     public Position position;
     private final CellType cellType;
     public Occupier occupier;
@@ -45,7 +47,16 @@ public class Cell extends Rectangle {
         occupier = null;
     }
 
+    public CellType getCellType() {
+        return cellType;
+    }
+
     public void setOccupier(Occupier occupier) {
         this.occupier = occupier;
+    }
+
+    @Override
+    public Node getToRender() {
+        return this;
     }
 }

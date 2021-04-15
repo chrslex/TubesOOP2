@@ -1,5 +1,9 @@
 package OOPokemon.Species;
 
+import OOPokemon.Skill.StaticStorm;
+import OOPokemon.Skill.Sunstrike;
+import javafx.scene.image.Image;
+
 import static OOPokemon.Element.ElementType.*;
 
 public class Inferail extends Engimon {
@@ -7,7 +11,10 @@ public class Inferail extends Engimon {
         this.namaSpecies = "Inferail";
         monElements[0].setElementType(Fire);
         monElements[1].setElementType(Electric);
-//        this.monSkills[0] = IceVortex();
+        monSkills[0] = new Sunstrike();
+        monSkills[1] = new StaticStorm();
+        image = new Image("assets/inferail.png");
+
     }
 
     public Inferail() {

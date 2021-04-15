@@ -9,7 +9,7 @@ public class Element{
     private static final HashMap<Tuple<ElementType, ElementType>, Float> tableElementAdv = new HashMap<>();
 
 
-    Element() {
+    public Element() {
         elementType = ElementType.None;
     }
     Element(ElementType elementType) {

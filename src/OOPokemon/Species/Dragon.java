@@ -1,12 +1,17 @@
 package OOPokemon.Species;
 
+import OOPokemon.Skill.Sunstrike;
+import javafx.scene.image.Image;
+
 import static OOPokemon.Element.ElementType.Fire;
 
 public class Dragon extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Dragon";
+        namaSpecies = "Dragon";
         monElements[0].setElementType(Fire);
-//        this.monSkills[0] = IceVortex();
+        monSkills[0] = new Sunstrike();
+        image = new Image("assets/dragon.png");
+
     }
 
     public Dragon() {

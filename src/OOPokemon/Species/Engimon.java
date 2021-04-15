@@ -2,6 +2,8 @@ package OOPokemon.Species;
 import java.util.Scanner;
 import OOPokemon.Element.Element;
 import OOPokemon.Element.ElementType;
+import OOPokemon.Skill.Skill;
+import javafx.scene.image.Image;
 
 import static OOPokemon.Element.ElementType.None;
 //import OOPokemon.Skill;
@@ -15,9 +17,11 @@ public class Engimon {
     protected int monLife;
     protected String monName;
     protected String namaSpecies;
-    protected Element monElements[];
-    protected Engimon monParents[];
-//    public Skill monSkills;
+    protected Element[] monElements;
+    protected Engimon[] monParents;
+
+    protected Image image;
+    public Skill[] monSkills;
 
     private void InitComp() {
         this.monName = "";
@@ -27,9 +31,17 @@ public class Engimon {
         this.monLife = 3;
         this.monExp = 0;
         this.monCtvExp = 2000;
-//        this.monSkills = new Skill[4];
-        this.monElements = new Element[4];
+        this.monSkills = new Skill[4];
+        for (int i = 0; i < 4; i++) {
+            monSkills[i] = new Skill();
+        }
+        this.monElements = new Element[2];
+        for (int i = 0; i < 2; i++) {
+            monElements[i] = new Element();
+        }
         this.monParents = null;
+
+        image = new Image("assets/pikachu.png");
     }
 
     public Engimon() {
@@ -93,6 +105,9 @@ public class Engimon {
         InitComp();
         this.monName = name;
         this.monParents = new Engimon[2];
+        for (int i = 0; i < 2; i++) {
+            monParents[i] = new Engimon();
+        }
         this.monParents[0] = other1;
         this.monParents[1] = other2;
 
@@ -242,7 +257,7 @@ public class Engimon {
             System.out.println("Elemen 2 : " + this.monElements[1].toString());
         }
 //        printInfoSkill();
-        if (this.monParents != null && (this.monParents[0].getName() != "")) {
+        if (this.monParents != null && (!this.monParents[0].getName().equals(""))) {
             System.out.println("List nama dan spesies Parent :");
             for (int j = 0; j < 2 ; j++)
             {
@@ -269,8 +284,7 @@ public class Engimon {
 //    }
 
     public float maxFloat(float a, float b) {
-        if (a > b) return a;
-        return b;
+        return Math.max(a, b);
     }
 
     public float maxElAdv(Engimon a, Engimon b) {
@@ -279,7 +293,7 @@ public class Engimon {
         ElementType elb1 = b.getFirstElement();
         ElementType elb2 = b.getSecondElement();
 
-        float elAdvA[] =
+        float[] elAdvA =
         {
             Element.getElementAdv(ela1, elb1),
             Element.getElementAdv(ela1, elb2),
@@ -293,5 +307,13 @@ public class Engimon {
             elAdvAMax = maxFloat(elAdvA[i], elAdvAMax);
         }
         return elAdvAMax;
+    }
+
+    public Image getImage(){
+        return image;
+    }
+
+    public Image getElementImage() {
+        return new Image("assets/dragon.png");
     }
 }

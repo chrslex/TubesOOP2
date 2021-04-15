@@ -1,9 +1,12 @@
 package OOPokemon;
 import OOPokemon.Map.Map;
 
+import OOPokemon.Occupier.Enemy;
 import OOPokemon.Occupier.Player;
+import OOPokemon.exception.NotInitializedException;
 import OOPokemon.misc.GameState;
 import OOPokemon.misc.MusicPlayer;
+import OOPokemon.misc.Renderer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +26,11 @@ public class OOPokemonApp extends Application {
 
     private BorderPane root;
     private Pane camera;
+    private Pane mapContainer;
+    private Pane guiContainer;
     private MusicPlayer musicPlayer;
+
+    private Renderer renderer;
 
     private Map isekai;
     private Player myPlayer;
@@ -34,30 +41,35 @@ public class OOPokemonApp extends Application {
         setUpCamera();
         playBGM();
 
-        Pane mapContainer = new Pane();
-        Pane guiContainer = new Pane();
-        guiContainer.toFront();
-
-        root.setTop(guiContainer);
-        root.setBottom(camera);
-        camera.getChildren().add(mapContainer);
-
-
-        GameState gameState = new GameState(mapContainer);
+        GameState gameState = new GameState();
         isekai = gameState.map;
         myPlayer = gameState.player;
+        try {
+            Enemy enemy = new Enemy(isekai, 3, 10);
+        } catch (NotInitializedException e){
+            System.err.println(e.getErrorMessage());
+        }
+
+        renderer = new Renderer(isekai);
+        renderer.render(mapContainer);
+
         cameraHandler();
         return root;
     }
 
     private void playBGM() {
-        musicPlayer = new MusicPlayer("bin/music/freedomR3.mp3");
+        musicPlayer = new MusicPlayer("bin/music/Anville Town.mp3", true);
         musicPlayer.start();
     }
 
     private void initPane() {
         root = new BorderPane();
         camera = new Pane();
+        mapContainer = new Pane();
+        guiContainer = new Pane();
+        guiContainer.toFront();
+        root.setTop(guiContainer);
+        root.setBottom(camera);
     }
 
 
@@ -95,17 +107,25 @@ public class OOPokemonApp extends Application {
                     break;
                 case S:
                     myPlayer.setPositionOcc(myPlayer.position.x, myPlayer.position.y + 1);
+                    break;
                 case SPACE:
-                    // BATTLE
+                    musicPlayer.playpause();
                     break;
                 case I:
                     // Buka Inventory
                     break;
+                case L:
+                    renderer.unRender(mapContainer);
+                    break;
+                case K:
+                    renderer.render(mapContainer);
+                    break;
                 case ESCAPE:
                     setGameToPause(stage, mainGame);
+                    break;
             }
             cameraHandler();
-            System.out.println(event);
+
         });
 
 
@@ -151,7 +171,11 @@ public class OOPokemonApp extends Application {
 
         });
 
-        btn_main.setOnAction(event -> createMainMenu(stage));
+        btn_main.setOnAction(event -> {
+            musicPlayer.interrupt();
+            musicPlayer = null;
+            createMainMenu(stage);
+        });
 
         stage.setScene(pauseScene);
 
@@ -166,6 +190,7 @@ public class OOPokemonApp extends Application {
 
 
     private void createMainMenu(Stage stage) {
+        musicPlayer = null;
         loadConfig();
         Pane mainMenuContainer = new Pane();
         Scene mainMenu = new Scene(mainMenuContainer);
@@ -218,6 +243,7 @@ public class OOPokemonApp extends Application {
         camera.setMinSize(getCameraWidth(), getCameraHeight());
         camera.setPrefSize(getCameraWidth(), getCameraHeight());
         camera.setMaxSize(getCameraWidth(), getCameraHeight());
+        camera.getChildren().add(mapContainer);
     }
 
     private void cameraHandler() {

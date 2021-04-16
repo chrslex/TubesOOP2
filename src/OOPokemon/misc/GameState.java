@@ -19,6 +19,8 @@ public class GameState {
     private static int numOfCellHoriz = 10;
     private static int numOfCellVert = 6;
 
+    private static double musicVol = 0.5;
+    private static double sfxVol = 1;
 
     public Map map;
     public Player player;
@@ -54,6 +56,14 @@ public class GameState {
             if (fileObject.has("numOfCellVertical")) {
                 numOfCellVert = fileObject.get("numOfCellVertical").getAsInt();
             }
+            if (fileObject.has("musicVolume")) {
+                musicVol = fileObject.get("musicVolume").getAsDouble();
+            }
+            if (fileObject.has("sfxVolume")) {
+                sfxVol = fileObject.get("sfxVolume").getAsDouble();
+            }
+            MusicPlayer.MusicType.BGM.setVolume(musicVol);
+            MusicPlayer.MusicType.SFX.setVolume(sfxVol);
 
         }
         catch (FileNotFoundException e) {

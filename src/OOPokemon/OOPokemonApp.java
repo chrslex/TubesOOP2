@@ -58,7 +58,7 @@ public class OOPokemonApp extends Application {
     }
 
     private void playBGM() {
-        musicPlayer = new MusicPlayer("bin/music/Anville Town.mp3", true);
+        musicPlayer = new MusicPlayer("bin/music/Anville Town.mp3", MusicPlayer.MusicType.BGM,true);
         musicPlayer.start();
     }
 

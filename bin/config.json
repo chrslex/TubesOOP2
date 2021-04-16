@@ -1,6 +1,8 @@
 {
-  "cellWidth": 50,
-  "cellHeight": 50,
-  "numOfCellHorizontal": 18,
-  "numOfCellVertical": 9
+  "cellWidth": 200,
+  "cellHeight": 200,
+  "numOfCellHorizontal": 9,
+  "numOfCellVertical": 4,
+  "musicVolume": 0.2,
+  "sfxVolume": 1
 }

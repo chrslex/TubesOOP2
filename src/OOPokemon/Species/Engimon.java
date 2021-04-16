@@ -292,7 +292,7 @@ public class Engimon implements Comparable<Engimon> {
         System.out.println("-----------------");
         for (int i = 0; i < 4; i++)
         {
-            if(this.monSkills[i].getSkillName().equals("None")){
+            if(!this.monSkills[i].getSkillName().equals("None")){
             monSkills[i].printInfoAll();
                 System.out.println("--------" + (i+1) + "--------");
             }

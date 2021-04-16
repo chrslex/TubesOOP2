@@ -4,7 +4,7 @@ import OOPokemon.misc.Tuple;
 
 import java.util.HashMap;
 
-public class Element{
+public class Element implements Comparable<Element> {
     private ElementType elementType;
     private static final HashMap<Tuple<ElementType, ElementType>, Float> tableElementAdv = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class Element{
     public Element() {
         elementType = ElementType.None;
     }
-    Element(ElementType elementType) {
+    public Element(ElementType elementType) {
         this.elementType = elementType;
     }
 
@@ -83,5 +83,10 @@ public class Element{
         tableElementAdv.put(new Tuple<>(ElementType.None, ElementType.None),(float) -5);
 
 
+    }
+
+    @Override
+    public int compareTo(Element o) {
+        return this.elementType.toString().compareTo(o.elementType.toString());
     }
 }

@@ -7,10 +7,10 @@ import static OOPokemon.Element.ElementType.Water;
 
 public class Squirtle extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Squirtle";
+        namaSpecies = "Squirtle";
         monElements[0].setElementType(Water);
-        this.monSkills[0] = new Torrent();
-        image = new Image("assets/squirtle.png");
+        monSkills[0] = new Torrent();
+        imageSource = "assets/squirtle.png";
     }
 
     public Squirtle() {

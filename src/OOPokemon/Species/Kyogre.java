@@ -8,12 +8,12 @@ import static OOPokemon.Element.ElementType.*;
 
 public class Kyogre extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Kyogre";
+        namaSpecies = "Kyogre";
         monElements[0].setElementType(Water);
         monElements[1].setElementType(Ice);
         monSkills[0] = new Torrent();
         monSkills[1] = new IceVortex();
-        image = new Image("assets/kyogre.png");
+        imageSource = "assets/kyogre.png";
     }
 
     public Kyogre() {

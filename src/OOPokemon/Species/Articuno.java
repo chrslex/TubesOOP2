@@ -7,10 +7,10 @@ import static OOPokemon.Element.ElementType.Ice;
 
 public class Articuno extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Articuno";
+        namaSpecies = "Articuno";
         monElements[0].setElementType(Ice);
         monSkills[0] = new IceVortex();
-        image = new Image("assets/articuno.png");
+        imageSource = "assets/articuno.png";
 
     }
 

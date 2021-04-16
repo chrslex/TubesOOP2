@@ -8,12 +8,12 @@ import static OOPokemon.Element.ElementType.*;
 
 public class Inferail extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Inferail";
+        namaSpecies = "Inferail";
         monElements[0].setElementType(Fire);
         monElements[1].setElementType(Electric);
         monSkills[0] = new Sunstrike();
         monSkills[1] = new StaticStorm();
-        image = new Image("assets/inferail.png");
+        imageSource = "assets/inferail.png";
 
     }
 

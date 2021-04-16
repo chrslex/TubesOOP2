@@ -7,10 +7,10 @@ import static OOPokemon.Element.ElementType.Electric;
 
 public class Raichu extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Raichu";
+        namaSpecies = "Raichu";
         monElements[0].setElementType(Electric);
-        this.monSkills[0] = new StaticStorm();
-        image = new Image("assets/raichu.png");
+        monSkills[0] = new StaticStorm();
+        imageSource = "assets/raichu.png";
     }
 
     public Raichu() {

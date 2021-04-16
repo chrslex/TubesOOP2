@@ -10,7 +10,7 @@ public class Dragon extends Engimon {
         namaSpecies = "Dragon";
         monElements[0].setElementType(Fire);
         monSkills[0] = new Sunstrike();
-        image = new Image("assets/dragon.png");
+        imageSource = "assets/dragon.png";
 
     }
 

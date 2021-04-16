@@ -9,12 +9,12 @@ import static OOPokemon.Element.ElementType.*;
 
 public class Seismotoad extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Seismotoad";
+        namaSpecies = "Seismotoad";
         monElements[0].setElementType(Water);
         monElements[1].setElementType(Ground);
-        this.monSkills[0] = new Torrent();
-        this.monSkills[1] = new Fissure();
-        image = new Image("assets/seismotoad.png");
+        monSkills[0] = new Torrent();
+        monSkills[1] = new Fissure();
+        imageSource = "assets/seismotoad.png";
     }
 
     public Seismotoad() {

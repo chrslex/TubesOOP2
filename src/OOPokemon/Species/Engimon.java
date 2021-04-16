@@ -1,7 +1,9 @@
 package OOPokemon.Species;
-import java.util.Scanner;
+import java.util.*;
+
 import OOPokemon.Element.Element;
 import OOPokemon.Element.ElementType;
+import OOPokemon.Occupier.Player;
 import OOPokemon.Skill.Skill;
 import javafx.scene.image.Image;
 
@@ -9,7 +11,7 @@ import static OOPokemon.Element.ElementType.None;
 //import OOPokemon.Skill;
 //import OOPokemon.Player;
 
-public class Engimon {
+public class Engimon implements Comparable<Engimon> {
     protected int monLevel;
     protected int monExp;
     protected int monCtvExp;
@@ -20,7 +22,7 @@ public class Engimon {
     protected Element[] monElements;
     protected Engimon[] monParents;
 
-    protected Image image;
+    protected String imageSource;
     public Skill[] monSkills;
 
     private void InitComp() {
@@ -41,7 +43,7 @@ public class Engimon {
         }
         this.monParents = null;
 
-        image = new Image("assets/pikachu.png");
+        imageSource = "assets/pikachu.png";
     }
 
     public Engimon() {
@@ -53,53 +55,79 @@ public class Engimon {
         this.monName = monName;
     }
 
+    public Engimon(Engimon other){
+        this.monName = other.monName;
+        this.namaSpecies = other.namaSpecies;
+        this.monLevel = other.monLevel;
+        this.baseLevel = other.baseLevel;
+        this.monLife = other.monLife;
+        this.monExp = other.monExp;
+        this.monCtvExp = other.monCtvExp;
+        this.monSkills = new Skill[4];
+        for (int i = 0; i < 4; i++) {
+            monSkills[i] = new Skill(other.monSkills[i]);
+        }
+        this.monElements = new Element[2];
+        for (int i = 0; i < 2; i++) {
+            monElements[i] = new Element(other.monElements[i].getElementType());
+        }
+        this.monParents = (other.monParents != null)? new Engimon[2]: null;
+        if (monParents != null){
+            for (int i = 0; i < 2; i++) {
+                monParents[i] = new Engimon(other.monParents[i]);
+            }
+        }
+        this.imageSource = other.imageSource;
+    }
+
     public Engimon(int monLife) {
         InitComp();
         this.monLife = monLife;
     }
 
-//    public boolean isContainSkill(Skill a) {
-//        for (int i = 0; i < 4; i++) {
-//            if (a == this.monSkills[i]) return true;
-//        }
-//        return false;
-//    }
-//
-//    public boolean learnSkill(Skill other) {
-//        Scanner myObj = new Scanner(System.in);
-//        if (other.getSkillName() == "AntiAging") {
-//            this.monCtvExp += 1000;
-//            System.out.println("Maximum Exp Bertambah 1000");
-//            return true;
-//        }
-//        if (this.isContainSkill(other)) {
-//            System.out.println("Skill telah dipelajari");
-//            return false;
-//        }
-//        if (other.skillType == "None" || this.monElements[0].toString() == other.skillType
-//                || this.monElements[1].toString() == other.skillType) {
-//            for (int i = 0; i < 4; i++) {
-//                if (this.monSkills[i].getSkillName() == "None") {
-//                    this.monSkills[i] = other;
-//                    System.out.println("Skill berhasil dipelajari");
-//                    return true;
-//                }
-//            }
+    public boolean isContainSkill(Skill a) {
+        for (int i = 0; i < 4; i++) {
+            if (a.isSame(monSkills[i])) return true;
+        }
+        return false;
+    }
+
+    public boolean learnSkill(Skill other) {
+        Scanner myObj = new Scanner(System.in);
+        if (other.getSkillName().equals("AntiAging")) {
+            this.monCtvExp += 1000;
+            System.out.println("Maximum Exp Bertambah 1000");
+            return true;
+        }
+        if (this.isContainSkill(other)) {
+            System.out.println("Skill telah dipelajari");
+            return false;
+        }
+        if (other.skillType.equals("None") || this.monElements[0]
+                .getElementType().toString().equals(other.skillType)
+                || this.monElements[1].getElementType().toString().equals(other.skillType)) {
+            for (int i = 0; i < 4; i++) {
+                if (this.monSkills[i].getSkillName().equals("None")) {
+                    this.monSkills[i] = other;
+                    System.out.println("Skill berhasil dipelajari");
+                    return true;
+                }
+            }
 //            System.out.println("Slot skill penuh");
 //            System.out.print("Apakah ingin menimpa skill yang ada? (y/n): ");
 //            String input = myObj.nextLine();
-//            if (input == "y" || input == "yes") {
+//            if (input.equals("y") || input.equals("yes")) {
 //                printInfoSkill();
 //                int inpt = Player.validasiInput ("Pilih skill: ", 0, 4, -1);
 //                this.monSkills[inpt - 1] = other;
 //                System.out.println("Skill berhasil dipelajari");
 //                return true;
 //            }
-//            return false;
-//        }
-//        System.out.println("Elemen skill tidak sesuai");
-//        return false;
-//    }
+            return false;
+        }
+        System.out.println("Elemen skill tidak sesuai");
+        return false;
+    }
 
     public Engimon(String name, Engimon other1, Engimon other2) {
         InitComp();
@@ -108,47 +136,35 @@ public class Engimon {
         for (int i = 0; i < 2; i++) {
             monParents[i] = new Engimon();
         }
-        this.monParents[0] = other1;
-        this.monParents[1] = other2;
+        this.monParents[0] = new Engimon(other1);
+        this.monParents[1] = new Engimon(other2);
 
         this.monCtvExp = other1.monCtvExp + other2.monCtvExp;
 
-//        Skill* temporaryskill = new Skill[8];
-//        for (int i = 0; i < 4; i++)
-//        {
-//            temporaryskill[i] = other1.monSkills[i];
-//            temporaryskill[i+4] = other2.monSkills[i];
-//        }
-//
-//        // Sorting skill
-//        int i, j;
-//        Skill temp;
-//        for (i = 0; i < 7-1; i++) {
-//            for (j = 0; j < 7-i-1; j++)  {
-//                if (temporaryskill[j] < temporaryskill[j+1]) {
-//                    Skill temp = temporaryskill[j];
-//                    temporaryskill[j] = temporaryskill[j+1];
-//                    temporaryskill[j+1] = temp;
-//                }
-//            }
-//        }
-//
-//        this->monSkills[0] = temporaryskill[0];
-//
-//        int angka = 1;
-//        for (int i = 1; i < 7; i++)
-//        {
-//            if (!isContainSkill(temporaryskill[i])) this->monSkills[angka++] = temporaryskill[i];
-//        else
-//            {
-//                for (int j = 0; j < 4; j++)
-//                {
-//                    if (this->monSkills[j] == temporaryskill[i]) {this->monSkills[j].masteryLevel++; break;}
-//
-//                }
-//            }
-//            if (angka == 4) break;
-//        }
+        List<Skill> temporaryskill = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            temporaryskill.add(new Skill(other1.monSkills[i]));
+            temporaryskill.add(new Skill(other2.monSkills[i]));
+        }
+        // Sorting skill
+        Collections.sort(temporaryskill);
+
+        this.monSkills = new Skill[4];
+        monSkills[0] = temporaryskill.get(0);
+
+        int angka = 1;
+        for (int i = 1; i < 7; i++) {
+            if (!isContainSkill(temporaryskill.get(i))) monSkills[angka++] = temporaryskill.get(i);
+            else {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (monSkills[j].equals(temporaryskill.get(i))) {monSkills[j].increaseMasteryLevel(); break;}
+
+                }
+            }
+            if (angka == 4) break;
+        }
+
         ElementType elFather1 = other1.getFirstElement();
         ElementType elFather2 = other1.getSecondElement();
         ElementType elMother1 = other2.getFirstElement();
@@ -238,13 +254,13 @@ public class Engimon {
         return this.monElements[1].getElementType();
     }
 
-//    public float sumSkillPower() {
-//        float temp = 0;
-//        for (int i = 0; i < 4; i++) {
-//            temp += (this.monSkills[i].getBasePower() * this.monSkills[i].masteryLevel);
-//        }
-//        return temp;
-//    }
+    public float sumSkillPower() {
+        float temp = 0;
+        for (int i = 0; i < 4; i++) {
+            temp += (this.monSkills[i].getBasePower() * this.monSkills[i].masteryLevel);
+        }
+        return temp;
+    }
 
     public void printInfo() {
         System.out.println("Nama : " + this.monName);
@@ -271,17 +287,17 @@ public class Engimon {
         System.out.println("Level : " + this.monLevel);
     }
 
-//    public void printInfoSkill() {
-//        System.out.println("List skills :");
-//        System.out.println("-----------------";
-//        for (long i = 0; i < 4; i++)
-//        {
-//            if(this.monSkills[i].getSkillName() != "None"){
-//            monSkills[i].printInfoAll();
-//                System.out.println("--------" + i+1 + "--------");
-//            }
-//        }
-//    }
+    public void printInfoSkill() {
+        System.out.println("List skills :");
+        System.out.println("-----------------");
+        for (int i = 0; i < 4; i++)
+        {
+            if(this.monSkills[i].getSkillName().equals("None")){
+            monSkills[i].printInfoAll();
+                System.out.println("--------" + (i+1) + "--------");
+            }
+        }
+    }
 
     public float maxFloat(float a, float b) {
         return Math.max(a, b);
@@ -310,10 +326,24 @@ public class Engimon {
     }
 
     public Image getImage(){
-        return image;
+        return new Image(imageSource);
     }
 
     public Image getElementImage() {
         return new Image("assets/dragon.png");
+    }
+
+    @Override
+    public int compareTo(Engimon o) {
+        // kalau kedua element tidak sama, akan mensort elemennya
+        if (!o.monElements[0].equals(this.monElements[0])) {
+            return o.monElements[0].compareTo(this.monElements[0]);
+        }
+        // kalau kedua element sama tapi elemen kedua tidak sama akan mensort element kedua
+        else if (!o.monElements[1].equals(this.monElements[1])) {
+            return o.monElements[1].compareTo(this.monElements[1]);
+        }
+        // kedua element sama dan kedua element kedua sama
+        return o.monLevel - this.monLevel;
     }
 }

@@ -7,10 +7,10 @@ import static OOPokemon.Element.ElementType.Ground;
 
 public class Excadrill extends Engimon {
     private void InitComp() {
-        this.namaSpecies = "Excadrill";
+        namaSpecies = "Excadrill";
         monElements[0].setElementType(Ground);
-        this.monSkills[0] = new Fissure();
-        image = new Image("assets/excadrill.png");
+        monSkills[0] = new Fissure();
+        imageSource = "assets/excadrill.png";
 
     }
 

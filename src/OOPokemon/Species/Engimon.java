@@ -201,6 +201,7 @@ public class Engimon implements Comparable<Engimon> {
             this.monElements[0].setElementType(elFather1);
             this.monElements[1].setElementType(elFather2);
         }
+        this.imageSource = "assets/" + this.namaSpecies + ".png";
     }
 
     public void setName(String name) {
@@ -330,7 +331,10 @@ public class Engimon implements Comparable<Engimon> {
     }
 
     public Image getElementImage() {
-        return new Image("assets/dragon.png");
+        String url = "assets/" + this.monElements[0].toString();
+        if (this.monElements[1].getElementType() != None) url+= this.monElements[1].toString();
+        url+=".png";
+        return new Image(url);
     }
 
     @Override

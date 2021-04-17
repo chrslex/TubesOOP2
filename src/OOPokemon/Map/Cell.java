@@ -37,7 +37,7 @@ public class Cell extends Rectangle implements Renderable {
                 setFill(Color.ROYALBLUE);
                 break;
             case Mountain_Cell:
-                setFill(Color.valueOf("#FF8F0C"));
+                setFill(Color.valueOf("#9D350E"));
                 break;
             case Tundra_Cell:
                 setFill(Color.valueOf("#C5DDFA"));

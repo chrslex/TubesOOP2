@@ -8,6 +8,7 @@ import OOPokemon.exception.NotInitializedException;
 import OOPokemon.Species.*;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,8 @@ import static OOPokemon.Map.CellType.*;
 public class Enemy extends Occupier{
     
     private Engimon engimon;
+    private final CellType cellType1;
+    private final CellType cellType2;
 
 //    public enum EngimonType{
 //        ARTICUNO(0),
@@ -71,50 +74,46 @@ public class Enemy extends Occupier{
                 break;
 
         }
-        CellType[] cellType = new CellType[2];
         switch (engimon.getFirstElement())
         {
             case Water:
-                cellType[0] = Sea_Cell;
+                cellType1 = Sea_Cell;
                 break;
             case Fire:
-                cellType[0] = Mountain_Cell;
+                cellType1 = Mountain_Cell;
                 break;
             case Ice:
-                cellType[0] = Tundra_Cell;
+                cellType1 = Tundra_Cell;
                 break;
             default:
-                cellType[0] = Grassland_Cell;
+                cellType1 = Grassland_Cell;
                 break;
         }
         switch (engimon.getSecondElement())
         {
             case None:
-                cellType[1] = cellType[0];
+                cellType2 = cellType1;
                 break;
             case Water:
-                cellType[1] = Sea_Cell;
+                cellType2 = Sea_Cell;
                 break;
             case Fire:
-                cellType[1] = Mountain_Cell;
+                cellType2 = Mountain_Cell;
                 break;
             case Ice:
-                cellType[1] = Tundra_Cell;
+                cellType2 = Tundra_Cell;
                 break;
             default:
-                cellType[1] = Grassland_Cell;
+                cellType2 = Grassland_Cell;
                 break;
         }
 
         int posisirand, x, y;
-        CellType mapCellType;
         do {
             posisirand = rand.nextInt(Position.MAX_X * Position.MAX_Y);
             x = posisirand % Position.MAX_X;
             y = posisirand / Position.MAX_X;
-            mapCellType = map.getCellAtPosition(new Position(x, y)).getCellType();
-
-        } while ((cellType[0] != mapCellType && cellType[1] != mapCellType) || !setPositionOcc(x, y));
+        } while (!setPos(x, y));
 
 
         engimon.setLevel(level);
@@ -125,4 +124,46 @@ public class Enemy extends Occupier{
         System.out.println(position.x + ", " + position.y);
     }
 
+    public boolean setPos(int x, int y) {
+        if (!Position.isValidCoordinate(x,y)) return false;
+        CellType mapCellType = map.getCellAtPosition(new Position(x, y)).getCellType();
+        if (mapCellType == null) return false;
+        if (this.cellType1 != mapCellType && this.cellType2 != mapCellType) return false;
+        return setPositionOcc(x, y);
+    }
+
+    public void setEngimon(Engimon engimon) {
+        this.engimon = engimon;
+    }
+
+    public Engimon getEngimon() {
+        return engimon;
+    }
+
+    private CellType getFirstCellType(){
+        return cellType1;
+    }
+
+    private CellType getSecondCellType(){
+        return cellType2;
+
+    }
+
+
+    public boolean move(int rand){
+        int x = this.position.x;
+        int y = this.position.y;
+        switch (rand){
+            case 0:
+                return setPos(x,--y);
+            case 1:
+                return setPos(--x,y);
+            case 2:
+                return setPos(x,++y);
+            case 3:
+                return setPos(++x,y);
+            default:
+                return false;
+        }
+    }
 }

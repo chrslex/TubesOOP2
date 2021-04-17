@@ -33,6 +33,7 @@ public class OOPokemonApp extends Application {
     private Pane guiContainer;
     private MusicPlayer musicPlayer;
 
+    private EnemyHandler enemyHandler;
     private Renderer renderer;
 
     private Map isekai;
@@ -48,8 +49,8 @@ public class OOPokemonApp extends Application {
         isekai = gameState.map;
         myPlayer = gameState.player;
         try {
-            Enemy enemy = new Enemy(isekai, 3, 10);
-            EnemyHandler enemyHandler = new EnemyHandler(isekai, 40);
+            enemyHandler = new EnemyHandler(isekai, 40);
+            enemyHandler.suspend();
 
         } catch (NotInitializedException e){
             System.err.println(e.getErrorMessage());
@@ -114,10 +115,10 @@ public class OOPokemonApp extends Application {
                     myPlayer.setPositionOcc(myPlayer.position.x, myPlayer.position.y + 1);
                     break;
                 case SPACE:
-                    musicPlayer.playpause();
+                    enemyHandler.suspend();
                     break;
                 case I:
-                    // Buka Inventory
+                    enemyHandler.resume();
                     break;
                 case L:
                     renderer.unRender(mapContainer);
@@ -138,6 +139,7 @@ public class OOPokemonApp extends Application {
     }
 
     private void setGameToPause(Stage stage, Scene previouseScene) {
+        enemyHandler.suspend();
         musicPlayer.pause();
         Pane pane = new Pane();
         Scene pauseScene = new Scene(pane, previouseScene.getWidth(), previouseScene.getHeight());
@@ -168,6 +170,7 @@ public class OOPokemonApp extends Application {
 
         // Setup Tombol
         btn_resume.setOnAction(event -> {
+            enemyHandler.resume();
             musicPlayer.play();
             stage.setScene(previouseScene);
         });
@@ -188,7 +191,13 @@ public class OOPokemonApp extends Application {
 
         stage.setScene(pauseScene);
 
-        escapeToReturn(stage, pauseScene, previouseScene);
+        pauseScene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                enemyHandler.resume();
+                musicPlayer.play();
+                stage.setScene(previouseScene);
+            }
+        });
 
         stage.show();
     }

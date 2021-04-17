@@ -7,7 +7,7 @@ import javafx.util.Duration;
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MusicPlayer extends Thread {
+public class MusicPlayer {
 
     private MediaPlayer mediaPlayer;
 
@@ -41,15 +41,12 @@ public class MusicPlayer extends Thread {
         }
     }
 
-    @Override
     public void run() {
         running.set(true);
         mediaPlayer.play();
     }
 
-    @Override
     public void interrupt() {
-        super.interrupt();
         mediaPlayer.stop();
     }
 
@@ -60,6 +57,14 @@ public class MusicPlayer extends Thread {
             return;
         }
         running.set(true);
+        mediaPlayer.play();
+    }
+
+    public void pause(){
+        mediaPlayer.pause();
+    }
+
+    public void play(){
         mediaPlayer.play();
     }
 }

@@ -1,24 +1,19 @@
 package OOPokemon.misc;
 
+import OOPokemon.Map.Cell;
 import OOPokemon.Map.Map;
 import OOPokemon.Occupier.Player;
 import OOPokemon.exception.NotInitializedException;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 public class GameState {
-
     private static float cellWidth = 100;
     private static float cellHeight = 100;
     private static int numOfCellHoriz = 10;
     private static int numOfCellVert = 6;
-
     private static double musicVol = 0.5;
     private static double sfxVol = 1;
 
@@ -50,17 +45,17 @@ public class GameState {
             if (fileObject.has("cellHeight")) {
                 cellHeight = fileObject.get("cellHeight").getAsFloat();
             }
-            if (fileObject.has("numOfCellHorizontal")) {
-                numOfCellHoriz = fileObject.get("numOfCellHorizontal").getAsInt();
+            if (fileObject.has("numOfCellHoriz")) {
+                numOfCellHoriz = fileObject.get("numOfCellHoriz").getAsInt();
             }
-            if (fileObject.has("numOfCellVertical")) {
-                numOfCellVert = fileObject.get("numOfCellVertical").getAsInt();
+            if (fileObject.has("numOfCellVert")) {
+                numOfCellVert = fileObject.get("numOfCellVert").getAsInt();
             }
-            if (fileObject.has("musicVolume")) {
-                musicVol = fileObject.get("musicVolume").getAsDouble();
+            if (fileObject.has("musicVol")) {
+                musicVol = fileObject.get("musicVol").getAsDouble();
             }
-            if (fileObject.has("sfxVolume")) {
-                sfxVol = fileObject.get("sfxVolume").getAsDouble();
+            if (fileObject.has("sfxVol")) {
+                sfxVol = fileObject.get("sfxVol").getAsDouble();
             }
             MusicPlayer.MusicType.BGM.setVolume(musicVol);
             MusicPlayer.MusicType.SFX.setVolume(sfxVol);
@@ -96,4 +91,33 @@ public class GameState {
         return numOfCellVert * cellHeight;
     }
 
+    public static double getMusicVol() {
+        return musicVol;
+    }
+
+    public static double getSfxVol() {
+        return sfxVol;
+    }
+
+    public static void saveConfig(int hcell, int vcell, double _musicVol, double _sfxVol) {
+        numOfCellHoriz = hcell;
+        numOfCellVert = vcell;
+        musicVol = _musicVol;
+        sfxVol = _sfxVol;
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(new Config());
+
+        try {
+            FileWriter myWriter = new FileWriter("bin/config.json");
+            myWriter.write(json);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
 }
+

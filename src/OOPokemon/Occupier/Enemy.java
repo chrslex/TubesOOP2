@@ -7,6 +7,9 @@ import OOPokemon.Species.Engimon;
 import OOPokemon.exception.NotInitializedException;
 import OOPokemon.Species.*;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static OOPokemon.Map.CellType.*;
@@ -14,7 +17,24 @@ import static OOPokemon.Map.CellType.*;
 public class Enemy extends Occupier{
     
     private Engimon engimon;
-    private CellType cellType;
+
+//    public enum EngimonType{
+//        ARTICUNO(0),
+//        DRAGON(1),
+//        EXCADRILL(2),
+//        INFERAIL(3),
+//        KYOGRE(4),
+//        RAICHU(5),
+//        SEISMOTOAD(6),
+//        SQUIRTLE(7);
+//
+//
+//        private final int value;
+//
+//        EngimonType(int value) {
+//            this.value = value;
+//        }
+//    }
 
     public Enemy(Map map, int angka, int level) throws NotInitializedException {
         super(map);
@@ -51,50 +71,51 @@ public class Enemy extends Occupier{
                 break;
 
         }
+        CellType[] cellType = new CellType[2];
         switch (engimon.getFirstElement())
         {
             case Water:
+                cellType[0] = Sea_Cell;
+                break;
+            case Fire:
+                cellType[0] = Mountain_Cell;
+                break;
             case Ice:
-                cellType = Sea_Cell;
-                hashCellType = 1;
+                cellType[0] = Tundra_Cell;
                 break;
             default:
-                cellType = Grassland_Cell;
-                hashCellType = 10;
+                cellType[0] = Grassland_Cell;
                 break;
         }
         switch (engimon.getSecondElement())
         {
             case None:
+                cellType[1] = cellType[0];
                 break;
             case Water:
+                cellType[1] = Sea_Cell;
+                break;
+            case Fire:
+                cellType[1] = Mountain_Cell;
+                break;
             case Ice:
-                hashCellType += 1;
+                cellType[1] = Tundra_Cell;
                 break;
             default:
-                hashCellType += 10;
+                cellType[1] = Grassland_Cell;
                 break;
         }
-        if (hashCellType == 11) cellType = Rancu;
 
-        int posisirand ;
+        int posisirand, x, y;
+        CellType mapCellType;
+        do {
+            posisirand = rand.nextInt(Position.MAX_X * Position.MAX_Y);
+            x = posisirand % Position.MAX_X;
+            y = posisirand / Position.MAX_X;
+            mapCellType = map.getCellAtPosition(new Position(x, y)).getCellType();
 
-        if (cellType == Rancu){
-            do {
-                posisirand = rand.nextInt(Position.MAX_X * Position.MAX_Y);
+        } while ((cellType[0] != mapCellType && cellType[1] != mapCellType) || !setPositionOcc(x, y));
 
-            } while (!setPositionOcc(posisirand % Position.MAX_X, posisirand / Position.MAX_X)) ;
-        }
-	    else {
-	        int x;
-	        int y;
-            do {
-                posisirand = rand.nextInt(Position.MAX_X * Position.MAX_Y);
-                x = posisirand % Position.MAX_X;
-                y = posisirand / Position.MAX_X;
-
-            } while (cellType != map.getCellAtPosition(new Position(x, y)).getCellType() || !setPositionOcc(x, y));
-        }
 
         engimon.setLevel(level);
         sprite.setCenterImage(engimon.getImage());

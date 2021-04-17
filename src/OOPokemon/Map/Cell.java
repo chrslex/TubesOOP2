@@ -46,6 +46,10 @@ public class Cell extends Rectangle implements Renderable {
         }
         occupier = null;
     }
+    private static void loadStatic(){
+
+    }
+
 
     public CellType getCellType() {
         return cellType;

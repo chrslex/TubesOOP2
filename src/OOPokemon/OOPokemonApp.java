@@ -2,6 +2,7 @@ package OOPokemon;
 import OOPokemon.Map.Map;
 
 import OOPokemon.Occupier.Enemy;
+import OOPokemon.Occupier.EnemyHandler;
 import OOPokemon.Occupier.Player;
 import OOPokemon.exception.NotInitializedException;
 import OOPokemon.misc.GameState;
@@ -11,6 +12,8 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -46,6 +49,8 @@ public class OOPokemonApp extends Application {
         myPlayer = gameState.player;
         try {
             Enemy enemy = new Enemy(isekai, 3, 10);
+            EnemyHandler enemyHandler = new EnemyHandler(isekai, 40);
+
         } catch (NotInitializedException e){
             System.err.println(e.getErrorMessage());
         }
@@ -59,7 +64,7 @@ public class OOPokemonApp extends Application {
 
     private void playBGM() {
         musicPlayer = new MusicPlayer("bin/music/Anville Town.mp3", MusicPlayer.MusicType.BGM,true);
-        musicPlayer.start();
+        musicPlayer.run();
     }
 
     private void initPane() {
@@ -77,7 +82,7 @@ public class OOPokemonApp extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("OOPokemon");
         stage.getIcons().add(new Image("assets/oopokemon.png"));
-        createMainMenu(stage);
+        setGameToMainMenu(stage);
         stage.show();
     }
 
@@ -132,9 +137,10 @@ public class OOPokemonApp extends Application {
         stage.setScene(mainGame);
     }
 
-    private void setGameToPause(Stage stage, Scene scene) {
+    private void setGameToPause(Stage stage, Scene previouseScene) {
+        musicPlayer.pause();
         Pane pane = new Pane();
-        Scene pauseScene = new Scene(pane, scene.getWidth(), scene.getHeight());
+        Scene pauseScene = new Scene(pane, previouseScene.getWidth(), previouseScene.getHeight());
         VBox uiContainer = new VBox(10);
 
         int btnWidth = 175;
@@ -157,11 +163,14 @@ public class OOPokemonApp extends Application {
         // Setup layout
         uiContainer.getChildren().addAll(btn_resume,btn_save,btn_load, btn_main);
         pane.getChildren().add(uiContainer);
-        uiContainer.setLayoutX((scene.getWidth() - btnWidth)/2);
-        uiContainer.setLayoutY((scene.getHeight() - 4*(btnHeight+10))/2);
+        uiContainer.setLayoutX((previouseScene.getWidth() - btnWidth)/2);
+        uiContainer.setLayoutY((previouseScene.getHeight() - 4*(btnHeight+10))/2);
 
         // Setup Tombol
-        btn_resume.setOnAction(event -> stage.setScene(scene));
+        btn_resume.setOnAction(event -> {
+            musicPlayer.play();
+            stage.setScene(previouseScene);
+        });
 
         btn_save.setOnAction(event -> {
 
@@ -174,22 +183,27 @@ public class OOPokemonApp extends Application {
         btn_main.setOnAction(event -> {
             musicPlayer.interrupt();
             musicPlayer = null;
-            createMainMenu(stage);
+            setGameToMainMenu(stage);
         });
 
         stage.setScene(pauseScene);
 
-        pauseScene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                stage.setScene(scene);
-            }
-        });
+        escapeToReturn(stage, pauseScene, previouseScene);
 
         stage.show();
     }
 
+    private void escapeToReturn(Stage stage,  Scene currentScene, Scene destScene) {
+        currentScene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                musicPlayer.play();
+                stage.setScene(destScene);
+            }
+        });
+    }
 
-    private void createMainMenu(Stage stage) {
+
+    private void setGameToMainMenu(Stage stage) {
         musicPlayer = null;
         loadConfig();
         Pane mainMenuContainer = new Pane();
@@ -229,7 +243,7 @@ public class OOPokemonApp extends Application {
         });
 
         btn_setting.setOnAction(event -> {
-            // work on progress
+            setGametoSetting(stage);
         });
 
         stage.setScene(mainMenu);
@@ -237,6 +251,106 @@ public class OOPokemonApp extends Application {
 
         stage.show();
 
+    }
+    private void setGametoSetting(Stage stage){
+        Pane settingContainer = new Pane();
+        Scene settingScreen = new Scene(settingContainer);
+
+        settingContainer.setPrefSize(getCameraWidth(), getCameraHeight());
+
+        VBox uiContainer = new VBox(10);
+
+        int btnWidth = 175;
+        int btnHeight = 50;
+
+        int sliderWidth = 500;
+
+//        // Setup UI
+//        Label lbl_cellSize = new Label("Tile size (pixels):");
+//        lbl_cellSize.setPrefSize(btnWidth, btnHeight);
+
+        Label lbl_musicVol = new Label("Music Volume");
+        lbl_musicVol.setPrefSize(btnWidth, btnHeight);
+
+        Label lbl_sfxVol = new Label("SFX Volume");
+        lbl_sfxVol.setPrefSize(btnWidth, btnHeight);
+
+        Label lbl_horizCell = new Label("Number of Horizonal Tiles");
+        lbl_horizCell.setPrefSize(btnWidth, btnHeight);
+
+        Label lbl_vertCell = new Label("Number of Vertical Tiles");
+        lbl_vertCell.setPrefSize(btnWidth, btnHeight);
+
+
+//        Slider slider_cellsize = new Slider(10, 200, getCellWidth());
+//        slider_cellsize.setMinWidth(sliderWidth/2);
+//        slider_cellsize.setBlockIncrement(10);
+//        slider_cellsize.setMajorTickUnit(10);
+//        slider_cellsize.setMinorTickCount(0);
+//        slider_cellsize.setShowTickLabels(true);
+//        slider_cellsize.setSnapToTicks(true);
+
+
+        Slider slider_hcell = new Slider(1, 20, getNumOfCellHoriz());
+        slider_hcell.setMinWidth(sliderWidth);
+        slider_hcell.setBlockIncrement(1);
+        slider_hcell.setMajorTickUnit(1);
+        slider_hcell.setMinorTickCount(0);
+        slider_hcell.setShowTickLabels(true);
+        slider_hcell.setSnapToTicks(true);
+
+        Slider slider_vcell = new Slider(1, 20, getNumOfCellVert());
+        slider_vcell.setMinWidth(sliderWidth);
+        slider_vcell.setBlockIncrement(1);
+        slider_vcell.setMajorTickUnit(1);
+        slider_vcell.setMinorTickCount(0);
+        slider_vcell.setShowTickLabels(true);
+        slider_vcell.setSnapToTicks(true);
+
+        Slider slider_music_vol = new Slider(0, 1, getMusicVol());
+//        slider_music_vol.setShowTickMarks(true);
+//        slider_music_vol.setShowTickLabels(true);
+        slider_music_vol.setBlockIncrement(0.1);
+
+        Slider slider_sfx_vol = new Slider(0, 1, getSfxVol());
+//        slider_sfx_vol.setShowTickMarks(true);
+//        slider_sfx_vol.setShowTickLabels(true);
+        slider_sfx_vol.setBlockIncrement(0.1);
+
+        Button btn_save = new Button("Save");
+        btn_save.setPrefSize(btnWidth, btnHeight);
+        btn_save.setTranslateX((sliderWidth-btnWidth)/2);
+
+
+        // Setup layout
+        uiContainer.getChildren().addAll(
+                lbl_horizCell, slider_hcell,
+                lbl_vertCell, slider_vcell,
+                lbl_musicVol, slider_music_vol,
+                lbl_sfxVol, slider_sfx_vol,
+                btn_save);
+
+        settingContainer.getChildren().add(uiContainer);
+        uiContainer.setTranslateX((getCameraWidth() - sliderWidth)/2);
+        uiContainer.setTranslateY((getCameraHeight() - 8.5*(btnHeight+10))/2);
+
+        // Setup Tombol
+        btn_save.setOnAction(event -> {
+            GameState.saveConfig(
+                    (int) slider_hcell.getValue(),
+                    (int) slider_vcell.getValue(),
+                    slider_music_vol.getValue(),
+                    slider_sfx_vol.getValue());
+        });
+
+
+        stage.setScene(settingScreen);
+
+        settingScreen.setOnKeyPressed(event -> {
+            setGameToMainMenu(stage);
+        });
+
+        stage.show();
     }
 
     private void setUpCamera() {
@@ -247,6 +361,7 @@ public class OOPokemonApp extends Application {
     }
 
     private void cameraHandler() {
+        System.out.println(myPlayer.position.x + ", "+  myPlayer.position.y);
         camera.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
         camera.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
     }

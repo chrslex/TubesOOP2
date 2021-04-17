@@ -24,7 +24,7 @@ public class Player extends Occupier {
         if (ret) {
             String namaFile = map.getCellAtPosition(this.position).getCellType().toString();
             MusicPlayer musicPlayer = new MusicPlayer(namaFile, MusicPlayer.MusicType.SFX,false);
-            musicPlayer.start();
+            musicPlayer.run();
         }
 
         return ret;

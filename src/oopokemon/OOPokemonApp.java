@@ -241,6 +241,9 @@ public class OOPokemonApp extends Application {
 
     private void setGameToMainMenu(Stage stage) {
         musicPlayer = null;
+        if (enemyHandler != null){
+            enemyHandler.interrupt();
+        }
         loadConfig();
         Pane mainMenuContainer = new Pane();
         Scene mainMenu = new Scene(mainMenuContainer);
@@ -411,5 +414,18 @@ public class OOPokemonApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        if (this.musicPlayer != null){
+            musicPlayer.interrupt();
+            musicPlayer = null;
+        }
+        if (this.enemyHandler != null){
+            enemyHandler.suspend();
+            enemyHandler.interrupt();
+        }
     }
 }

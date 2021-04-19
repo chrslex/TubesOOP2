@@ -10,8 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnemyHandler implements Runnable {
     private final List<Enemy> enemyList;
-    private final AtomicBoolean want_to_susp = new AtomicBoolean(false);
-    private final Thread t;
+    private final AtomicBoolean running = new AtomicBoolean(false);
+    private final AtomicBoolean wantToSusp = new AtomicBoolean(false);
+    public final Thread thread;
 
     private int interval = 500;
 
@@ -21,14 +22,14 @@ public class EnemyHandler implements Runnable {
             Random rand = new Random();
             enemyList.add(new Enemy(map, rand.nextInt(8),1));
         }
-        t = new Thread(this);
-        t.start();
+        thread = new Thread(this);
+        thread.start();
     }
 
     public EnemyHandler(List<Enemy> enemyList) {
         this.enemyList = enemyList;
-        t = new Thread(this);
-        t.start();
+        thread = new Thread(this);
+        thread.start();
     }
 
     @Override
@@ -38,33 +39,32 @@ public class EnemyHandler implements Runnable {
 
 
     public void moveAllRandom() {
-        while (true) {
-//            enemyList.forEach(enemy -> enemy.move(new Random().nextInt(4)));
+        running.set(true);
+        while (running.get()) {
+            enemyList.forEach(enemy -> enemy.move(new Random().nextInt(4)));
             for ( Enemy enemy: enemyList) {
                 enemy.move(new Random().nextInt(4));
             }
             try {
                 Thread.sleep(interval);
                 synchronized (this){
-                    while (want_to_susp.get()){
+                    while (wantToSusp.get()){
                         wait();
                     }
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            catch (InterruptedException ignored) {}
         }
     }
     public synchronized void suspend() {
-        want_to_susp.set(true);
+        wantToSusp.set(true);
     }
 
     public synchronized void resume(){
-        want_to_susp.set(false);
+        wantToSusp.set(false);
         notify();
     }
-
 
     public void setInterval(int interval) {
         if (interval >= 1000){
@@ -72,5 +72,9 @@ public class EnemyHandler implements Runnable {
         }
     }
 
+    public void interrupt(){
+        this.running.set(false);
+        this.thread.interrupt();
+    }
 
 }

@@ -10,14 +10,14 @@ import javafx.scene.shape.Rectangle;
 public class Cell extends Rectangle implements Renderable {
     public Position position;
     private final CellType cellType;
-    public Occupier occupier;
+    public Occupier occupier = null;
 
     // Configuration parameter
     public static float cellWidth = GameState.getCellWidth();
     public static float cellHeight = GameState.getCellHeight();
 
 
-    Cell() {
+    public Cell() {
         super(0,0, cellWidth, cellHeight);
         position = new Position();
         cellType = CellType.Grassland_Cell;

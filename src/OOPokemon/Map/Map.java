@@ -13,9 +13,11 @@ public class Map {
     private List<Cell> cells;
     int MAX_X = Position.MAX_X;
     int MAX_Y = Position.MAX_Y;
+    public String namaFile;
 
 
     public Map() {
+        namaFile = "";
         cells = new ArrayList<>();
         for (int i = 0; i < MAX_X * MAX_Y; i++) {
             Cell cell = new Cell(i % MAX_X, i / MAX_X, CellType.Grassland_Cell);
@@ -24,6 +26,7 @@ public class Map {
     }
 
     public Map(String fileName) {
+        namaFile = fileName;
         cells = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));

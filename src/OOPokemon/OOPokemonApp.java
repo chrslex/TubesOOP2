@@ -36,6 +36,7 @@ public class OOPokemonApp extends Application {
     private EnemyHandler enemyHandler;
     private Renderer renderer;
 
+    private GameState gameState;
     private Map isekai;
     private Player myPlayer;
 
@@ -44,17 +45,32 @@ public class OOPokemonApp extends Application {
         loadConfig();
         setUpCamera();
         playBGM();
-
-        GameState gameState = new GameState();
+        gameState = new GameState();
         isekai = gameState.map;
         myPlayer = gameState.player;
-        try {
-            enemyHandler = new EnemyHandler(isekai, 40);
-            enemyHandler.suspend();
+        enemyHandler = gameState.enemyhandler;
 
-        } catch (NotInitializedException e){
-            System.err.println(e.getErrorMessage());
+        renderer = new Renderer(isekai);
+        renderer.render(mapContainer);
+
+        cameraHandler();
+        return root;
+    }
+
+    private Parent loadGemu() {
+        initPane();
+        loadConfig();
+        setUpCamera();
+        playBGM();
+        try {
+            gameState = loadGame("testing");
+        } catch (NotInitializedException e) {
+            System.err.println("gagal menload game memuat game baru");
+            gameState = new GameState();
         }
+        isekai = gameState.map;
+        myPlayer = gameState.player;
+        enemyHandler = gameState.enemyhandler;
 
         renderer = new Renderer(isekai);
         renderer.render(mapContainer);
@@ -91,7 +107,7 @@ public class OOPokemonApp extends Application {
         Scene mainGame;
 
         if (mode == GameModeType.LoadGame) {
-            mainGame = new Scene(newGame());
+            mainGame = new Scene(loadGemu());
         }
         else {
             mainGame = new Scene(newGame());
@@ -176,11 +192,23 @@ public class OOPokemonApp extends Application {
         });
 
         btn_save.setOnAction(event -> {
-
+            gameState.saveGame("testing");
         });
 
         btn_load.setOnAction(event -> {
+            renderer.unRender(mapContainer);
+            try {
+                gameState = GameState.loadGame("testing");
+            } catch (NotInitializedException e){
+                System.err.println(e.getErrorMessage());
 
+            }
+            isekai = gameState.map;
+            myPlayer = gameState.player;
+            renderer = new Renderer(gameState.map);
+            renderer.render(mapContainer);
+            cameraHandler();
+            stage.setScene(previouseScene);
         });
 
         btn_main.setOnAction(event -> {
@@ -245,7 +273,9 @@ public class OOPokemonApp extends Application {
         // Setup Tombol
         btn_new.setOnAction(event -> setGameToMainGame(stage, GameModeType.NewGame));
 
-        btn_load.setOnAction(event -> setGameToMainGame(stage, GameModeType.LoadGame));
+        btn_load.setOnAction(event -> {
+            setGameToMainGame(stage, GameModeType.LoadGame);
+        });
 
         btn_hof.setOnAction(event -> {
             // work on progress

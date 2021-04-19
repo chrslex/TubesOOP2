@@ -1,13 +1,20 @@
 package OOPokemon.misc;
 
 import OOPokemon.Map.Cell;
+import OOPokemon.Map.CellType;
 import OOPokemon.Map.Map;
-import OOPokemon.Occupier.Player;
+import OOPokemon.Map.Position;
+import OOPokemon.Occupier.*;
+import OOPokemon.Species.Engimon;
 import OOPokemon.exception.NotInitializedException;
 import com.google.gson.*;
 
 
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameState {
     private static float cellWidth = 100;
@@ -19,6 +26,7 @@ public class GameState {
 
     public Map map;
     public Player player;
+    public EnemyHandler enemyhandler;
 
 
     public GameState() {
@@ -26,11 +34,17 @@ public class GameState {
         map = new Map(mapFile);
         try {
             player = new Player(3,3, map);
+            enemyhandler = new EnemyHandler(map, 40);
         } catch (NotInitializedException e) {
             System.err.println(e.getErrorMessage());
         }
     }
 
+    private GameState(Map map, Player player, EnemyHandler enemyHandler){
+        this.map = map;
+        this.player = player;
+        this.enemyhandler = enemyHandler;
+    }
 
     public static void loadConfig() {
         File input = new File("bin/config.json");
@@ -119,7 +133,7 @@ public class GameState {
         String json = gson.toJson(new GameState.Config());
 
         try {
-            FileWriter myWriter = new FileWriter("bin/config.json");
+            FileWriter myWriter = new FileWriter("bin/config2.json");
             myWriter.write(json);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
@@ -127,7 +141,97 @@ public class GameState {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
     }
+    private static String formater(String string){
+        return "\"" + string + "\"";
+    }
+
+    public static GameState loadGame(String source) throws NotInitializedException {
+        File input = new File("bin/savefiles/" + source +".json");
+        try {
+            JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
+            JsonObject fileObject = fileElement.getAsJsonObject();
+
+            Map map;
+            Player player;
+            List<Enemy> enemyList = new ArrayList<>();
+            EnemyHandler enemyHandler;
+
+            // Mengambil data
+            if (fileObject.has("map")) {
+                String mapfile = fileObject.get("map").getAsString();
+                map = new Map(mapfile);
+            }
+            else throw new NotInitializedException();
+            if (fileObject.has("player")) {
+                JsonObject playerObject = fileObject.get("player").getAsJsonObject();
+                Position playerpos = new Gson().fromJson(playerObject.get("position").getAsJsonObject(), Position.class);
+                player = new Player(playerpos.x, playerpos.y, map);
+
+            }
+            else throw new NotInitializedException();
+            if (fileObject.has("enemies")) {
+                JsonArray jsonArray = fileObject.getAsJsonArray("enemies");
+                for (JsonElement enm : jsonArray) {
+                    JsonObject enobj = enm.getAsJsonObject();
+                    Position enemypos = new Gson().fromJson(enobj.get("position").getAsJsonObject(), Position.class);
+                    int lvl = enobj.get("level").getAsInt();
+                    int jenis = Engimon.getTypeInt(enobj.get("type").getAsString());
+                    Enemy enemy = new Enemy(map,jenis,lvl);
+                    enemy.setPos(enemypos.x, enemypos.y);
+                    enemyList.add(enemy);
+                }
+                if (enemyList.size() > 0){
+                    enemyHandler = new EnemyHandler(enemyList);
+                }
+                else throw new NotInitializedException();
+            }
+            else throw new NotInitializedException();
+            System.out.println("Berhasil load");
+            return new GameState(map, player, enemyHandler);
+        }
+
+        catch (FileNotFoundException e) {
+            throw new NotInitializedException();
+        }
+    }
+
+    public void saveGame(String saveDest) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = "{\"map\":" + formater(map.namaFile);
+        // Player
+        json += String.format(",%s:{%s:%s}", formater("player"), formater("position"), gson.toJson(player.position));
+
+        List<Enemy> enemyList = map.getMap().stream()
+                .filter(cell -> cell.occupier != null && cell.occupier.occupierType == OccupierType.Enemy_Type)
+                .map(cell -> (Enemy) cell.occupier).collect(Collectors.toList());
+
+        StringBuilder enemystr = new StringBuilder();
+        for (Enemy enemy: enemyList) {
+//            {"type": 1, "level": 1, "position": {"x": 1, "y": 2}}
+            String enemiess = String.format("{%s:%s, %s:%d, %s:%s},",
+                    formater("type"), formater(enemy.getEngimon().getNamaSpecies()),
+                    formater("level"), enemy.getEngimon().getLevel(),
+                    formater("position"), gson.toJson(enemy.position));
+            enemystr.append(enemiess);
+        }
+        if (enemystr.length() > 0){
+            enemystr = new StringBuilder(enemystr.substring(0, enemystr.length() - 1));
+            json += String.format(",%s:[%s]",formater("enemies"), enemystr.toString());
+        }
+
+        json+= "}";
+
+        try {
+            FileWriter myWriter = new FileWriter("bin/savefiles/" + saveDest + ".json");
+            myWriter.write(json);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
 }
 

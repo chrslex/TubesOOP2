@@ -7,10 +7,6 @@ import OOPokemon.Species.Engimon;
 import OOPokemon.exception.NotInitializedException;
 import OOPokemon.Species.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import static OOPokemon.Map.CellType.*;
@@ -21,23 +17,6 @@ public class Enemy extends Occupier{
     private final CellType cellType1;
     private final CellType cellType2;
 
-//    public enum EngimonType{
-//        ARTICUNO(0),
-//        DRAGON(1),
-//        EXCADRILL(2),
-//        INFERAIL(3),
-//        KYOGRE(4),
-//        RAICHU(5),
-//        SEISMOTOAD(6),
-//        SQUIRTLE(7);
-//
-//
-//        private final int value;
-//
-//        EngimonType(int value) {
-//            this.value = value;
-//        }
-//    }
 
     public Enemy(Map map, int angka, int level) throws NotInitializedException {
         super(map);
@@ -120,8 +99,7 @@ public class Enemy extends Occupier{
         sprite.setCenterImage(engimon.getImage());
 	    sprite.setBottomRightImage(engimon.getElementImage());
 
-
-        System.out.println(position.x + ", " + position.y);
+//        System.out.println(position.x + ", " + position.y);
     }
 
     public boolean setPos(int x, int y) {

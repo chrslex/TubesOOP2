@@ -59,6 +59,7 @@ public abstract class Occupier implements Renderable {
         return false;
     }
 
+
     @Override
     public Node getToRender() {
         return sprite;

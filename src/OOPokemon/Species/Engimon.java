@@ -25,6 +25,8 @@ public class Engimon implements Comparable<Engimon> {
     protected String imageSource;
     public Skill[] monSkills;
 
+    private static Map<String, Integer> map;
+
     private void InitComp() {
         this.monName = "";
         this.namaSpecies = "";
@@ -263,6 +265,7 @@ public class Engimon implements Comparable<Engimon> {
         return temp;
     }
 
+
     public void printInfo() {
         System.out.println("Nama : " + this.monName);
         printInfoSafe();
@@ -299,12 +302,29 @@ public class Engimon implements Comparable<Engimon> {
             }
         }
     }
+    static {
+        map = new HashMap<>();
+        map.put("Squirtle", 1);
+        map.put("Raichu", 2);
+        map.put("Excadrill", 3);
+        map.put("Articuno", 4);
+        map.put("Inferail", 5);
+        map.put("Kyogre", 6);
+        map.put("Seismotoad", 7);
+        map.put("Dragon", 8);
+        map.put("", 9);
 
-    public float maxFloat(float a, float b) {
+    }
+
+    public static int getTypeInt(String namaSpecies){
+        return map.get(namaSpecies);
+    }
+
+    public static float maxFloat(float a, float b) {
         return Math.max(a, b);
     }
 
-    public float maxElAdv(Engimon a, Engimon b) {
+    public static float maxElAdv(Engimon a, Engimon b) {
         ElementType ela1 = a.getFirstElement();
         ElementType ela2 = a.getSecondElement();
         ElementType elb1 = b.getFirstElement();

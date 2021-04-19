@@ -22,7 +22,7 @@ public class Player extends Occupier {
         boolean ret =  super.setPositionOcc(x, y);
 
         if (ret) {
-            String namaFile = map.getCellAtPosition(this.position).getCellType().toString();
+            String namaFile = map.getCellAtPosition(this.position).getCellType().getClip();
             MusicPlayer musicPlayer = new MusicPlayer(namaFile, MusicPlayer.MusicType.SFX,false);
             musicPlayer.run();
         }

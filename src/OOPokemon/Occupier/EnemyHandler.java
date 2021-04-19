@@ -25,6 +25,12 @@ public class EnemyHandler implements Runnable {
         t.start();
     }
 
+    public EnemyHandler(List<Enemy> enemyList) {
+        this.enemyList = enemyList;
+        t = new Thread(this);
+        t.start();
+    }
+
     @Override
     public void run() {
         moveAllRandom();

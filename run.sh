@@ -1,1 +1,1 @@
-java -jar /bin/OOPokemon.jar
+java -jar bin/OOPokemon.jar

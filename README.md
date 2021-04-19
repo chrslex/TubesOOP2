@@ -6,6 +6,21 @@ Java SE-1.8
 
 Google gson-2.8.6
 
+# requirements
+OracleJDK-1.8 (run & build) `belum mendukung openJDK`
+
+intelliJ (build)
+
+# Run
+double click run.bat (windows) atau jalankan perintah
+
+#### windows
+`$ java -jar .\bin\OOPokemon.jar`
+
+#### Linux dan lainnya
+`$ java -jar bin/OOPokemon.jar`
+
+
 # Build
 Pastikan Java JDK 8 (java SE-1.8) terinstall
 

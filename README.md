@@ -17,7 +17,7 @@ Pada bagian Project pastikan Project SDK menggunakan java 1.8 dengan SDK Default
 
 Jalankan Build Artifact
 
-![oopokemon build](https://user-images.githubusercontent.com/68516528/114084156-0ccd3680-98da-11eb-995e-8352c47b6556.gif)
+![OOPokemon build](https://user-images.githubusercontent.com/68516528/114084156-0ccd3680-98da-11eb-995e-8352c47b6556.gif)
 
 # Tools
 #### IntelliJ 
@@ -38,13 +38,15 @@ Tidak wajib tapi disarankan
 |   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
 |   Occupier         | ✅         |   GUI              |                                                  |
 |   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
-|   Player           | ❌         |   GUI              | atribut Image, setImage dari atribut ini   |
-|   Enemy            | ❌         |   Method           | setCenterImage dari Image Engimon      |
+|   Player           | ✅         |   GUI              | atribut Image, setImage dari atribut ini   |
+|   Enemy            | ✅         |   Method           | setCenterImage dari Image Engimon      |
 |   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   Battle           | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
-|   GameState        |             |                    | Menyimpan semua keterangan game dari map player dan musuh2 |
-|   GameState save   |             |                    | Deserialize object gamestate jadi file eksternal seperti json |
-|   GameState load   |             |                    | Serialize file eksternal seperti json menjadi object GameState object|   
+|   GameState        | ✅         |                    | Menyimpan semua keterangan game dari map player dan musuh2 |
+|   GameState save   | ✅         |                    | Deserialize object gamestate jadi file eksternal seperti json |
+|   GameState load   | ✅         |                    | Serialize file eksternal seperti json menjadi object GameState object|   
 
-Progress: ~60%
+Progress: ~85%
+
+Design Progress : ~20%
 

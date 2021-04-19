@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Cataclysm extends Skill {
-    private String species;
+    private final String species;
     
     public Cataclysm() {
         super("Cataclysm", "Fire", 15, 1);

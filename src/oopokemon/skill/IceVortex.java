@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class IceVortex extends Skill {
-    private String species;
+    private final String species;
     
     public IceVortex() {
         super("Ice Vortex", "Ice", 13, 1);

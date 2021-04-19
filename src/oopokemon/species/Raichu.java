@@ -3,7 +3,7 @@ package oopokemon.species;
 import oopokemon.skill.StaticStorm;
 import javafx.scene.image.Image;
 
-import static oopokemon.Element.ElementType.Electric;
+import static oopokemon.element.ElementType.Electric;
 
 public class Raichu extends Engimon {
     private void InitComp() {

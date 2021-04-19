@@ -2,7 +2,7 @@ package oopokemon.species;
 
 import oopokemon.skill.Torrent;
 
-import static oopokemon.Element.ElementType.Water;
+import static oopokemon.element.ElementType.Water;
 
 public class Squirtle extends Engimon {
     private void InitComp() {

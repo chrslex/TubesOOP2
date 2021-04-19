@@ -9,9 +9,9 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnemyHandler implements Runnable {
-    private List<Enemy> enemyList;
-    private AtomicBoolean want_to_susp = new AtomicBoolean(false);
-    private Thread t;
+    private final List<Enemy> enemyList;
+    private final AtomicBoolean want_to_susp = new AtomicBoolean(false);
+    private final Thread t;
 
     private int interval = 500;
 

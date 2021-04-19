@@ -1,12 +1,12 @@
 package oopokemon.species;
 import java.util.*;
 
-import oopokemon.Element.Element;
-import oopokemon.Element.ElementType;
+import oopokemon.element.Element;
+import oopokemon.element.ElementType;
 import oopokemon.skill.Skill;
 import javafx.scene.image.Image;
 
-import static oopokemon.Element.ElementType.None;
+import static oopokemon.element.ElementType.None;
 //import oopokemon.skill;
 //import oopokemon.Player;
 
@@ -24,7 +24,7 @@ public class Engimon implements Comparable<Engimon> {
     protected String imageSource;
     public Skill[] monSkills;
 
-    private static Map<String, Integer> map;
+    private static final Map<String, Integer> map;
 
     private void InitComp() {
         this.monName = "";

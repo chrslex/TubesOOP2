@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Fissure extends Skill {
-    private String species;
+    private final String species;
     
     public Fissure() {
         super("Fissure", "Ground", 12, 1);

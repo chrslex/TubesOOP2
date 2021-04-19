@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Nimbus extends Skill {
-    private String species;
+    private final String species;
     
     public Nimbus() {
         super("Nimbus", "Electric", 16, 1);

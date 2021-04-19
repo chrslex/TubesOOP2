@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Magnetize extends Skill {
-    private String species;
+    private final String species;
     
     public Magnetize() {
         super("Magnetize", "Ground", 15, 1);

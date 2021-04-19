@@ -3,7 +3,7 @@ package oopokemon.species;
 import oopokemon.skill.IceVortex;
 import oopokemon.skill.Torrent;
 
-import static oopokemon.Element.ElementType.*;
+import static oopokemon.element.ElementType.*;
 
 public class Kyogre extends Engimon {
     private void InitComp() {

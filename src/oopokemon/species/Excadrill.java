@@ -2,7 +2,7 @@ package oopokemon.species;
 
 import oopokemon.skill.Fissure;
 
-import static oopokemon.Element.ElementType.Ground;
+import static oopokemon.element.ElementType.Ground;
 
 public class Excadrill extends Engimon {
     private void InitComp() {

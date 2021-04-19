@@ -1,4 +1,4 @@
-package oopokemon.Element;
+package oopokemon.element;
 
 public enum  ElementType {
     None {

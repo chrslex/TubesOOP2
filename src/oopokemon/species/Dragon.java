@@ -2,7 +2,7 @@ package oopokemon.species;
 
 import oopokemon.skill.Sunstrike;
 
-import static oopokemon.Element.ElementType.Fire;
+import static oopokemon.element.ElementType.Fire;
 
 public class Dragon extends Engimon {
     private void InitComp() {

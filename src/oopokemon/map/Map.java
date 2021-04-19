@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-    private List<Cell> cells;
+    private final List<Cell> cells;
     int maxX = Position.MAX_X;
     int maxY = Position.MAX_Y;
     public String namaFile;

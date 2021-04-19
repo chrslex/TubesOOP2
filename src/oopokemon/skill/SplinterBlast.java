@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class SplinterBlast extends Skill {
-    private String species;
+    private final String species;
     
     public SplinterBlast() {
         super("Splinter Blast", "Ice", 16, 1);

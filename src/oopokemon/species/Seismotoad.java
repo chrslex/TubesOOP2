@@ -3,7 +3,7 @@ package oopokemon.species;
 import oopokemon.skill.Fissure;
 import oopokemon.skill.Torrent;
 
-import static oopokemon.Element.ElementType.*;
+import static oopokemon.element.ElementType.*;
 
 public class Seismotoad extends Engimon {
     private void InitComp() {

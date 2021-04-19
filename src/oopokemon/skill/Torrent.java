@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Torrent extends Skill {
-    private String species;
+    private final String species;
     
     public Torrent() {
         super("Torrent", "Water", 15, 1);

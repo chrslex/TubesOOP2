@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Renderer {
-    private List<Renderable> toRender;
+    private final List<Renderable> toRender;
 
     /**
      * @param map is what to render

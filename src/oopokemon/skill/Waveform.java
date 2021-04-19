@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Waveform extends Skill {
-    private String species;
+    private final String species;
     
     public Waveform() {
         super("Waveform", "Water", 17, 1);

@@ -3,7 +3,7 @@ package oopokemon.species;
 import oopokemon.skill.StaticStorm;
 import oopokemon.skill.Sunstrike;
 
-import static oopokemon.Element.ElementType.*;
+import static oopokemon.element.ElementType.*;
 
 public class Inferail extends Engimon {
     private void InitComp() {

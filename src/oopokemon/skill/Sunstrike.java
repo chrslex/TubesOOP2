@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class Sunstrike extends Skill {
-    private String species;
+    private final String species;
     
     public Sunstrike() {
         super("Sunstrike", "Fire", 15, 1);

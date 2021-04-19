@@ -1,7 +1,7 @@
 package oopokemon.skill;
 
 public class StaticStorm extends Skill {
-    private String species;
+    private final String species;
     
     public StaticStorm() {
         super("Static Storm", "Electric", 14, 1);

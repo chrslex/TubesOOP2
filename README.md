@@ -17,7 +17,7 @@ Pada bagian Project pastikan Project SDK menggunakan java 1.8 dengan SDK Default
 
 Jalankan Build Artifact
 
-![OOPokemon build](https://user-images.githubusercontent.com/68516528/114084156-0ccd3680-98da-11eb-995e-8352c47b6556.gif)
+![oopokemon build](https://user-images.githubusercontent.com/68516528/114084156-0ccd3680-98da-11eb-995e-8352c47b6556.gif)
 
 # Tools
 #### IntelliJ 

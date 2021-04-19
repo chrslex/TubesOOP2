@@ -99,6 +99,16 @@ public class GameState {
         return sfxVol;
     }
 
+    private static class Config{
+        public final float cellWidth = getCellWidth();
+        public final float cellHeight = getCellHeight();
+        public final int numOfCellHoriz = getNumOfCellHoriz();
+        public final int numOfCellVert = getNumOfCellVert();
+        public final double musicVol = getMusicVol();
+        public final double sfxVol = getSfxVol();
+        Config(){}
+    }
+
     public static void saveConfig(int hcell, int vcell, double _musicVol, double _sfxVol) {
         numOfCellHoriz = hcell;
         numOfCellVert = vcell;
@@ -106,7 +116,7 @@ public class GameState {
         sfxVol = _sfxVol;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(new Config());
+        String json = gson.toJson(new GameState.Config());
 
         try {
             FileWriter myWriter = new FileWriter("bin/config.json");

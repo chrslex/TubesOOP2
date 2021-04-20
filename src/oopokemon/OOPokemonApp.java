@@ -1,4 +1,5 @@
 package oopokemon;
+import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import oopokemon.map.Map;
 
@@ -321,16 +322,26 @@ public class OOPokemonApp extends Application {
 //        lbl_cellSize.setPrefSize(btnWidth, btnHeight);
 
         Label lbl_musicVol = new Label("Music Volume");
-        lbl_musicVol.setPrefSize(btnWidth, btnHeight);
+        lbl_musicVol.setPrefSize(sliderWidth, btnHeight);
+        lbl_musicVol.setId("label");
+        lbl_musicVol.setPadding(new Insets(20,0,0,0));
 
         Label lbl_sfxVol = new Label("SFX Volume");
-        lbl_sfxVol.setPrefSize(btnWidth, btnHeight);
+        lbl_sfxVol.setPrefSize(sliderWidth, btnHeight);
+        lbl_sfxVol.setId("label");
+        lbl_sfxVol.setPadding(new Insets(20,0,0,0));
+
 
         Label lbl_horizCell = new Label("Number of Horizonal Tiles");
-        lbl_horizCell.setPrefSize(btnWidth, btnHeight);
+        lbl_horizCell.setPrefSize(sliderWidth, btnHeight);
+        lbl_horizCell.setId("label");
+        lbl_horizCell.setPadding(new Insets(20,0,0,0));
+
 
         Label lbl_vertCell = new Label("Number of Vertical Tiles");
-        lbl_vertCell.setPrefSize(btnWidth, btnHeight);
+        lbl_vertCell.setPrefSize(sliderWidth, btnHeight);
+        lbl_vertCell.setId("label");
+        lbl_vertCell.setPadding(new Insets(20,0,0,0));
 
 
 //        Slider slider_cellsize = new Slider(10, 200, getCellWidth());
@@ -370,6 +381,8 @@ public class OOPokemonApp extends Application {
 
         Button btn_save = new Button("Save");
         btn_save.setPrefSize(btnWidth, btnHeight);
+//        btn_save.setPadding(new Insets(10,0,0,0));
+        btn_save.setTranslateY(20);
         btn_save.setTranslateX((sliderWidth-btnWidth)/2);
         btn_save.setId("button");
 

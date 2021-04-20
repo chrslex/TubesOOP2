@@ -92,6 +92,11 @@ public class Skill implements Comparable<Skill>{
 //        }
     }
 
+    @Override
+    public int hashCode() {
+        return skillName.length() + skillType.length();
+    }
+
     public void increaseMasteryLevel() {
         if (masteryLevel < 3) masteryLevel++;
     }

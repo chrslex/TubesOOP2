@@ -1,4 +1,5 @@
 package oopokemon;
+import javafx.scene.image.ImageView;
 import oopokemon.map.Map;
 
 import oopokemon.occupier.EnemyHandler;
@@ -96,7 +97,9 @@ public class OOPokemonApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("oopokemon");
+        stage.setTitle("OOPokemon");
+        stage.setResizable(false);
+
         stage.getIcons().add(new Image("assets/oopokemon.png"));
         setGameToMainMenu(stage);
         stage.show();
@@ -113,6 +116,8 @@ public class OOPokemonApp extends Application {
         else {
             mainGame = new Scene(newGame());
         }
+//        mapContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+//        camera.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         mainGame.setFill(Color.BLACK);
 
@@ -150,7 +155,6 @@ public class OOPokemonApp extends Application {
 
         });
 
-
         stage.setScene(mainGame);
     }
 
@@ -159,23 +163,25 @@ public class OOPokemonApp extends Application {
         musicPlayer.pause();
         Pane pane = new Pane();
         Scene pauseScene = new Scene(pane, previouseScene.getWidth(), previouseScene.getHeight());
+        pauseScene.getStylesheets().add("assets/styles.css");
         VBox uiContainer = new VBox(10);
-
+        pane.setId("scene");
         int btnWidth = 175;
         int btnHeight = 50;
 
         // Membuat Tombol
         Button btn_resume = new Button("Resume");
         btn_resume.setPrefSize(btnWidth, btnHeight);
-
+        btn_resume.setId("button");
         Button btn_save = new Button("Save");
         btn_save.setPrefSize(btnWidth, btnHeight);
-
+        btn_save.setId("button");
         Button btn_load = new Button("Load");
         btn_load.setPrefSize(btnWidth, btnHeight);
-
+        btn_load.setId("button");
         Button btn_main = new Button("Main Menu");
         btn_main.setPrefSize(btnWidth, btnHeight);
+        btn_main.setId("button");
 
 
         // Setup layout
@@ -233,15 +239,6 @@ public class OOPokemonApp extends Application {
         stage.show();
     }
 
-    private void escapeToReturn(Stage stage,  Scene currentScene, Scene destScene) {
-        currentScene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                musicPlayer.play();
-                stage.setScene(destScene);
-            }
-        });
-    }
-
 
     private void setGameToMainMenu(Stage stage) {
         musicPlayer = null;
@@ -251,9 +248,13 @@ public class OOPokemonApp extends Application {
         loadConfig();
         Pane mainMenuContainer = new Pane();
         Scene mainMenu = new Scene(mainMenuContainer);
-
+        mainMenu.getStylesheets().add("assets/styles.css");
         mainMenuContainer.setPrefSize(getCameraWidth(), getCameraHeight());
-
+//        ImageView backgroundImage = new ImageView(new Image("assets/pokemon.jpg"));
+//        backgroundImage.fitWidthProperty().bind(mainMenu.widthProperty());
+//        backgroundImage.setPreserveRatio(true);
+//        mainMenuContainer.getChildren().add(backgroundImage);
+        mainMenuContainer.setId("scene");
         VBox uiContainer = new VBox(10);
 
         int btnWidth = 175;
@@ -262,12 +263,16 @@ public class OOPokemonApp extends Application {
         // Membuat Tombol
         Button btn_new = new Button("New Game");
         btn_new.setPrefSize(btnWidth, btnHeight);
+        btn_new.setId("button");
         Button btn_load = new Button("Load");
         btn_load.setPrefSize(btnWidth, btnHeight);
+        btn_load.setId("button");
         Button btn_hof = new Button("Hall of Fame");
         btn_hof.setPrefSize(btnWidth, btnHeight);
+        btn_hof.setId("button");
         Button btn_setting = new Button("Setting");
         btn_setting.setPrefSize(btnWidth, btnHeight);
+        btn_setting.setId("button");
 
 
         // Setup layout
@@ -302,7 +307,8 @@ public class OOPokemonApp extends Application {
         Scene settingScreen = new Scene(settingContainer);
 
         settingContainer.setPrefSize(getCameraWidth(), getCameraHeight());
-
+        settingScreen.getStylesheets().add("assets/styles.css");
+        settingContainer.setId("scene");
         VBox uiContainer = new VBox(10);
 
         int btnWidth = 175;
@@ -365,7 +371,7 @@ public class OOPokemonApp extends Application {
         Button btn_save = new Button("Save");
         btn_save.setPrefSize(btnWidth, btnHeight);
         btn_save.setTranslateX((sliderWidth-btnWidth)/2);
-
+        btn_save.setId("button");
 
         // Setup layout
         uiContainer.getChildren().addAll(

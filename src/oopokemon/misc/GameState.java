@@ -131,7 +131,7 @@ public class GameState {
         String json = gson.toJson(new GameState.Config());
 
         try {
-            FileWriter myWriter = new FileWriter("bin/config2.json");
+            FileWriter myWriter = new FileWriter("bin/config.json");
             myWriter.write(json);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
@@ -140,7 +140,7 @@ public class GameState {
             e.printStackTrace();
         }
     }
-    private static String formater(String string){
+    private static String formatter(String string){
         return "\"" + string + "\"";
     }
 
@@ -196,9 +196,9 @@ public class GameState {
 
     public void saveGame(String saveDest) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = "{\"map\":" + formater(map.namaFile);
+        String json = "{\"map\":" + formatter(map.namaFile);
         // Player
-        json += String.format(",%s:{%s:%s}", formater("player"), formater("position"), gson.toJson(player.position));
+        json += String.format(",%s:{%s:%s}", formatter("player"), formatter("position"), gson.toJson(player.position));
 
         List<Enemy> enemyList = map.getMap().stream()
                 .filter(cell -> cell.occupier != null && cell.occupier.occupierType == OccupierType.Enemy_Type)
@@ -208,14 +208,14 @@ public class GameState {
         for (Enemy enemy: enemyList) {
 //            {"type": 1, "level": 1, "position": {"x": 1, "y": 2}}
             String enemiess = String.format("{%s:%s, %s:%d, %s:%s},",
-                    formater("type"), formater(enemy.getEngimon().getNamaSpecies()),
-                    formater("level"), enemy.getEngimon().getLevel(),
-                    formater("position"), gson.toJson(enemy.position));
+                    formatter("type"), formatter(enemy.getEngimon().getNamaSpecies()),
+                    formatter("level"), enemy.getEngimon().getLevel(),
+                    formatter("position"), gson.toJson(enemy.position));
             enemystr.append(enemiess);
         }
         if (enemystr.length() > 0){
             enemystr = new StringBuilder(enemystr.substring(0, enemystr.length() - 1));
-            json += String.format(",%s:[%s]",formater("enemies"), enemystr.toString());
+            json += String.format(",%s:[%s]", formatter("enemies"), enemystr.toString());
         }
 
         json+= "}";

@@ -1,0 +1,23 @@
+#button{
+    -fx-background-color: #130047;
+    /*-fx-text-fill: #84D0F0;*/
+    -fx-text-fill: #2196f3;
+    -fx-opacity: 70%;
+    -fx-font-family: consolas;
+    -fx-letter-spacing: 4px;
+    -fx-transition: 0.2s;
+    -fx-font-size: 20px
+}
+
+#button:hover{
+    -fx-opacity: 50%;
+    -fx-transition-delay: 1s;
+}
+
+#scene{
+    -fx-background-image: url("pokemon.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}

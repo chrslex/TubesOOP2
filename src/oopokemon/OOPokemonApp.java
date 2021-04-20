@@ -104,14 +104,15 @@ public class OOPokemonApp extends Application {
 
     private void setGameToMainGame(Stage stage, GameModeType mode) {
         Scene mainGame;
-
+        if (enemyHandler != null){
+            enemyHandler.interrupt();
+        }
         if (mode == GameModeType.LoadGame) {
             mainGame = new Scene(loadGemu());
         }
         else {
             mainGame = new Scene(newGame());
         }
-
 
         mainGame.setFill(Color.BLACK);
 
@@ -196,6 +197,7 @@ public class OOPokemonApp extends Application {
 
         btn_load.setOnAction(event -> {
             renderer.unRender(mapContainer);
+            enemyHandler.interrupt();
             try {
                 gameState = GameState.loadGame("testing");
             } catch (NotInitializedException e){
@@ -204,9 +206,11 @@ public class OOPokemonApp extends Application {
             }
             isekai = gameState.map;
             myPlayer = gameState.player;
+            enemyHandler = gameState.enemyhandler;
             renderer = new Renderer(gameState.map);
             renderer.render(mapContainer);
             cameraHandler();
+            playBGM();
             stage.setScene(previouseScene);
         });
 
@@ -421,10 +425,8 @@ public class OOPokemonApp extends Application {
         super.stop();
         if (this.musicPlayer != null){
             musicPlayer.interrupt();
-            musicPlayer = null;
         }
         if (this.enemyHandler != null){
-            enemyHandler.suspend();
             enemyHandler.interrupt();
         }
     }

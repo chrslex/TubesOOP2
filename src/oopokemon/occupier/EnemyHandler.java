@@ -41,16 +41,13 @@ public class EnemyHandler implements Runnable {
     public void moveAllRandom() {
         running.set(true);
         while (running.get()) {
-            enemyList.forEach(enemy -> enemy.move(new Random().nextInt(4)));
-            for ( Enemy enemy: enemyList) {
-                enemy.move(new Random().nextInt(4));
-            }
             try {
                 Thread.sleep(interval);
                 synchronized (this){
                     while (wantToSusp.get()){
                         wait();
                     }
+                    enemyList.forEach(enemy -> enemy.move(new Random().nextInt(4)));
                 }
 
             }

@@ -52,7 +52,7 @@ Tidak wajib tapi disarankan
 |   Turunan Skill    | ✅         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
 |   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
 |   Occupier         | ✅         |   GUI              |                                                  |
-|   ActiveEngimon    | ❌         |   Method           | setImage jika ada Engimon aktif   |
+|   ActiveEngimon    | ✅         |   Method           | setImage jika ada Engimon aktif   |
 |   Player           | ✅         |   GUI              | atribut Image, setImage dari atribut ini   |
 |   Enemy            | ✅         |   Method           | setCenterImage dari Image Engimon      |
 |   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
@@ -63,5 +63,8 @@ Tidak wajib tapi disarankan
 
 Progress: ~85%
 
-Design Progress : ~20%
+Design Progress : ~70%
+
+# Tampilan Layar
+![image](https://user-images.githubusercontent.com/68516528/115685206-38dcc300-a382-11eb-8373-0420f8263759.png)
 

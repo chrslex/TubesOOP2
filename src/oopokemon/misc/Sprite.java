@@ -64,7 +64,21 @@ public class Sprite extends Pane {
         this.getChildren().addAll(center,topLeft, topRight, bottomLeft, bottomRight);
     }
 
-
+    public void setLowerSize(boolean status){
+        float width = Cell.cellWidth;
+        float height = Cell.cellHeight;
+        if (status){
+            center.setFitWidth(0.7 * width);
+            center.setFitHeight(0.7 * height);
+            center.setX(0.15 * width);
+            center.setY(0.15 * height);
+            return;
+        }
+        center.setFitHeight(width);
+        center.setFitWidth(height);
+        center.setX(0);
+        center.setY(0);
+    }
 
     public void setCenterImage(Image image) {
         center.setImage(image);

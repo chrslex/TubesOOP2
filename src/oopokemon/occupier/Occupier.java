@@ -59,6 +59,10 @@ public abstract class Occupier implements Renderable {
         return false;
     }
 
+    public Map getMap(){
+        return map;
+    }
+
 
     @Override
     public Node getToRender() {

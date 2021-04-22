@@ -200,7 +200,7 @@ public class GameState {
         // Player
         json += String.format(",%s:{%s:%s}", formatter("player"), formatter("position"), gson.toJson(player.position));
 
-        List<Enemy> enemyList = map.getMap().stream()
+        List<Enemy> enemyList = map.getCells().stream()
                 .filter(cell -> cell.occupier != null && cell.occupier.occupierType == OccupierType.Enemy_Type)
                 .map(cell -> (Enemy) cell.occupier).collect(Collectors.toList());
 

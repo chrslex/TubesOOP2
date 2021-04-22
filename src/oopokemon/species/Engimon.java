@@ -357,6 +357,12 @@ public class Engimon implements Comparable<Engimon> {
     }
 
     @Override
+    public String toString() {
+        return
+        "Engimon || Nama : " + this.getName() + " || Spesies : " + this.getNamaSpecies() + " || Level : " + this.getLevel() + " || Elemen 1 : " + this.monElements[0] + " || Elemen 2 : " + monElements[1];
+    }
+
+    @Override
     public int compareTo(Engimon o) {
         // kalau kedua element tidak sama, akan mensort elemennya
         if (!o.monElements[0].equals(this.monElements[0])) {
@@ -364,7 +370,7 @@ public class Engimon implements Comparable<Engimon> {
         }
         // kalau kedua element sama tapi elemen kedua tidak sama akan mensort element kedua
         else if (!o.monElements[1].equals(this.monElements[1])) {
-            return o.monElements[1].compareTo(this.monElements[1]);
+            return this.monElements[1].compareTo(o.monElements[1]);
         }
         // kedua element sama dan kedua element kedua sama
         return o.monLevel - this.monLevel;

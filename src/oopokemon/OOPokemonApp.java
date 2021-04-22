@@ -36,7 +36,7 @@ public class OOPokemonApp extends Application {
 
     private EnemyHandler enemyHandler;
     private Renderer renderer;
-
+    private ImageView healthbar;
     private GameState gameState;
     private Map isekai;
     private Player myPlayer;
@@ -46,14 +46,16 @@ public class OOPokemonApp extends Application {
         loadConfig();
         setUpCamera();
         playBGM();
+
         gameState = new GameState();
         isekai = gameState.map;
         myPlayer = gameState.player;
         enemyHandler = gameState.enemyhandler;
+        healthbar = myPlayer.healthbar;
 
         renderer = new Renderer(isekai);
         renderer.render(mapContainer);
-
+        camera.getChildren().add(healthbar);
         cameraHandler();
         return root;
     }
@@ -72,9 +74,11 @@ public class OOPokemonApp extends Application {
         isekai = gameState.map;
         myPlayer = gameState.player;
         enemyHandler = gameState.enemyhandler;
+        healthbar = myPlayer.healthbar;
 
         renderer = new Renderer(isekai);
         renderer.render(mapContainer);
+        camera.getChildren().add(healthbar);
 
         cameraHandler();
         return root;
@@ -91,7 +95,9 @@ public class OOPokemonApp extends Application {
         mapContainer = new Pane();
         guiContainer = new Pane();
         guiContainer.toFront();
+
         root.setTop(guiContainer);
+
         root.setBottom(camera);
     }
 
@@ -426,8 +432,8 @@ public class OOPokemonApp extends Application {
 
     private void cameraHandler() {
         System.out.println(myPlayer.position.x + ", "+  myPlayer.position.y);
-        camera.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
-        camera.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
+        mapContainer.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
+        mapContainer.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
     }
 
     private enum GameModeType {

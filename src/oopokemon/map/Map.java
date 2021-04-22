@@ -83,7 +83,7 @@ public class Map {
         getCellAtPosition(position).occupier = null;
     }
 
-    public List<Cell> getMap(){
+    public List<Cell> getCells(){
         return cells;
     }
 

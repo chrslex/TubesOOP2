@@ -14,8 +14,8 @@ public class Renderer {
      * @param map is what to render
      */
     public Renderer(Map map) {
-        toRender = new ArrayList<>(map.getMap());
-        map.getMap().stream().filter(c -> c.occupier != null).forEach(c -> toRender.add(c.occupier));
+        toRender = new ArrayList<>(map.getCells());
+        map.getCells().stream().filter(c -> c.occupier != null).forEach(c -> toRender.add(c.occupier));
     }
 
     /**
@@ -23,11 +23,11 @@ public class Renderer {
      * @param mapPlaceHolder is where to render
      */
     public static void renderAll(Map map, Pane mapPlaceHolder) {
-        map.getMap()
+        map.getCells()
                 .forEach(cell -> {
                     mapPlaceHolder.getChildren().add(cell.getToRender());
                 });
-        map.getMap()
+        map.getCells()
                 .stream()
                 .filter(cell -> cell.occupier != null)
                 .forEach(cell -> mapPlaceHolder.getChildren().add(cell.occupier.getToRender()));
@@ -38,7 +38,7 @@ public class Renderer {
      * @param mapPlaceHolder is where to unRender
      */
     public static void unRenderAll(Map map, Pane mapPlaceHolder){
-        map.getMap()
+        map.getCells()
                 .forEach(cell -> {
                     mapPlaceHolder.getChildren().remove(cell.getToRender());
                     if (cell.occupier != null){

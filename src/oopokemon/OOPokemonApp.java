@@ -299,7 +299,7 @@ public class OOPokemonApp extends Application {
 
         btn_help.setOnAction(event -> {
 //            setGameToHelp(stage);
-            InventoryGUI.createInventInventory(null);
+            InventoryGUI.createInventory(null);
         });
 
         btn_setting.setOnAction(event -> {
@@ -328,7 +328,7 @@ public class OOPokemonApp extends Application {
         lbl_move.setId("label");
         Label lbl_battle = new Label("Mengajukan Battle: SPACE");
         lbl_battle.setId("label");
-        Label lbl_invetory = new Label("Inventory: B");
+        Label lbl_invetory = new Label("Inventory: B\ntest\ntest");
         lbl_invetory.setId("label");
         Label lbl_breed = new Label("Mengajukan Breed: M");
         lbl_breed.setId("label");

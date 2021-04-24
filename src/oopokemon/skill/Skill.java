@@ -1,6 +1,8 @@
 package oopokemon.skill;
 
-public class Skill implements Comparable<Skill>{
+import oopokemon.inventory.Item;
+
+public class Skill implements Comparable<Skill>, Item {
     protected int basePower;
     public int masteryLevel;
     public String skillName;
@@ -104,5 +106,30 @@ public class Skill implements Comparable<Skill>{
 
     public void increaseMasteryLevel() {
         if (masteryLevel < 3) masteryLevel++;
+    }
+
+    @Override
+    public String getFirstLine() {
+        return skillName;
+    }
+
+    @Override
+    public String getSecondLine() {
+        return skillType;
+    }
+
+    @Override
+    public String getThirdLine() {
+        return "" + basePower;
+    }
+
+    @Override
+    public String getFourthLine() {
+        return "" + masteryLevel;
+    }
+
+    @Override
+    public String getFifthLine() {
+        return "";
     }
 }

@@ -137,7 +137,11 @@ public class Inventory {
     }
     public int getHighestLevel(){
         if (this.engimonBag.isEmpty()) return 1;
-        return engimonBag.stream().map(Engimon::getLevel).max(Comparator.naturalOrder()).get();
+        return engimonBag
+                .stream()
+                .map(Engimon::getLevel)
+                .max(Comparator.naturalOrder())
+                .get();
     }
 
 //    public static void main(String[] args) {

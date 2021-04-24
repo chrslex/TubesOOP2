@@ -4,6 +4,7 @@ import java.util.*;
 import com.google.gson.*;
 import oopokemon.element.Element;
 import oopokemon.element.ElementType;
+import oopokemon.inventory.Item;
 import oopokemon.skill.Skill;
 import javafx.scene.image.Image;
 
@@ -11,7 +12,7 @@ import static oopokemon.element.ElementType.None;
 //import oopokemon.skill;
 //import oopokemon.Player;
 
-public class Engimon implements Comparable<Engimon> {
+public class Engimon implements Comparable<Engimon>, Item {
     protected int monLevel;
     protected int monExp;
     protected int monCtvExp;
@@ -326,7 +327,7 @@ public class Engimon implements Comparable<Engimon> {
         {
             if(!this.monSkills[i].getSkillName().equals("None")){
             monSkills[i].printInfoAll();
-                System.out.println("--------" + (i+1) + "--------");
+            System.out.println("--------" + (i+1) + "--------");
             }
         }
     }
@@ -482,6 +483,42 @@ public class Engimon implements Comparable<Engimon> {
         }
         // kedua element sama dan kedua element kedua sama
         return o.monLevel - this.monLevel;
+    }
+
+    @Override
+    public String getFirstLine() {
+        return "Nama : " + monName;
+    }
+
+    @Override
+    public String getSecondLine() {
+        return "Spesies : " + namaSpecies;
+    }
+
+    @Override
+    public String getThirdLine() {
+        return "Exp : " + monExp + "/" + monCtvExp + " Lvl : " + monLevel;
+    }
+
+    @Override
+    public String getFourthLine() {
+        StringBuilder skills = new StringBuilder();
+        for (Skill skill : monSkills){
+            skills.append(skill).append("\n");
+        }
+        return "" + skills;
+    }
+
+    @Override
+    public String getFifthLine() {
+        if (monParents != null){
+            StringBuilder parents = new StringBuilder();
+            for (Engimon engimon: monParents){
+                parents.append("Parent | Nama: ").append(engimon.monName).append(" Spesies: ").append(engimon.namaSpecies);
+            }
+            return parents.toString();
+        }
+        return "";
     }
 
 

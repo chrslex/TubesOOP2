@@ -1,6 +1,7 @@
 package oopokemon.occupier;
 
 import javafx.scene.image.ImageView;
+import oopokemon.inventory.Bag;
 import oopokemon.inventory.Inventory;
 import oopokemon.map.Map;
 import oopokemon.exception.NotInitializedException;
@@ -74,6 +75,35 @@ public class Player extends Occupier {
 
     public ActiveEngimon getActiveEngimon() {
         return activeEngimon;
+    }
+
+    public void breeding(){
+        if (inventory.isEngimonBagEmpty()){
+            //Print inv kosong
+        }
+        else if (inventory.isFull()){
+            //Print inv penuh
+        }
+        else{
+            inventory.printAllEngimonInfo();
+
+            Bag<Engimon> temp = inventory.listEngimon();
+            //input e1
+            //input e2
+//            Engimon e1 = temp.list;
+//            Engimon e2 = temp.list;
+//            if(e1.getLevel() <4 || e2.getLevel()<4  ){
+//                //Print level tidak cukup
+//                return ;
+//            }
+//            e1.setLevel(e1.getLevel() - 3);
+//            e2.setLevel(e2.getLevel() - 3);
+
+            //Input nama anak
+
+//            Engimon anak = new Engimon(input, e1, e2);
+//            inventory.addEngimon(anak);
+        }
     }
 
     @Override

@@ -8,15 +8,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import oopokemon.inventory.*;
 import oopokemon.species.Engimon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryGUI extends Pane {
-    public static void createInventInventory(List<Engimon> engimons){
+    public static void createInventory(List<Item> items){
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -38,14 +40,22 @@ public class InventoryGUI extends Pane {
         inventoryItems.setAlignment(Pos.CENTER);
 
 
-        itemInfo.setPrefSize(300,600);
+        itemInfo.setPrefSize(1,600);
 
-
-        for (int i = 0; i < 5; i++) {
+        List<InventroyItem> listItems = new ArrayList<>();
+        int counter = 0;
+        for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) {
-                inventoryItems.add(new InventroyItem(), i, j);
+                InventroyItem inv = new InventroyItem(counter++);
+                inventoryItems.add(inv, j, i);
             }
         }
+
+//        for (int i = 0; i < items.size(); i++) {
+//            InventroyItem inv = new InventroyItem(counter++);
+//            listItems.add(inv);
+//            inventoryItems.add(inv, i /5, i % 5);
+//        }
 
 
 
@@ -57,5 +67,18 @@ public class InventoryGUI extends Pane {
 
     public static void main(String[] args) {
 
+    }
+
+    public static void createInfo(Item item) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        VBox itemInfo = new VBox();
+
+
+        Scene infoScene =new Scene(itemInfo);
+
+        stage.setScene(infoScene);
+        stage.setResizable(false);
+        stage.showAndWait();
     }
 }

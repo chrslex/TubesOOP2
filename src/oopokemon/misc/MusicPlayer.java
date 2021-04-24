@@ -5,14 +5,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.nio.file.Paths;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MusicPlayer {
 
     private final MediaPlayer mediaPlayer;
-
-    private final AtomicBoolean running = new AtomicBoolean(false);
-
 
     /**
      * @param namaFile is the location where the music file is located relative to the project folder
@@ -40,31 +36,13 @@ public class MusicPlayer {
             this.volume = volume;
         }
     }
-
-    public void run() {
-        running.set(true);
-        mediaPlayer.play();
-    }
-
-    public void interrupt() {
-        mediaPlayer.stop();
-    }
-
-    public void playpause() {
-        if (running.get()) {
-            running.set(false);
-            mediaPlayer.pause();
-            return;
-        }
-        running.set(true);
-        mediaPlayer.play();
-    }
-
     public void pause(){
         mediaPlayer.pause();
     }
-
     public void play(){
         mediaPlayer.play();
+    }
+    public void interrupt() {
+        mediaPlayer.stop();
     }
 }

@@ -1,5 +1,6 @@
 package oopokemon.misc;
 
+import oopokemon.inventory.Inventory;
 import oopokemon.map.Map;
 import oopokemon.map.Position;
 import oopokemon.occupier.*;
@@ -164,7 +165,28 @@ public class GameState {
             if (fileObject.has("player")) {
                 JsonObject playerObject = fileObject.get("player").getAsJsonObject();
                 Position playerpos = new Gson().fromJson(playerObject.get("position").getAsJsonObject(), Position.class);
-                player = new Player(playerpos.x, playerpos.y, map);
+
+                ActiveEngimon activeEngimon = new ActiveEngimon(map);
+
+                Inventory inventory = new Inventory();
+
+                if (fileObject.has("activeEngimon")){
+                    JsonObject aeObject = fileObject.get("activeEngimon").getAsJsonObject();
+                    Position aePos = new Gson().fromJson(aeObject.get("position").getAsJsonObject(), Position.class);
+
+
+                    if (aeObject.has("engimon")) {
+                        JsonObject engimonObj = aeObject.get("engimon").getAsJsonObject();
+                        activeEngimon = new ActiveEngimon(aePos.x, aePos.y, map, Engimon.fromJson(engimonObj));
+                    }
+                }
+
+                if (fileObject.has("inventory")){
+
+                }
+
+                player = new Player(playerpos.x, playerpos.y, activeEngimon, inventory, map);
+//                ActiveEngimon activeEngimon = new ActiveEngimon()
 
             }
             else throw new NotInitializedException();
@@ -173,10 +195,12 @@ public class GameState {
                 for (JsonElement enm : jsonArray) {
                     JsonObject enobj = enm.getAsJsonObject();
                     Position enemypos = new Gson().fromJson(enobj.get("position").getAsJsonObject(), Position.class);
-                    int lvl = enobj.get("level").getAsInt();
+                    int baselvl = enobj.get("level").getAsInt();
                     int jenis = Engimon.getTypeInt(enobj.get("type").getAsString());
-                    Enemy enemy = new Enemy(map,jenis,lvl);
+                    int exp = enobj.get("exp").getAsInt();
+                    Enemy enemy = new Enemy(map,jenis,baselvl);
                     enemy.setPos(enemypos.x, enemypos.y);
+                    enemy.setExp(exp);
                     enemyList.add(enemy);
                 }
                 if (enemyList.size() > 0){
@@ -196,9 +220,17 @@ public class GameState {
 
     public void saveGame(String saveDest) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = "{\"map\":" + formatter(map.namaFile);
+        String json = "{\n\"map\":" + formatter(map.namaFile);
         // Player
-        json += String.format(",%s:{%s:%s}", formatter("player"), formatter("position"), gson.toJson(player.position));
+        json += String.format(",\n%s:{\n%s:\n%s}", formatter("player"), formatter("position"), gson.toJson(player.position));
+
+        ActiveEngimon activeEngimon = player.getActiveEngimon();
+
+        if (activeEngimon.getEngimon() != null) {
+            json += String.format(", \n%s:{\n%s:\n%s , \n%s:%s}",
+                    formatter("activeEngimon"), formatter("position"), gson.toJson(activeEngimon.position),
+                    formatter("engimon"), activeEngimon.getEngimon().toJson());
+        }
 
         List<Enemy> enemyList = map.getCells().stream()
                 .filter(cell -> cell.occupier != null && cell.occupier.occupierType == OccupierType.Enemy_Type)
@@ -207,9 +239,10 @@ public class GameState {
         StringBuilder enemystr = new StringBuilder();
         for (Enemy enemy: enemyList) {
 //            {"type": 1, "level": 1, "position": {"x": 1, "y": 2}}
-            String enemiess = String.format("{%s:%s, %s:%d, %s:%s},",
+            String enemiess = String.format("{%s:%s, %s:%d, %s:%d, %s:%s},",
                     formatter("type"), formatter(enemy.getEngimon().getNamaSpecies()),
-                    formatter("level"), enemy.getEngimon().getLevel(),
+                    formatter("level"), enemy.getEngimon().getBaseLevel(),
+                    formatter("exp"), enemy.getEngimon().getExp(),
                     formatter("position"), gson.toJson(enemy.position));
             enemystr.append(enemiess);
         }
@@ -218,7 +251,7 @@ public class GameState {
             json += String.format(",%s:[%s]", formatter("enemies"), enemystr.toString());
         }
 
-        json+= "}";
+        json+= "\n}";
 
         try {
             FileWriter myWriter = new FileWriter("bin/savefiles/" + saveDest + ".json");

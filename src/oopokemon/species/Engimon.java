@@ -1,6 +1,7 @@
 package oopokemon.species;
 import java.util.*;
 
+import com.google.gson.*;
 import oopokemon.element.Element;
 import oopokemon.element.ElementType;
 import oopokemon.skill.Skill;
@@ -81,6 +82,22 @@ public class Engimon implements Comparable<Engimon> {
         this.imageSource = other.imageSource;
     }
 
+    public Engimon(String name, String species, int level, int baselvl,
+                   int life, int exp, int maxExp, Skill[] skills,
+                   Element[] elements, Engimon[] parents, String _imageSource){
+        monName = name;
+        namaSpecies = species;
+        monLevel = level;
+        baseLevel = baselvl;
+        monLife = life;
+        monExp = exp;
+        monCtvExp = maxExp;
+        monSkills = skills;
+        monElements = elements;
+        monParents = parents;
+        imageSource = _imageSource;
+    }
+
     public Engimon(int monLife) {
         InitComp();
         this.monLife = monLife;
@@ -151,6 +168,10 @@ public class Engimon implements Comparable<Engimon> {
         Collections.sort(temporaryskill);
 
         this.monSkills = new Skill[4];
+        for (int i = 0; i < 4; i++) {
+            monSkills[i] = new Skill();
+        }
+
         monSkills[0] = temporaryskill.get(0);
 
         int angka = 1;
@@ -221,14 +242,14 @@ public class Engimon implements Comparable<Engimon> {
     public boolean addExp(int additionalExp) {
         int virtualExp = baseLevel * 100;
         this.monExp += additionalExp;
-        System.out.println("Anda Mendapatkan " + additionalExp + " exp");
+//        System.out.println("Anda Mendapatkan " + additionalExp + " exp");
         if (monExp >= monCtvExp)
         {
             return false;
         }
         else if (this.monLevel != ((this.monExp + virtualExp)/ 100))  {
             this.monLevel = ((this.monExp + virtualExp) / 100);
-            System.out.println("LEVEL UP!! Engimon anda naik ke level " + monLevel);
+//            System.out.println("LEVEL UP!! Engimon anda naik ke level " + monLevel);
         }
         return true;
     }
@@ -244,8 +265,16 @@ public class Engimon implements Comparable<Engimon> {
         return monLevel;
     }
 
+    public int getBaseLevel() {
+        return baseLevel;
+    }
+
     public int getLife() {
         return monLife;
+    }
+
+    public int getExp() {
+        return monExp;
     }
 
     public ElementType getFirstElement() {
@@ -356,6 +385,85 @@ public class Engimon implements Comparable<Engimon> {
         return new Image(url);
     }
 
+    private static String formatter(String string){
+        return "\"" + string + "\"";
+    }
+
+
+    public static Engimon fromJson(JsonObject json){
+
+        String nama = json.get("nama").getAsString();
+        String spesies = json.get("spesies").getAsString();
+        String imageSource = json.get("imageSource").getAsString();
+        int level = json.get("level").getAsInt();
+        int baseLevel = json.get("baseLevel").getAsInt();
+        int exp = json.get("exp").getAsInt();
+        int life = json.get("life").getAsInt();
+        int maxExp = json.get("maxExp").getAsInt();
+        JsonArray skillString = json.get("skills").getAsJsonArray();
+        Skill[] skills = new Gson().fromJson(skillString, Skill[].class);
+        JsonArray elementString = json.get("elements").getAsJsonArray();
+        Element[] elements = new Gson().fromJson(elementString, Element[].class);
+        Engimon[] parents = null;
+
+        if (json.has("parents")){
+            parents = new Engimon[2];
+            int counter = 0;
+            JsonArray parentsarray = json.get("parents").getAsJsonArray();
+            for (JsonElement parentobj: parentsarray){
+                parents[counter++] = Engimon.fromJson(parentobj.getAsJsonObject());
+            }
+        }
+
+
+//            public Engimon(String name, String species, int level, int baselvl,
+//        int life, int exp, int maxExp, Skill[] skills,
+//                Element[] elements, Engimon[] parents, String _imageSource){
+
+
+
+        return new Engimon(nama, spesies, level, baseLevel, life, exp, maxExp, skills, elements, parents, imageSource);
+    }
+
+
+    public String toJson() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        StringBuilder skillString = new StringBuilder();
+        StringBuilder elementsString = new StringBuilder();
+        for (Skill skill: monSkills){
+            String skill1 = gson.toJson(skill);
+            skillString.append(skill1).append(",");
+        }
+
+        for (Element element: monElements){
+            String els = gson.toJson(element);
+            elementsString.append(els).append(",");
+        }
+        skillString = new StringBuilder(skillString.substring(0, skillString.length() - 1));
+        elementsString  = new StringBuilder(elementsString.substring(0, elementsString.length() - 1));
+
+        String engimonJson = String.format("{\n%s:%s, \n%s:%s, \n%s:%s, \n%s:%d, \n%s:%d, \n%s:%d, \n%s:%d, \n%s:%d, \n%s:[%s], \n%s:[%s]",
+                formatter("nama"), formatter(monName),
+                formatter("spesies"), formatter(namaSpecies),
+                formatter("imageSource"), formatter(imageSource),
+                formatter("level"), monLevel,
+                formatter("baseLevel"), baseLevel,
+                formatter("exp"), monExp,
+                formatter("maxExp"), monCtvExp,
+                formatter("life"), monLife,
+                formatter("elements"), elementsString,
+                formatter("skills"), skillString);
+        if (monParents != null){
+            String parent1 = monParents[0].toJson();
+            String parent2 = monParents[1].toJson();
+            engimonJson += String.format(", \n%s:[\n%s,\n%s]",
+                    formatter("parents"), parent1, parent2);
+        }
+        engimonJson += "\n}";
+        return engimonJson;
+
+    }
+
     @Override
     public String toString() {
         return
@@ -370,9 +478,31 @@ public class Engimon implements Comparable<Engimon> {
         }
         // kalau kedua element sama tapi elemen kedua tidak sama akan mensort element kedua
         else if (!o.monElements[1].equals(this.monElements[1])) {
-            return this.monElements[1].compareTo(o.monElements[1]);
+            return o.monElements[1].compareTo(this.monElements[1]);
         }
         // kedua element sama dan kedua element kedua sama
         return o.monLevel - this.monLevel;
     }
+
+
+//    public static void main(String[] args) {
+//        Engimon engimon = new Dragon("okeeee");
+//
+//        Engimon kyogre = new Kyogre("kyogre");
+//
+//        Engimon breedTest =new Engimon("test",engimon, kyogre);
+//
+//        String parsed = breedTest.toJson();
+//
+////        System.out.println(parsed);
+//
+//        JsonObject jsonObject = new Gson().fromJson(parsed, JsonObject.class);
+//
+//        Engimon engimon1 = Engimon.fromJson(jsonObject);
+//
+//
+//        System.out.println(engimon1.toJson());
+//
+//
+//    }
 }

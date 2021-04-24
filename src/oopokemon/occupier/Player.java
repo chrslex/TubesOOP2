@@ -12,7 +12,7 @@ import oopokemon.species.Engimon;
 
 public class Player extends Occupier {
 
-    private final Inventory inventory = new Inventory();
+    private final Inventory inventory;
     private final ActiveEngimon activeEngimon;
 
     public ImageView healthbar = new ImageView(new Image("assets/life3.png"));
@@ -21,7 +21,7 @@ public class Player extends Occupier {
         super(0,0, OccupierType.Player_Type, map);
         init();
         activeEngimon = new ActiveEngimon(map, new Dragon());
-//        activeEngimon.setEngimon(new Dragon());
+        inventory = new Inventory();
     }
 
     public Player(int x, int y, Map map) throws NotInitializedException {
@@ -30,9 +30,15 @@ public class Player extends Occupier {
         activeEngimon = new ActiveEngimon(map);
         setActiveEngimon(new Dragon());
         activeEngimon.setPositionOcc(x-1, y);
-//        setActiveEngimon(null);
-//        activeEngimon.sprite.setCenterImage(new Image("assets/player.png"));
-//        new Player(map);
+        inventory = new Inventory();
+    }
+
+    public Player(int x, int y, ActiveEngimon activeEngimon,
+                  Inventory inventory, Map map) throws NotInitializedException {
+        super(x,y,OccupierType.Player_Type, map);
+        init();
+        this.activeEngimon = activeEngimon;
+        this.inventory = inventory;
     }
 
     private void init() {
@@ -59,19 +65,24 @@ public class Player extends Occupier {
 
     public void setActiveEngimon(Engimon engimon){
         activeEngimon.setEngimon(engimon);
-        int life = getLife();
-        healthbar.setImage(new Image("assets/life" + life + ".png"));
+        healthbar.setImage(new Image("assets/life" + getLife() + ".png"));
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public ActiveEngimon getActiveEngimon() {
+        return activeEngimon;
+    }
 
     @Override
     public boolean setPositionOcc(int x, int y) {
-//        boolean ret =  super.setPositionOcc(x, y);
-
         if (Position.isValidCoordinate(x,y))
         {
             Position posisiBaru = new Position(x,y);
-            if (map.getCellAtPosition(posisiBaru).occupier == null || map.getCellAtPosition(posisiBaru).occupier.occupierType == OccupierType.Pet_Type)
+            if (map.getCellAtPosition(posisiBaru).occupier == null
+                    || map.getCellAtPosition(posisiBaru).occupier.occupierType == OccupierType.Pet_Type)
             {
                 map.removeOccupierAtPosition(this.position);
                 if (activeEngimon != null) {
@@ -83,7 +94,7 @@ public class Player extends Occupier {
                 updateImagePosition();
                 String namaFile = map.getCellAtPosition(this.position).getCellType().getClip();
                 MusicPlayer musicPlayer = new MusicPlayer(namaFile, MusicPlayer.MusicType.SFX,false);
-                musicPlayer.run();
+                musicPlayer.play();
                 return true;
             }
         }

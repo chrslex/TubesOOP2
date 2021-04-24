@@ -13,7 +13,11 @@ public class ActiveEngimon extends Occupier{
         super(map);
         this.occupierType = OccupierType.Pet_Type;
         setEngimon(engimon);
+    }
 
+    public ActiveEngimon(int x, int y, Map map, Engimon engimon) throws NotInitializedException {
+        super(x, y, OccupierType.Pet_Type, map);
+        setEngimon(engimon);
     }
 
     public ActiveEngimon(Map map) throws NotInitializedException {

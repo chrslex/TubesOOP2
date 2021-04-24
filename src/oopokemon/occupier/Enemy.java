@@ -127,6 +127,14 @@ public class Enemy extends Occupier{
 
     }
 
+    public int getExp() {
+        return engimon.getExp();
+    }
+
+    public void setExp(int exp) {
+        engimon.addExp(exp);
+    }
+
 
     public boolean move(int rand){
         int x = this.position.x;

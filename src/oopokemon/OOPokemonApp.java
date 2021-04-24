@@ -1,5 +1,6 @@
 package oopokemon;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import oopokemon.map.Map;
 
@@ -86,7 +87,7 @@ public class OOPokemonApp extends Application {
 
     private void playBGM() {
         musicPlayer = new MusicPlayer("bin/music/Anville Town.mp3", MusicPlayer.MusicType.BGM,true);
-        musicPlayer.run();
+        musicPlayer.play();
     }
 
     private void initPane() {
@@ -274,16 +275,16 @@ public class OOPokemonApp extends Application {
         Button btn_load = new Button("Load");
         btn_load.setPrefSize(btnWidth, btnHeight);
         btn_load.setId("button");
-        Button btn_hof = new Button("Hall of Fame");
-        btn_hof.setPrefSize(btnWidth, btnHeight);
-        btn_hof.setId("button");
+        Button btn_help = new Button("Help");
+        btn_help.setPrefSize(btnWidth, btnHeight);
+        btn_help.setId("button");
         Button btn_setting = new Button("Setting");
         btn_setting.setPrefSize(btnWidth, btnHeight);
         btn_setting.setId("button");
 
 
         // Setup layout
-        uiContainer.getChildren().addAll(btn_new,btn_load,btn_hof,btn_setting);
+        uiContainer.getChildren().addAll(btn_new,btn_load,btn_help,btn_setting);
         mainMenuContainer.getChildren().add(uiContainer);
         uiContainer.setTranslateX((getCameraWidth() - btnWidth)/2);
         uiContainer.setTranslateY((getCameraHeight() - 4*(btnHeight+10))/2);
@@ -295,8 +296,8 @@ public class OOPokemonApp extends Application {
             setGameToMainGame(stage, GameModeType.LoadGame);
         });
 
-        btn_hof.setOnAction(event -> {
-            // work on progress
+        btn_help.setOnAction(event -> {
+            setGameToHelp(stage);
         });
 
         btn_setting.setOnAction(event -> {
@@ -309,6 +310,44 @@ public class OOPokemonApp extends Application {
         stage.show();
 
     }
+    private void setGameToHelp(Stage stage){
+        Pane helpContainer = new Pane();
+        Scene helpScreen = new Scene(helpContainer);
+
+        VBox uiContainer = new VBox(10);
+        uiContainer.setAlignment(Pos.CENTER);
+        helpContainer.setPrefSize(getCameraWidth(), getCameraHeight());
+        helpScreen.getStylesheets().add("assets/styles.css");
+        helpContainer.setId("scene");
+        helpContainer.getChildren().add(uiContainer);
+
+
+        Label lbl_move = new Label("Bergerak: W/A/S/D");
+        lbl_move.setId("label");
+        Label lbl_battle = new Label("Mengajukan Battle: SPACE");
+        lbl_battle.setId("label");
+        Label lbl_invetory = new Label("Inventory: B");
+        lbl_invetory.setId("label");
+        Label lbl_breed = new Label("Mengajukan Breed: M");
+        lbl_breed.setId("label");
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(300);
+
+
+        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_invetory, lbl_breed, imageView);
+
+        uiContainer.setTranslateX((getCameraWidth() - 300)/2);
+        uiContainer.setTranslateY((getCameraHeight() - 4*(10 + 20))/2);
+
+        helpScreen.setOnKeyPressed(event -> {
+            setGameToMainMenu(stage);
+        });
+
+
+        stage.setScene(helpScreen);
+    }
+
+
     private void setGametoSetting(Stage stage){
         Pane settingContainer = new Pane();
         Scene settingScreen = new Scene(settingContainer);

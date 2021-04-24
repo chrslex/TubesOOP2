@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnemyHandler implements Runnable {
-    private final List<Enemy> enemyList;
+    private List<Enemy> enemyList;
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final AtomicBoolean wantToSusp = new AtomicBoolean(false);
     public final Thread thread;
@@ -69,21 +69,27 @@ public class EnemyHandler implements Runnable {
                     int finalTurnCounter = turnCounter;
                     enemyList.forEach(enemy -> {
                         enemy.move(new Random().nextInt(4));
-                        if ((finalTurnCounter % 10) == 9) enemy.setExp(100);
+                        if ((finalTurnCounter % 10) == 9) {
+                            if (!enemy.setExp(100)){
+                                Random rand = new Random();
+                                enemy.init(rand.nextInt(8), rand.nextInt(3) + player.getHighestLevel());
+                                System.out.println("musuh baru spawning");
+                            }
+                        }
                     });
-                    if (finalTurnCounter % 5 == 4){
-                        Random rand = new Random();
-                        int lvl = player.getHighestLevel();
-                        Enemy newENemy = new Enemy(player.getMap(), rand.nextInt(8), rand.nextInt(3) + lvl);
-                        enemyList.add(newENemy);
-                        Renderer.renderNode(newENemy.getToRender(), mapPlaceHolder);
-                        System.out.println("spawning");
-                    }
+//                    if (finalTurnCounter % 5 == 4){
+//                        Random rand = new Random();
+//                        int lvl = player.getHighestLevel();
+//                        Enemy newENemy = new Enemy(player.getMap(), rand.nextInt(8), rand.nextInt(3) + lvl);
+//                        enemyList.add(newENemy);
+//                        Renderer.renderNode(newENemy.getToRender(), mapPlaceHolder);
+//                        System.out.println("spawning");
+//                    }
                     turnCounter++;
                 }
 
             }
-            catch (InterruptedException | NotInitializedException ignored) {}
+            catch (InterruptedException ignored) {}
         }
     }
     public synchronized void suspend() {

@@ -14,8 +14,8 @@ import static oopokemon.map.CellType.*;
 public class Enemy extends Occupier{
     
     private Engimon engimon;
-    private final CellType cellType1;
-    private final CellType cellType2;
+    private CellType cellType1;
+    private CellType cellType2;
 
 
     public Enemy(Map map, int angka, int level) throws NotInitializedException {
@@ -24,6 +24,16 @@ public class Enemy extends Occupier{
         Random rand = new Random();
 
         int hashCellType;
+
+        init(angka, level);
+
+
+//        System.out.println(position.x + ", " + position.y);
+    }
+
+    public void init(int angka, int level) {
+        Random rand = new Random();
+
         switch (angka)
         {
             case 1:
@@ -51,8 +61,8 @@ public class Enemy extends Occupier{
             default:
                 engimon = new Dragon();
                 break;
-
         }
+
         switch (engimon.getFirstElement())
         {
             case Water:
@@ -86,7 +96,6 @@ public class Enemy extends Occupier{
                 cellType2 = Grassland_Cell;
                 break;
         }
-
         int posisirand, x, y;
         do {
             posisirand = rand.nextInt(Position.MAX_X * Position.MAX_Y);
@@ -97,9 +106,7 @@ public class Enemy extends Occupier{
 
         engimon.setLevel(level);
         sprite.setCenterImage(engimon.getImage());
-	    sprite.setBottomRightImage(engimon.getElementImage());
-
-//        System.out.println(position.x + ", " + position.y);
+        sprite.setBottomRightImage(engimon.getElementImage());
     }
 
     public boolean setPos(int x, int y) {
@@ -131,8 +138,8 @@ public class Enemy extends Occupier{
         return engimon.getExp();
     }
 
-    public void setExp(int exp) {
-        engimon.addExp(exp);
+    public boolean setExp(int exp) {
+        return engimon.addExp(exp);
     }
 
 

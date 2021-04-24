@@ -48,7 +48,7 @@ public class OOPokemonApp extends Application {
         setUpCamera();
         playBGM();
 
-        gameState = new GameState();
+        gameState = new GameState(mapContainer);
         isekai = gameState.map;
         myPlayer = gameState.player;
         enemyHandler = gameState.enemyhandler;
@@ -67,10 +67,10 @@ public class OOPokemonApp extends Application {
         setUpCamera();
         playBGM();
         try {
-            gameState = loadGame("testing");
+            gameState = loadGame("testing", mapContainer);
         } catch (NotInitializedException e) {
             System.err.println("gagal menload game memuat game baru");
-            gameState = new GameState();
+            gameState = new GameState(mapContainer);
         }
         isekai = gameState.map;
         myPlayer = gameState.player;
@@ -213,7 +213,7 @@ public class OOPokemonApp extends Application {
             renderer.unRender(mapContainer);
             enemyHandler.interrupt();
             try {
-                gameState = GameState.loadGame("testing");
+                gameState = loadGame("testing", mapContainer);
             } catch (NotInitializedException e){
                 System.err.println(e.getErrorMessage());
 

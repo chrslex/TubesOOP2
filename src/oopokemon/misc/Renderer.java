@@ -48,6 +48,10 @@ public class Renderer {
                 });
     }
 
+    public static void renderNode(Node toRender, Pane mapPlaceHolder) {
+        mapPlaceHolder.getChildren().add(toRender);
+    }
+
     /**
      * @param mapPlaceHolder is where to render
      */

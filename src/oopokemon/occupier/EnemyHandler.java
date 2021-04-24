@@ -1,7 +1,9 @@
 package oopokemon.occupier;
 
+import javafx.scene.layout.Pane;
 import oopokemon.map.Map;
 import oopokemon.exception.NotInitializedException;
+import oopokemon.misc.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +19,18 @@ public class EnemyHandler implements Runnable {
 
     private Player player = null;
 
+    private Pane mapPlaceHolder;
     private volatile int interval = 500;
 
-    public EnemyHandler(Map map, int size) throws NotInitializedException {
+    public EnemyHandler(Map map, int initialSize, Pane mapPlaceHolder) throws NotInitializedException {
         this.enemyList = new ArrayList<>();
         Optional<Player> player = map.getCells().stream().filter(cell -> cell.occupier != null
                 && cell.occupier.occupierType == OccupierType.Player_Type)
                 .map(cell -> (Player) cell.occupier).findFirst();
         int lvl = player.map(Player::getHighestLevel).orElse(1);
         player.ifPresent(value -> this.player = value);
-        for (int i = 0; i < size; i++) {
+        this.mapPlaceHolder = mapPlaceHolder;
+        for (int i = 0; i < initialSize; i++) {
             Random rand = new Random();
             // merandom 0 - 8 untuk jenis engimon, (lvl engimon tertingi + 3) - (lvl engimon tertinggi) untuk level
             enemyList.add(new Enemy(map, rand.nextInt(8),rand.nextInt(3) + lvl));
@@ -35,7 +39,8 @@ public class EnemyHandler implements Runnable {
         thread.start();
     }
 
-    public EnemyHandler(List<Enemy> enemyList) {
+    public EnemyHandler(List<Enemy> enemyList, Pane mapPlaceHolder) {
+        this.mapPlaceHolder = mapPlaceHolder;
         this.enemyList = enemyList;
         Optional<Player> player = enemyList.get(0).getMap().getCells().stream().filter(cell -> cell.occupier != null
                 && cell.occupier.occupierType == OccupierType.Player_Type)
@@ -66,11 +71,19 @@ public class EnemyHandler implements Runnable {
                         enemy.move(new Random().nextInt(4));
                         if ((finalTurnCounter % 10) == 9) enemy.setExp(100);
                     });
+                    if (finalTurnCounter % 5 == 4){
+                        Random rand = new Random();
+                        int lvl = player.getHighestLevel();
+                        Enemy newENemy = new Enemy(player.getMap(), rand.nextInt(8), rand.nextInt(3) + lvl);
+                        enemyList.add(newENemy);
+                        Renderer.renderNode(newENemy.getToRender(), mapPlaceHolder);
+                        System.out.println("spawning");
+                    }
                     turnCounter++;
                 }
 
             }
-            catch (InterruptedException ignored) {}
+            catch (InterruptedException | NotInitializedException ignored) {}
         }
     }
     public synchronized void suspend() {

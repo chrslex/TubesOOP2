@@ -1,5 +1,6 @@
 package oopokemon.misc;
 
+import javafx.scene.layout.Pane;
 import oopokemon.inventory.Inventory;
 import oopokemon.map.Map;
 import oopokemon.map.Position;
@@ -28,18 +29,18 @@ public class GameState {
     public EnemyHandler enemyhandler;
 
 
-    public GameState() {
-        String mapFile = "bin/map1.txt";
+    public GameState(Pane mapContainer) {
+        String mapFile = "bin/map2.txt";
         map = new Map(mapFile);
         try {
             player = new Player(3,3, map);
-            enemyhandler = new EnemyHandler(map, 40);
+            enemyhandler = new EnemyHandler(map, 5, mapContainer);
         } catch (NotInitializedException e) {
             System.err.println(e.getErrorMessage());
         }
     }
 
-    private GameState(Map map, Player player, EnemyHandler enemyHandler){
+    private GameState(Map map, Player player, EnemyHandler enemyHandler, Pane mapContainer){
         this.map = map;
         this.player = player;
         this.enemyhandler = enemyHandler;
@@ -145,7 +146,7 @@ public class GameState {
         return "\"" + string + "\"";
     }
 
-    public static GameState loadGame(String source) throws NotInitializedException {
+    public static GameState loadGame(String source, Pane mapContainer) throws NotInitializedException {
         File input = new File("bin/savefiles/" + source +".json");
         try {
             JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
@@ -204,13 +205,13 @@ public class GameState {
                     enemyList.add(enemy);
                 }
                 if (enemyList.size() > 0){
-                    enemyHandler = new EnemyHandler(enemyList);
+                    enemyHandler = new EnemyHandler(enemyList, mapContainer);
                 }
                 else throw new NotInitializedException();
             }
             else throw new NotInitializedException();
             System.out.println("Berhasil load");
-            return new GameState(map, player, enemyHandler);
+            return new GameState(map, player, enemyHandler, mapContainer);
         }
 
         catch (FileNotFoundException e) {

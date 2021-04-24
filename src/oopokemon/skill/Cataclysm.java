@@ -4,7 +4,7 @@ public class Cataclysm extends Skill {
     private final String species;
     
     public Cataclysm() {
-        super("Cataclysm", "Fire", 15, 1);
+        super("Cataclysm", "Fire", 18, 1);
         this.species  = "None";
     }
     

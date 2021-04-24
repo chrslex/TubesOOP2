@@ -18,8 +18,7 @@ public class Bag<T> {
     }
     public void printAllInfo() {
         for (int i = 0; i < neff; i++) {
-            System.out.println(i+1);
-            System.out.println(this.listItem.get(i));
+            System.out.println((i+1) + ". " + this.listItem.get(i));
         }
     }
 }

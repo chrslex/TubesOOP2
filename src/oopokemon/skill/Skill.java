@@ -96,7 +96,7 @@ public class Skill implements Comparable<Skill>, Item {
 
     @Override
     public String toString() {
-        return "Skill || Nama : " + this.skillName + " || Elemen : " + this.skillType + " || Base Power : " + this.basePower + " ||  Mastery Level : " + this.masteryLevel;
+        return "Skill || Nama : " + this.skillName + " || Elemen : " + this.skillType + " || Base Power : " + this.basePower + " || Mastery Level : " + this.masteryLevel;
     }
 
     @Override

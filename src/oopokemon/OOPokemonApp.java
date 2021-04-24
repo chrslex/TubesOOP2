@@ -2,6 +2,7 @@ package oopokemon;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
+import oopokemon.inventory.InventoryGUI;
 import oopokemon.map.Map;
 
 import oopokemon.occupier.EnemyHandler;
@@ -297,7 +298,8 @@ public class OOPokemonApp extends Application {
         });
 
         btn_help.setOnAction(event -> {
-            setGameToHelp(stage);
+//            setGameToHelp(stage);
+            InventoryGUI.createInventInventory(null);
         });
 
         btn_setting.setOnAction(event -> {

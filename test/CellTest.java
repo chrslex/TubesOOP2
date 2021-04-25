@@ -32,7 +32,7 @@ class CellTest {
         c1.setOccupier(o2);
         c3.setOccupier(o1);
         assertEquals(o2, c1.getOccupier());
-        assertEquals(null, c2.getOccupier());
+        assertNull(c2.getOccupier());
         assertEquals(o1, c3.getOccupier());
     }
 

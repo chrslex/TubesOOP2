@@ -1,10 +1,12 @@
 package oopokemon.misc;
 
 import javafx.scene.layout.Pane;
+import oopokemon.element.Element;
 import oopokemon.inventory.Inventory;
 import oopokemon.map.Map;
 import oopokemon.map.Position;
 import oopokemon.occupier.*;
+import oopokemon.skill.Skill;
 import oopokemon.species.Engimon;
 import oopokemon.exception.NotInitializedException;
 import com.google.gson.*;
@@ -232,6 +234,27 @@ public class GameState {
                     formatter("activeEngimon"), formatter("position"), gson.toJson(activeEngimon.position),
                     formatter("engimon"), activeEngimon.getEngimon().toJson());
         }
+        if (!player.getInventory().isEmpty()){
+            StringBuilder engimons = new StringBuilder();
+            for (Engimon engimon : player.getInventory().listEngimon()){
+                engimons.append(engimon.toJson()).append(",");
+            }
+            if (engimons.length() > 0){
+                engimons = new StringBuilder(engimons.substring(0, engimons.length() - 1));
+            }
+            StringBuilder skillString = new StringBuilder();
+            for (Skill skill : player.getInventory().listAllSkill()){
+                String skill1 = gson.toJson(skill);
+                skillString.append(skill1).append(",");
+            }
+            if (skillString.length() > 0){
+                skillString = new StringBuilder(skillString.substring(0, skillString.length() - 1));
+            }
+            json += String.format(", \n%s:{\n%s:[\n%s] , \n%s:[\n%s]}",
+                    formatter("inventory"),formatter("engimonList"), engimons,
+                    formatter("skillList"), skillString);
+
+        }
 
         List<Enemy> enemyList = map.getCells().stream()
                 .filter(cell -> cell.occupier != null && cell.occupier.occupierType == OccupierType.Enemy_Type)
@@ -258,10 +281,12 @@ public class GameState {
             FileWriter myWriter = new FileWriter("bin/savefiles/" + saveDest + ".json");
             myWriter.write(json);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            AlertBox.display("Saving", "Berhasil Menyimpan");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            AlertBox.display("Saving", "Gagal saving");
             e.printStackTrace();
+        } catch (Exception e){
+            AlertBox.display("Saving", "Gagal saving");
         }
     }
 

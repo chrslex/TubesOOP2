@@ -1,6 +1,7 @@
 package oopokemon.inventory;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import oopokemon.skill.*;
 import oopokemon.species.*;
@@ -8,13 +9,20 @@ import oopokemon.species.*;
 public class Inventory {
     public static final int MAX_CAPACITY = 30;
 
-    private final Vector<Skill> skillBag = new Vector<>();
-    private final Vector<Engimon> engimonBag = new Vector<>();
-    private static final HashMap<Skill, Integer> skillDict = new HashMap<>();
+    private Vector<Skill> skillBag;
+    private final Vector<Engimon> engimonBag;
+    private final HashMap<Skill, Integer> skillDict;
 
-    public Inventory() {}
+    public Inventory() {
+        skillBag = new Vector<>();
+        engimonBag = new Vector<>();
+        skillDict = new HashMap<>();
+    }
     public boolean isSkillExist(Skill s) {
-        return skillDict.containsKey(s);
+        if (skillDict.containsKey(s)){
+            return skillDict.get(s) != 0;
+        }
+        return false;
     }
     public boolean isEmpty() {
         return this.engimonBag.isEmpty() && this.skillBag.isEmpty();
@@ -77,11 +85,11 @@ public class Inventory {
 
     public void removeSkill(int x) {
         if (this.skillBag.isEmpty()) {
-            System.out.println("Tidak ada skill dalam Inventory");
+//            System.out.println("Tidak ada skill dalam Inventory");
             return;
         }
         else if (this.skillBag.size()<x || x<=0) {
-            System.out.println("Angka tidak valid");
+//            System.out.println("Angka tidak valid");
             return;
         }
         Skill key = this.skillBag.get(x-1);
@@ -135,6 +143,22 @@ public class Inventory {
         Collections.sort(skillBag);
         return skillBag;
     }
+
+    public List<Skill> listAllSkill(){
+        Collections.sort(skillBag);
+//        Vector<Skill> skilsCopy = new Vector<>(skillBag);
+        List<Skill> toReturn = new ArrayList<>();
+        while (!skillBag.isEmpty()){
+            toReturn.add(skillBag.get(0));
+            removeSkill(1);
+        }
+        for (Skill skill : toReturn){
+            addSkill(skill);
+        }
+//        skillBag = skilsCopy;
+        return toReturn;
+    }
+
     public int getHighestLevel(){
         if (this.engimonBag.isEmpty()) return 1;
         return engimonBag

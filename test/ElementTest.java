@@ -1,5 +1,3 @@
-package test;
-
 import oopokemon.element.Element;
 import org.junit.jupiter.api.*;
 

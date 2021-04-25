@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TubesOOP2:jar">
+    <output-path>$PROJECT_DIR$/bin</output-path>
+    <root id="archive" name="OOPokemon.jar">
+      <element id="module-output" name="TubesOOP2" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/bin/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.8.6.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

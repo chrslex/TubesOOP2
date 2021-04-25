@@ -173,22 +173,41 @@ public class GameState {
 
                 Inventory inventory = new Inventory();
 
+                Engimon currentEngimon = null;
+
                 if (fileObject.has("activeEngimon")){
                     JsonObject aeObject = fileObject.get("activeEngimon").getAsJsonObject();
                     Position aePos = new Gson().fromJson(aeObject.get("position").getAsJsonObject(), Position.class);
-
+                    activeEngimon.setPositionOcc(aePos.x, aePos.y);
 
                     if (aeObject.has("engimon")) {
                         JsonObject engimonObj = aeObject.get("engimon").getAsJsonObject();
-                        activeEngimon = new ActiveEngimon(aePos.x, aePos.y, map, Engimon.fromJson(engimonObj));
+                        currentEngimon = Engimon.fromJson(engimonObj);
+                        inventory.addEngimon(currentEngimon);
                     }
                 }
 
                 if (fileObject.has("inventory")){
-
+                    JsonObject invObj = fileObject.get("inventory").getAsJsonObject();
+                    if (invObj.has("engimonList")){
+                        JsonArray engimonArray = invObj.get("engimonList").getAsJsonArray();
+                        for (JsonElement engimonElement : engimonArray){
+                            JsonObject engimonJSONObj = engimonElement.getAsJsonObject();
+                            Engimon playerEngimon = Engimon.fromJson(engimonJSONObj);
+                            inventory.addEngimon(playerEngimon);
+                        }
+                    }
+                    if (invObj.has("skillList")){
+                        JsonArray skillString = invObj.get("skillList").getAsJsonArray();
+                        Skill[] skills = new Gson().fromJson(skillString, Skill[].class);
+                        for (Skill skillItem : skills){
+                            inventory.addSkill(skillItem);
+                        }
+                    }
                 }
 
                 player = new Player(playerpos.x, playerpos.y, activeEngimon, inventory, map);
+                player.setActiveEngimon(currentEngimon);
 //                ActiveEngimon activeEngimon = new ActiveEngimon()
 
             }
@@ -237,7 +256,9 @@ public class GameState {
         if (!player.getInventory().isEmpty()){
             StringBuilder engimons = new StringBuilder();
             for (Engimon engimon : player.getInventory().listEngimon()){
-                engimons.append(engimon.toJson()).append(",");
+                if (engimon != player.getEngimon()){
+                    engimons.append(engimon.toJson()).append(",");
+                }
             }
             if (engimons.length() > 0){
                 engimons = new StringBuilder(engimons.substring(0, engimons.length() - 1));

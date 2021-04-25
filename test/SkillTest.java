@@ -1,5 +1,3 @@
-package test;
-
 import oopokemon.skill.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -184,44 +182,38 @@ class SkillTest {
     @Test
     void getSecondLine() {
         assertAll("Get Skill's Type",
-                () -> assertEquals("None", s1.getSecondLine()),
-                () -> assertEquals("Fire", s2.getSecondLine()),
-                () -> assertEquals("None", s3.getSecondLine()),
-                () -> assertEquals("Electric", s4.getSecondLine()),
-                () -> assertEquals("Ice", s5.getSecondLine())
+                () -> assertEquals("Elemen : None", s1.getSecondLine()),
+                () -> assertEquals("Elemen : Fire", s2.getSecondLine()),
+                () -> assertEquals("Elemen : None", s3.getSecondLine()),
+                () -> assertEquals("Elemen : Electric", s4.getSecondLine()),
+                () -> assertEquals("Elemen : Ice", s5.getSecondLine())
         );
     }
 
     @Test
     void getThirdLine() {
         assertAll("Get Skill's Base Power",
-                () -> assertEquals("0", s1.getThirdLine()),
-                () -> assertEquals("18", s2.getThirdLine()),
-                () -> assertEquals("0", s3.getThirdLine()),
-                () -> assertEquals("16", s4.getThirdLine()),
-                () -> assertEquals("16", s5.getThirdLine())
+                () -> assertEquals("Base Power : 0", s1.getThirdLine()),
+                () -> assertEquals("Base Power : 18", s2.getThirdLine()),
+                () -> assertEquals("Base Power : 0", s3.getThirdLine()),
+                () -> assertEquals("Base Power : 16", s4.getThirdLine()),
+                () -> assertEquals("Base Power : 16", s5.getThirdLine())
         );
     }
 
     @Test
     void getFourthLine() {
         assertAll("Get Skill's Mastery Level",
-                () -> assertEquals("0", s1.getFourthLine()),
-                () -> assertEquals("1", s2.getFourthLine()),
-                () -> assertEquals("0", s3.getFourthLine()),
-                () -> assertEquals("1", s4.getFourthLine()),
-                () -> assertEquals("1", s5.getFourthLine())
+                () -> assertEquals("Mastery Level : 0", s1.getFourthLine()),
+                () -> assertEquals("Mastery Level : 1", s2.getFourthLine()),
+                () -> assertEquals("Mastery Level : 0", s3.getFourthLine()),
+                () -> assertEquals("Mastery Level : 1", s4.getFourthLine()),
+                () -> assertEquals("Mastery Level : 1", s5.getFourthLine())
         );
     }
 
     @Test
     void getFifthLine() {
-        assertAll("Get Nothing",
-                () -> assertEquals("", s1.getFifthLine()),
-                () -> assertEquals("", s2.getFifthLine()),
-                () -> assertEquals("", s3.getFifthLine()),
-                () -> assertEquals("", s4.getFifthLine()),
-                () -> assertEquals("", s5.getFifthLine())
-        );
+        assertEquals("", s1.getFifthLine());
     }
 }

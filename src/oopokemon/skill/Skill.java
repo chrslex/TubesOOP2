@@ -126,7 +126,7 @@ public class Skill implements Comparable<Skill>, Item {
 
     @Override
     public String getFourthLine() {
-        return "Master Level : " + masteryLevel;
+        return "Mastery Level : " + masteryLevel;
     }
 
     @Override

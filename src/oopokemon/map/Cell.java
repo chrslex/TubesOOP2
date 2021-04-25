@@ -25,7 +25,7 @@ public class Cell extends Rectangle implements Renderable {
         occupier = null;
     }
 
-    Cell(int x, int y, CellType cellType) {
+    public Cell(int x, int y, CellType cellType) {
         super(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
         position = new Position(x,y);
         this.cellType = cellType;
@@ -46,11 +46,12 @@ public class Cell extends Rectangle implements Renderable {
         }
         occupier = null;
     }
-    private static void loadStatic(){
 
+    private static void loadStatic(){}
+
+    public Occupier getOccupier() {
+        return occupier;
     }
-
-
     public CellType getCellType() {
         return cellType;
     }

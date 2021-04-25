@@ -28,7 +28,11 @@ public class Inventory {
         return this.engimonBag.isEmpty() && this.skillBag.isEmpty();
     }
     public boolean isFull() {
-        return (this.engimonBag.size() + this.skillBag.size() >= MAX_CAPACITY);
+        int skillBagSize = 0;
+        for (Skill skill : skillBag){
+            skillBagSize += skillDict.get(skill);
+        }
+        return (this.engimonBag.size() + skillBagSize >= MAX_CAPACITY);
     }
     public boolean isEngimonBagEmpty() {
         return this.engimonBag.isEmpty();

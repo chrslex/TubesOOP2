@@ -32,3 +32,16 @@
     -fx-font-weight: 900;
     -fx-padding-top: 20px;
 }
+
+#inventoryitem{
+    -fx-background-color: #0D2B4D;
+    -fx-opacity: 0%;
+    -fx-font-family: consolas;
+    -fx-letter-spacing: 4px;
+    -fx-transition: 0.2s;
+    -fx-font-size: 20px;
+}
+
+#inventoryitem:hover{
+    -fx-opacity: 50%;
+}

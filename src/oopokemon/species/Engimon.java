@@ -196,7 +196,7 @@ public class Engimon implements Comparable<Engimon>, Item {
         float maxEladvA = maxElAdv(other1, other2);
         float maxEladvB = maxElAdv(other2, other1);
 
-        if (maxEladvA > maxEladvB)
+        if (maxEladvA >= maxEladvB)
         {
             this.namaSpecies = other1.namaSpecies;
         }
@@ -207,7 +207,7 @@ public class Engimon implements Comparable<Engimon>, Item {
         // Kasus single element
         if (elFather2 == None && elMother2 == None)
         {
-            if (maxEladvA > maxEladvB)
+            if (maxEladvA >= maxEladvB)
             {
                 this.monElements[0].setElementType(elFather1);
             }
@@ -492,7 +492,11 @@ public class Engimon implements Comparable<Engimon>, Item {
 
     @Override
     public String getSecondLine() {
-        return "Spesies : " + namaSpecies;
+        String elemen2 = "";
+        if (monElements[1].getElementType() != None){
+            elemen2 = "\nElement 2 : " + monElements[1];
+        }
+        return "Spesies : " + namaSpecies + "\nElement 1 : " + monElements[0] + elemen2;
     }
 
     @Override
@@ -504,17 +508,22 @@ public class Engimon implements Comparable<Engimon>, Item {
     public String getFourthLine() {
         StringBuilder skills = new StringBuilder();
         for (Skill skill : monSkills){
-            skills.append(skill).append("\n");
+            if (!skill.skillName.equals("None")){
+                skills.append(skill).append("\n");
+            }
         }
         return "" + skills;
     }
+
 
     @Override
     public String getFifthLine() {
         if (monParents != null){
             StringBuilder parents = new StringBuilder();
             for (Engimon engimon: monParents){
-                parents.append("Parent | Nama: ").append(engimon.monName).append(" Spesies: ").append(engimon.namaSpecies);
+                parents.append("Parent | Nama: ")
+                        .append(engimon.monName).append(" Spesies: ")
+                        .append(engimon.namaSpecies).append("\n");
             }
             return parents.toString();
         }

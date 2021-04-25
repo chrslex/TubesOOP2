@@ -1,5 +1,6 @@
 package oopokemon.skill;
 
+import javafx.scene.image.Image;
 import oopokemon.inventory.Item;
 
 public class Skill implements Comparable<Skill>, Item {
@@ -115,21 +116,26 @@ public class Skill implements Comparable<Skill>, Item {
 
     @Override
     public String getSecondLine() {
-        return skillType;
+        return "Elemen : " +skillType;
     }
 
     @Override
     public String getThirdLine() {
-        return "" + basePower;
+        return "Base Power : " + basePower;
     }
 
     @Override
     public String getFourthLine() {
-        return "" + masteryLevel;
+        return "Master Level : " + masteryLevel;
     }
 
     @Override
     public String getFifthLine() {
         return "";
+    }
+
+    @Override
+    public Image getImage() {
+        return new Image("assets/" + skillName + ".png");
     }
 }

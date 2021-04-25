@@ -12,15 +12,14 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EnemyHandler implements Runnable {
-    private List<Enemy> enemyList;
+    private volatile List<Enemy> enemyList;
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final AtomicBoolean wantToSusp = new AtomicBoolean(false);
     public final Thread thread;
-
     private Player player = null;
 
     private Pane mapPlaceHolder;
-    private volatile int interval = 500;
+    private volatile int interval = 2000;
 
     public EnemyHandler(Map map, int initialSize, Pane mapPlaceHolder) throws NotInitializedException {
         this.enemyList = new ArrayList<>();
@@ -112,4 +111,7 @@ public class EnemyHandler implements Runnable {
         this.thread.interrupt();
     }
 
+    public List<Enemy> getEnemyList() {
+        return enemyList;
+    }
 }

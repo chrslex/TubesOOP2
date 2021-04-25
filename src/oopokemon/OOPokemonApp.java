@@ -1,16 +1,16 @@
 package oopokemon;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import oopokemon.inventory.InventoryGUI;
 import oopokemon.map.Map;
 
+import oopokemon.misc.*;
 import oopokemon.occupier.EnemyHandler;
 import oopokemon.occupier.Player;
 import oopokemon.exception.NotInitializedException;
-import oopokemon.misc.GameState;
-import oopokemon.misc.MusicPlayer;
-import oopokemon.misc.Renderer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -129,6 +129,9 @@ public class OOPokemonApp extends Application {
 //        camera.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         mainGame.setFill(Color.BLACK);
+//        enemyHandler.sizeProperty.addListener((observable, oldValue, newValue) -> {
+//
+//        });
 
         mainGame.setOnKeyPressed(event -> {
             switch (event.getCode()){
@@ -146,15 +149,13 @@ public class OOPokemonApp extends Application {
                     break;
                 case SPACE:
                     enemyHandler.suspend();
-                    break;
-                case I:
+                    myPlayer = Battle.battle(myPlayer, enemyHandler);
                     enemyHandler.resume();
                     break;
-                case L:
-                    renderer.unRender(mapContainer);
-                    break;
-                case K:
-                    renderer.render(mapContainer);
+                case B:
+                    enemyHandler.suspend();
+                    myPlayer.openInventory();
+                    enemyHandler.resume();
                     break;
                 case ESCAPE:
                     setGameToPause(stage, mainGame);
@@ -163,7 +164,11 @@ public class OOPokemonApp extends Application {
             cameraHandler();
 
         });
-
+        if (myPlayer == null){
+            musicPlayer.interrupt();
+            AlertBox.display("GAME OVER", "ANDA KALAH");
+            setGameToMainMenu(stage);
+        }
         stage.setScene(mainGame);
     }
 
@@ -298,8 +303,8 @@ public class OOPokemonApp extends Application {
         });
 
         btn_help.setOnAction(event -> {
-//            setGameToHelp(stage);
-            InventoryGUI.createInventory(null);
+            setGameToHelp(stage);
+//            InventoryGUI.createInventory(null);
         });
 
         btn_setting.setOnAction(event -> {
@@ -472,7 +477,7 @@ public class OOPokemonApp extends Application {
     }
 
     private void cameraHandler() {
-        System.out.println(myPlayer.position.x + ", "+  myPlayer.position.y);
+//        System.out.println(myPlayer.position.x + ", "+  myPlayer.position.y);
         mapContainer.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
         mapContainer.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
     }

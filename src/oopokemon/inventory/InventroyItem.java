@@ -6,15 +6,19 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import oopokemon.occupier.Player;
 
 public class InventroyItem extends Pane {
     private final ImageView center;
     public final Button button;
     public final int id;
-    private Item item = null;
-    public InventroyItem(int id){
+    private final Item item = null;
+    private final Player player;
+    public InventroyItem(int id, Item item, Player player, Stage prevStage){
         super();
         this.id = id;
+        this.player = player;
         setMaxSize(150, 150);
         center = new ImageView();
         button = new Button();
@@ -27,9 +31,9 @@ public class InventroyItem extends Pane {
         button.setTranslateY(0);
         button.setId("inventoryitem");
         getChildren().addAll(center, button);
-
+        setImage(item.getImage());
         button.setOnAction(event -> {
-//            InventoryGUI.createInfo(item);
+            InventoryGUI.createInfo(item, id, player, prevStage);
             System.out.println(id);
         });
     }

@@ -1,5 +1,7 @@
 package oopokemon.inventory;
 
+import javafx.scene.image.Image;
+
 public interface Item {
 
     String getFirstLine();
@@ -7,6 +9,7 @@ public interface Item {
     String getThirdLine();
     String getFourthLine();
     String getFifthLine();
+    Image getImage();
 //    String
 
 }

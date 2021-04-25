@@ -6,7 +6,7 @@ import oopokemon.skill.*;
 import oopokemon.species.*;
 
 public class Inventory {
-    public static final int MAX_CAPACITY = 6;
+    public static final int MAX_CAPACITY = 30;
 
     private final Vector<Skill> skillBag = new Vector<>();
     private final Vector<Engimon> engimonBag = new Vector<>();
@@ -71,6 +71,10 @@ public class Inventory {
             this.engimonBag.remove(x-1);
         }
     }
+    public void removeEngimon(Engimon toRemove){
+        engimonBag.remove(toRemove);
+    }
+
     public void removeSkill(int x) {
         if (this.skillBag.isEmpty()) {
             System.out.println("Tidak ada skill dalam Inventory");
@@ -106,6 +110,14 @@ public class Inventory {
             }
         }
     }
+
+    public int getCountSkill(Skill skill){
+        if (skillBag.contains(skill)){
+            return skillDict.get(skill);
+        }
+        return 0;
+    }
+
     public void printAllEngimonInfo() {
         if(!this.isEngimonBagEmpty()) {
             Collections.sort(engimonBag);
@@ -115,25 +127,13 @@ public class Inventory {
             }
         }
     }
-    public Bag<Engimon> listEngimon() {
-        Bag<Engimon> temp = new Bag<>();
-        if (!this.isEngimonBagEmpty()) {
-            for (Engimon e : engimonBag) {
-                temp.Add(e);
-            }
-            return temp;
-        }
-        return null;
+    public List<Engimon> listEngimon() {
+        Collections.sort(engimonBag);
+        return engimonBag;
     }
-    public Bag<Skill> listSkill() {
-        Bag<Skill> temp = new Bag<>();
-        if (!this.isSkillBagEmpty()) {
-            for (Skill s : skillBag) {
-                temp.Add(s);
-            }
-            return temp;
-        }
-        return null;
+    public List<Skill> listSkill() {
+        Collections.sort(skillBag);
+        return skillBag;
     }
     public int getHighestLevel(){
         if (this.engimonBag.isEmpty()) return 1;

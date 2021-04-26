@@ -167,7 +167,7 @@ public class OOPokemonApp extends Application {
                     break;
                 case C:
                     enemyHandler.suspend();
-                    myPlayer = Battle.battle(myPlayer, enemyHandler);
+                    Battle.battle(myPlayer, enemyHandler);
                     enemyHandler.resume();
                     break;
                 case B:
@@ -183,6 +183,11 @@ public class OOPokemonApp extends Application {
                     break;
             }
             cameraHandler();
+            if (myPlayer.getInventory().isEngimonBagEmpty()){
+                musicPlayer.interrupt();
+                AlertBox.display("GAME OVER", "ANDA KALAH");
+                setGameToMainMenu(stage);
+            }
 
         });
 
@@ -191,11 +196,6 @@ public class OOPokemonApp extends Application {
             setGameToPause(stage, mainGame);
         });
 
-        if (myPlayer == null){
-            musicPlayer.interrupt();
-            AlertBox.display("GAME OVER", "ANDA KALAH");
-            setGameToMainMenu(stage);
-        }
         stage.setScene(mainGame);
     }
 
@@ -334,19 +334,7 @@ public class OOPokemonApp extends Application {
 
         // Setup Tombol
         btn_new.setOnAction(event -> {
-            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmation.setTitle("New Game");
-            confirmation.setContentText("Do You Want To Start a New Game?");
-            ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
-            confirmation.getButtonTypes().setAll(okButton, noButton);
-            confirmation.showAndWait().ifPresent(type -> {
-                if (type == ButtonType.OK) {
-                    setGameToMainGame(stage, GameModeType.NewGame);
-                }
-            });
-        });
-            setGameToMainGame(stage, GameModeType.NewGame)
+            setGameToMainGame(stage, GameModeType.NewGame);
         });
 
         btn_load.setOnAction(event -> {

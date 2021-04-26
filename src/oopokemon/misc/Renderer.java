@@ -30,7 +30,8 @@ public class Renderer {
         map.getCells()
                 .stream()
                 .filter(cell -> cell.occupier != null)
-                .forEach(cell -> mapPlaceHolder.getChildren().add(cell.occupier.getToRender()));
+                .map(cell -> cell.occupier.getToRender())
+                .forEach(node -> mapPlaceHolder.getChildren().add(node));
     }
 
     /**

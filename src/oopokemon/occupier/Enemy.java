@@ -117,6 +117,10 @@ public class Enemy extends Occupier{
         return setPositionOcc(x, y);
     }
 
+    public void setToLowerSize(boolean status){
+        sprite.setLowerSize(status);
+    }
+
     public void setEngimon(Engimon engimon) {
         this.engimon = engimon;
     }
@@ -133,6 +137,8 @@ public class Enemy extends Occupier{
         return cellType2;
 
     }
+
+
 
     public int getExp() {
         return engimon.getExp();

@@ -8,6 +8,7 @@ import oopokemon.misc.Renderable;
 import oopokemon.misc.Sprite;
 
 import javafx.scene.Node;
+import oopokemon.species.Engimon;
 
 public abstract class Occupier implements Renderable {
     protected Sprite sprite;
@@ -58,6 +59,8 @@ public abstract class Occupier implements Renderable {
         }
         return false;
     }
+
+    public abstract Engimon getEngimon();
 
     public Map getMap(){
         return map;

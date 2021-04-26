@@ -4,6 +4,8 @@ import javafx.scene.layout.Pane;
 import oopokemon.map.Map;
 import oopokemon.exception.NotInitializedException;
 import oopokemon.misc.Renderer;
+import oopokemon.misc.Sprite;
+import oopokemon.species.Engimon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +68,16 @@ public class EnemyHandler implements Runnable {
                         wait();
                     }
                     int finalTurnCounter = turnCounter;
+                    int playerLvl = player.getLevel();
                     enemyList.forEach(enemy -> {
                         enemy.move(new Random().nextInt(4));
+                        int enemyLvl = enemy.getEngimon().getLevel();
+                        float playerMaxElAdv = Engimon.maxElAdv(player.getEngimon(), enemy.getEngimon());
+                        float enemyMaxElAdv = Engimon.maxElAdv(enemy.getEngimon(), player.getEngimon());
+                        float powerPlayer = (playerLvl * playerMaxElAdv) + player.getEngimon().sumSkillPower();
+                        float powerEnemy = (enemyLvl * enemyMaxElAdv) + enemy.getEngimon().sumSkillPower();
+                        enemy.setToLowerSize(powerEnemy < powerPlayer);
+
                         if ((finalTurnCounter % 10) == 9) {
                             if (!enemy.setExp(100)){
                                 Random rand = new Random();

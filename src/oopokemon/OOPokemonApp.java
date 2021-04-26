@@ -59,7 +59,7 @@ public class OOPokemonApp extends Application {
         setUpCamera();
         playBGM();
         try {
-            gameState = loadGame("testing", mapContainer);
+            gameState = loadGame("save1", mapContainer);
         } catch (NotInitializedException e) {
             AlertBox.display("Load Game", "Gagal Load Game, Memulai Game Baru!");
             gameState = new GameState(mapContainer);

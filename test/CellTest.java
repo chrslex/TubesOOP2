@@ -35,8 +35,4 @@ class CellTest {
         assertNull(c2.getOccupier());
         assertEquals(o1, c3.getOccupier());
     }
-
-//    @Test
-//    void getToRender() {
-//    }
 }

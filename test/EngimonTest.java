@@ -1,4 +1,3 @@
-import javafx.scene.image.Image;
 import oopokemon.skill.*;
 import oopokemon.species.*;
 import org.junit.jupiter.api.*;
@@ -64,22 +63,6 @@ class EngimonTest {
                 () -> assertFalse(e2.learnSkill(s6))
         );
     }
-
-//    @Test
-//    void setName() {
-//    }
-//
-//    @Test
-//    void setLevel() {
-//    }
-//
-//    @Test
-//    void setLife() {
-//    }
-//
-//    @Test
-//    void addExp() {
-//    }
 
     @Test
     void getNamaSpecies() {
@@ -184,18 +167,6 @@ class EngimonTest {
         );
     }
 
-//    @Test
-//    void printInfo() {
-//    }
-//
-//    @Test
-//    void printInfoSafe() {
-//    }
-//
-//    @Test
-//    void printInfoSkill() {
-//    }
-
     @Test
     void getTypeInt() {
         String e1Name = e1.getNamaSpecies();
@@ -230,46 +201,6 @@ class EngimonTest {
                 () -> assertEquals(2, Engimon.maxElAdv(e2, e5))
         );
     }
-
-//    @Test
-//    void getImage() {
-//        Image image1 = new Image("assets/pikachu.png");
-//        Image image2 = new Image("assets/articuno.png");
-//        Image image3 = new Image("assets/inferail.png");
-//        Image image4 = new Image("assets/pikachu.png");
-//        Image image5 = new Image("assets/seismotoad.png");
-//        assertAll("Get Species Image",
-//                () -> assertEquals(image1, e1.getImage()),
-//                () -> assertEquals(image2, e2.getImage()),
-//                () -> assertEquals(image3, e3.getImage()),
-//                () -> assertEquals(image4, e4.getImage()),
-//                () -> assertEquals(image5, e5.getImage())
-//        );
-//    }
-//
-//    @Test
-//    void getElementImage() {
-//        Image image1 = new Image("assets/None.png");
-//        Image image2 = new Image("assets/Ice.png");
-//        Image image3 = new Image("assets/FireElectric.png");
-//        Image image4 = new Image("assets/None.png");
-//        Image image5 = new Image("assets/WaterGround.png");
-//        assertAll("Get Species Image",
-//                () -> assertEquals(image1, e1.getElementImage()),
-//                () -> assertEquals(image2, e2.getElementImage()),
-//                () -> assertEquals(image3, e3.getElementImage()),
-//                () -> assertEquals(image4, e4.getElementImage()),
-//                () -> assertEquals(image5, e5.getElementImage())
-//        );
-//    }
-
-//    @Test
-//    void fromJson() {
-//    }
-//
-//    @Test
-//    void toJson() {
-//    }
 
     @Test
     void testToString() {
@@ -329,10 +260,10 @@ class EngimonTest {
         assertTrue(e3.addExp(1200));
         assertTrue(e4.addExp(1700));
         assertAll("Get Engimon's Exp",
-                () -> assertEquals("Exp : 200/2000 Lvl : 3", e1.getThirdLine()),
-                () -> assertEquals("Exp : 300/2000 Lvl : 4", e2.getThirdLine()),
-                () -> assertEquals("Exp : 1200/2000 Lvl : 13", e3.getThirdLine()),
-                () -> assertEquals("Exp : 1700/2000 Lvl : 18", e4.getThirdLine())
+                () -> assertEquals("Exp : 200/2000\nLvl : 3\nLife : 3", e1.getThirdLine()),
+                () -> assertEquals("Exp : 300/2000\nLvl : 4\nLife : 3", e2.getThirdLine()),
+                () -> assertEquals("Exp : 1200/2000\nLvl : 13\nLife : 3", e3.getThirdLine()),
+                () -> assertEquals("Exp : 1700/2000\nLvl : 18\nLife : 3", e4.getThirdLine())
         );
     }
 

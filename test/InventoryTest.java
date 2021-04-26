@@ -67,6 +67,9 @@ class InventoryTest {
         Engimon e4 = new Engimon();
         Dragon e5 = new Dragon();
         Squirtle e6 = new Squirtle();
+        for (int j = 0; j < 25; j++) {
+            i.addEngimon(e3);
+        }
         assertAll("Add Engimon to The Inventory",
                 () -> assertTrue(i.addEngimon(e4)),
                 () -> assertTrue(i.addEngimon(e5)),
@@ -82,6 +85,9 @@ class InventoryTest {
         Waveform s4 = new Waveform();
         Sunstrike s5 = new Sunstrike();
         Torrent s6 = new Torrent();
+        for (int j = 0; j < 25; j++) {
+            i.addSkill(s3);
+        }
         assertAll("Add Engimon to The Inventory",
                 () -> assertTrue(i.addSkill(s4)),
                 () -> assertTrue(i.addSkill(s5)),

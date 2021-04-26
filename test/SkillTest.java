@@ -124,9 +124,9 @@ class SkillTest {
     void compareTo() {
         assertAll("Skill Compare To",
                 () -> assertEquals(0, s1.compareTo(s3)),
-                () -> assertEquals(-1, s2.compareTo(s1)),
+                () -> assertEquals(-18, s2.compareTo(s1)),
                 () -> assertEquals(0, s4.compareTo(s5)),
-                () -> assertEquals(1, s3.compareTo(s5))
+                () -> assertEquals(16, s3.compareTo(s5))
         );
     }
 

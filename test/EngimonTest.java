@@ -269,9 +269,9 @@ class EngimonTest {
 
     @Test
     void getFourthLine() {
-        String skill2 = "Skill || Nama : Ice Vortex || Elemen : Ice || Base Power : 13 || Mastery Level : 1\n";
+        String skill2 = "Skill || Nama : IceVortex || Elemen : Ice || Base Power : 13 || Mastery Level : 1\n";
         String skill3 = "Skill || Nama : Sunstrike || Elemen : Fire || Base Power : 15 || Mastery Level : 1\n"+
-                "Skill || Nama : Static Storm || Elemen : Electric || Base Power : 14 || Mastery Level : 1\n";
+                "Skill || Nama : StaticStorm || Elemen : Electric || Base Power : 14 || Mastery Level : 1\n";
         assertAll("Get Engimon's Skill(s)",
                 () -> assertEquals("", e1.getFourthLine()),
                 () -> assertEquals(skill2, e2.getFourthLine()),

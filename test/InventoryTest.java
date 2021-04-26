@@ -3,7 +3,6 @@ import oopokemon.skill.*;
 import oopokemon.species.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sun.security.provider.Sun;
 
 import java.util.*;
 
@@ -123,18 +122,6 @@ class InventoryTest {
         assertTrue(i.isSkillExist(s1));
         assertFalse(i.isSkillExist(s2));
     }
-
-//    @Test
-//    void printItem() {
-//    }
-//
-//    @Test
-//    void printAllSkillInfo() {
-//    }
-//
-//    @Test
-//    void printAllEngimonInfo() {
-//    }
 
     @Test
     void listEngimon() {

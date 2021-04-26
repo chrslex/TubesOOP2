@@ -28,7 +28,7 @@ class SkillTest {
                 () -> assertEquals("Cataclysm", s2.getSkillName()),
                 () -> assertEquals("None", s3.getSkillName()),
                 () -> assertEquals("Nimbus", s4.getSkillName()),
-                () -> assertEquals("Splinter Blast", s5.getSkillName())
+                () -> assertEquals("SplinterBlast", s5.getSkillName())
         );
     }
 
@@ -42,14 +42,6 @@ class SkillTest {
                 () -> assertEquals(16, s5.getBasePower())
         );
     }
-
-//    @Test
-//    void printInfo() {
-//    }
-
-//    @Test
-//    void printInfoAll() {
-//    }
 
     @Test
     void isSame() {
@@ -113,10 +105,10 @@ class SkillTest {
     @Test
     void testEquals() {
         assertAll("Skill Equality",
-                () -> assertTrue(s1.equals(s3)),
-                () -> assertFalse(s2.equals(s1)),
-                () -> assertFalse(s4.equals(s5)),
-                () -> assertFalse(s3.equals(s6))
+                () -> assertEquals(s1, s3),
+                () -> assertNotEquals(s2, s1),
+                () -> assertNotEquals(s4, s5),
+                () -> assertNotEquals(s3, s6)
         );
     }
 
@@ -137,7 +129,7 @@ class SkillTest {
                 () -> assertEquals("Skill || Nama : Cataclysm || Elemen : Fire || Base Power : 18 || Mastery Level : 1", s2.toString()),
                 () -> assertEquals("Skill || Nama : None || Elemen : None || Base Power : 0 || Mastery Level : 0", s3.toString()),
                 () -> assertEquals("Skill || Nama : Nimbus || Elemen : Electric || Base Power : 16 || Mastery Level : 1", s4.toString()),
-                () -> assertEquals("Skill || Nama : Splinter Blast || Elemen : Ice || Base Power : 16 || Mastery Level : 1", s5.toString())
+                () -> assertEquals("Skill || Nama : SplinterBlast || Elemen : Ice || Base Power : 16 || Mastery Level : 1", s5.toString())
         );
     }
 
@@ -148,7 +140,7 @@ class SkillTest {
                 () -> assertEquals(13, s2.hashCode()),
                 () -> assertEquals(8, s3.hashCode()),
                 () -> assertEquals(14, s4.hashCode()),
-                () -> assertEquals(17, s5.hashCode())
+                () -> assertEquals(16, s5.hashCode())
         );
     }
 
@@ -175,7 +167,7 @@ class SkillTest {
                 () -> assertEquals("Cataclysm", s2.getFirstLine()),
                 () -> assertEquals("None", s3.getFirstLine()),
                 () -> assertEquals("Nimbus", s4.getFirstLine()),
-                () -> assertEquals("Splinter Blast", s5.getFirstLine())
+                () -> assertEquals("SplinterBlast", s5.getFirstLine())
         );
     }
 

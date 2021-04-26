@@ -49,8 +49,8 @@ class ElementTest {
     @Test
     void testEquals() {
         Element e4 = new Element(Fire);
-        assertTrue(e2.equals(e4));
-        assertFalse(e1.equals(e2));
+        assertEquals(e2, e4);
+        assertNotEquals(e1, e2);
     }
 
     @Test

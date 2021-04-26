@@ -47,6 +47,8 @@ public class InventoryGUI extends Pane {
         inventoryLayout.setAlignment(Pos.CENTER);
         Scene invScene = new Scene(inventoryLayout);
         invScene.getStylesheets().add("assets/styles.css");
+        inventoryLayout.setId("scene");
+        inventoryLayout.toBack();
         GridPane inventoryItems;
         if (type == InventoryType.ENGIMON){
             inventoryItems = populateItem(player.getInventory().listEngimon(), player, stage);
@@ -55,6 +57,8 @@ public class InventoryGUI extends Pane {
             inventoryItems = populateItem(player.getInventory().listSkill(), player, stage);
         }
         ScrollPane invScrollItem = new ScrollPane(inventoryItems);
+        invScrollItem.setId("inventoryBackground");
+        inventoryItems.toFront();
         invScrollItem.setFitToWidth(true);
         invScrollItem.setMaxHeight(650);
         Pane itemInfo = new Pane();
@@ -63,7 +67,6 @@ public class InventoryGUI extends Pane {
         inventoryItems.setVgap(10);
         inventoryItems.setAlignment(Pos.CENTER);
         itemInfo.setPrefSize(300,600);
-
 
         HBox buttonPlaceHolder = new HBox(10);
         Button btnEngimon = new Button("ENGIMON");
@@ -170,13 +173,13 @@ public class InventoryGUI extends Pane {
                     if (toLearn.learnSkill((Skill) item)){
                         player.getInventory().removeSkill(id + 1);
                         stage.close();
-                        AlertBox.display("Memakai Skill", "Skill berhasil dipelajari");
+                        AlertBox.display("Memakai Skill", "Skill Berhasil Dipelajari");
                         prevStage.setScene(createInventoryScene(player, InventoryType.SKILL, prevStage));
                     }else {
-                        AlertBox.display("Memakai Skill", "Skill gagal digunakan");
+                        AlertBox.display("Memakai Skill", "Skill Gagal Digunakan");
                     }
                 }else{
-                    AlertBox.display("Memakai Skill", "Tidak ada engimon yang aktif");
+                    AlertBox.display("Memakai Skill", "Tidak Ada Engimon Aktif");
                 }
             }
             else if (item instanceof Engimon){
@@ -195,14 +198,14 @@ public class InventoryGUI extends Pane {
                     return;
                 }
                 if (input1 > count){
-                    AlertBox.display("Buang Skill", "Jumlah Skill untuk dibuang melebihi jumlah yang dimiliki!");
+                    AlertBox.display("Buang Skill", "Jumlah Skill Untuk Dibuang Melebihi Jumlah yang Dimiliki!");
                     return;
                 }
                 for (int i = 0; i < input1; i++) {
                     player.getInventory().removeSkill(id + 1);
                 }
                 stage.close();
-                AlertBox.display("Buang Skill", item.getFirstLine() + " berhasil dibuang sebanyak : " + input1);
+                AlertBox.display("Buang Skill", item.getFirstLine() + " Berhasil Dibuang Sebanyak : " + input1);
                 prevStage.setScene(createInventoryScene(player, InventoryType.SKILL, prevStage));
             }
             else if (item instanceof Engimon){
@@ -214,7 +217,7 @@ public class InventoryGUI extends Pane {
                     player.setActiveEngimon(null);
                 }
                 stage.close();
-                AlertBox.display("Buang Engimon", "Engimon berhasil dibuang");
+                AlertBox.display("Buang Engimon", "Engimon Berhasil Dibuang");
                 prevStage.setScene(createInventoryScene(player, InventoryType.ENGIMON, prevStage));
             }
         });

@@ -32,7 +32,7 @@ public class Battle {
 			float powerEnemy = (enemyLvl * enemyMaxElAdv) + engimonMusuh.sumSkillPower();
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Battle");
-			alert.setHeaderText("Engimon Liar : " + engimonMusuh.getNamaSpecies() +
+			alert.setHeaderText("Engimon Liar : " + engimonMusuh.toString() +
 					"\nPower Anda : " + powerPlayer + "\nPower Musuh : " + powerEnemy);
 			alert.setContentText("Lanjutkan?");
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -47,7 +47,7 @@ public class Battle {
 			}
 			if (powerPlayer < powerEnemy) {
 				if (myengimon.getLife() == 1){
-					AlertBox.display("Battle", "Kalah Power, Engimon anda Mati");
+					AlertBox.display("Battle", "Kalah Power, Engimon Anda Mati");
 					myplayer.setActiveEngimon(null);
 					myplayer.getInventory().removeEngimon(myengimon);
 
@@ -59,7 +59,7 @@ public class Battle {
 				}
 			}
 			else {
-				AlertBox.display("Battle", "Menang Power, Engimon Liar menjadi milik anda");
+				AlertBox.display("Battle", "Menang Power, Engimon Liar Menjadi Milik Anda");
 				if (!myplayer.getInventory().isFull()) {
 					// Buat Input String buuat kasih nama buat engimon baik di inventory maupun battle
 //					AlertBox.display("Battle");
@@ -100,7 +100,7 @@ public class Battle {
 				}
 			}
 		} else {
-			AlertBox.display("Battle", "Tidak ada engimon liar di sekitar");
+			AlertBox.display("Battle", "Tidak Ada Engimon Liar Di Sekitar");
 		}
 		return myplayer;
 	}

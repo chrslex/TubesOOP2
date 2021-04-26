@@ -22,4 +22,9 @@ public class Dragon extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Panaaaasss...";
+    }
 }

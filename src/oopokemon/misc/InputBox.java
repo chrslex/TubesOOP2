@@ -20,11 +20,11 @@ public class InputBox {
                 String inputText = result.get();
                 return Integer.valueOf(inputText);
             }catch (NumberFormatException e){
-                AlertBox.display("input error", "Input salah");
+                AlertBox.display("Input Error", "Input Salah");
                 return null;
             }
         }
-        AlertBox.display("input error", "Tidak emasukkan input");
+        AlertBox.display("Input Error", "Tidak Memasukkan Input");
         return -1;
     }
 
@@ -39,7 +39,7 @@ public class InputBox {
         if (result.isPresent()){
             return result.get();
         }
-        AlertBox.display("input error", "tidak memasukkan input");
+        AlertBox.display("Input Error", "Tidak Memasukkan Input");
         return "";
     }
 }

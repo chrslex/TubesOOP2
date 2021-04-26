@@ -24,7 +24,7 @@ public class Raichu extends Engimon {
     }
 
     @Override
-    public Image getElementImage() {
-        return super.getElementImage();
+    public String interactions() {
+        return "Setrum nih...";
     }
 }

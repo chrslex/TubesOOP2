@@ -171,6 +171,9 @@ public class OOPokemonApp extends Application {
                     myPlayer.openInventory();
                     enemyHandler.resume();
                     break;
+                case I:
+                    myPlayer.interacts();
+                    break;
                 case ESCAPE:
                     setGameToPause(stage, mainGame);
                     break;
@@ -337,7 +340,6 @@ public class OOPokemonApp extends Application {
 
         stage.setScene(mainMenu);
 
-
         stage.show();
 
     }
@@ -359,6 +361,8 @@ public class OOPokemonApp extends Application {
         lbl_battle.setId("label");
         Label lbl_inventory = new Label("Inventory: B");
         lbl_inventory.setId("label");
+        Label lbl_interaction = new Label("Interaction: I");
+        lbl_interaction.setId("label");
         Label lbl_pause = new Label("Pause: Esc");
         lbl_pause.setId("label");
         Button btn_back = new Button("Back");
@@ -367,17 +371,17 @@ public class OOPokemonApp extends Application {
         ImageView imageView = new ImageView();
         imageView.setFitWidth(300);
 
-        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_inventory, lbl_pause, btn_back, imageView);
+        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_inventory, lbl_interaction, lbl_pause, btn_back, imageView);
 
         uiContainer.setTranslateX((getCameraWidth() - 300)/2);
-        uiContainer.setTranslateY((getCameraHeight() - 4*(10 + 20))/2);
+        uiContainer.setTranslateY((getCameraHeight() - 5*(10 + 20))/2);
 
         btn_back.setOnAction(event -> {
             stage.setScene(previousScene);
         });
 
         helpScreen.setOnKeyPressed(event -> {
-            stage.setScene(previousScene);
+            if (event.getCode() == KeyCode.ESCAPE) stage.setScene(previousScene);
         });
 
         stage.setScene(helpScreen);
@@ -492,7 +496,7 @@ public class OOPokemonApp extends Application {
         stage.setScene(settingScreen);
 
         settingScreen.setOnKeyPressed(event -> {
-            setGameToMainMenu(stage);
+            if (event.getCode() == KeyCode.ESCAPE) setGameToMainMenu(stage);
         });
 
         stage.show();

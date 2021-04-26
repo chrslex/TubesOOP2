@@ -24,4 +24,9 @@ public class Kyogre extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Kiko enak tau...";
+    }
 }

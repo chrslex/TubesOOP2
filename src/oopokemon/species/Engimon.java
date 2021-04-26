@@ -535,6 +535,9 @@ public class Engimon implements Comparable<Engimon>, Item {
         return "";
     }
 
+    public String interactions() {
+        return "Aku Lapar";
+    }
 
 //    public static void main(String[] args) {
 //        Engimon engimon = new Dragon("okeeee");

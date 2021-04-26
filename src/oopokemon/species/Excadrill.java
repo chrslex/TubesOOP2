@@ -22,4 +22,9 @@ public class Excadrill extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Aduh bau tanah...";
+    }
 }

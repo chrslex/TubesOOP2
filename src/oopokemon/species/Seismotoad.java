@@ -24,4 +24,9 @@ public class Seismotoad extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Jelek tapi kuat...";
+    }
 }

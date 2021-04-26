@@ -25,4 +25,9 @@ public class Inferail extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Akulah terkuattt...";
+    }
 }

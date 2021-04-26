@@ -45,3 +45,8 @@
 #inventoryitem:hover{
     -fx-opacity: 50%;
 }
+
+#inventoryBackground{
+    -fx-background-color: black;
+    -fx-opacity: 90%;
+}

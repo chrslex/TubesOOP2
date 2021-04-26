@@ -120,6 +120,12 @@ public class Player extends Occupier {
         healthbar.setImage(new Image("assets/life" + getLife() + ".png"));
     }
 
+    public void interacts() {
+        if (this.getEngimon() != null) {
+            AlertBox.display("Interaction", this.getEngimon().getName() + ":\n" + this.getEngimon().interactions());
+        }
+    }
+
     public void openInventory(){
         InventoryGUI.createInventory(this, InventoryGUI.InventoryType.ENGIMON);
     }

@@ -22,4 +22,9 @@ public class Articuno extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Dingiiiinnn...";
+    }
 }

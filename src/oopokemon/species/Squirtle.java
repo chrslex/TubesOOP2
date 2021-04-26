@@ -21,4 +21,9 @@ public class Squirtle extends Engimon {
         super(name);
         InitComp();
     }
+
+    @Override
+    public String interactions() {
+        return "Lambat tapi kuat...";
+    }
 }

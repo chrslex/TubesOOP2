@@ -50,20 +50,20 @@ Tidak wajib tapi disarankan
 |   Turunan Engimon  | ✅         |   GUI              | Tiap Tiap Engimon punya Gambar unik/sama dengan tambahan aura sesuai element     |
 |   Skill            | ✅         |   GUI              | Inherit dari Image atau punya atribut image biar bisa render gambar di layar  |
 |   Turunan Skill    | ✅         |   GUI              | Tiap Tiap Skill punya Gambar unik/sama dengan tambahan aura sesuai element    |
-|   Inventory        | ❌         |   GUI              | Membuat layout dan panel baru   |
+|   Inventory        | ✅         |   GUI              | Membuat layout dan panel baru   |
 |   Occupier         | ✅         |   GUI              |                                                  |
 |   ActiveEngimon    | ✅         |   Method           | setImage jika ada Engimon aktif   |
 |   Player           | ✅         |   GUI              | atribut Image, setImage dari atribut ini   |
 |   Enemy            | ✅         |   Method           | setCenterImage dari Image Engimon      |
-|   Breeding         | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
-|   Battle           | ❌         |                    | Menunggu semua di atas selesai ditranslasi      |
+|   Breeding         | ✅         |                    | Menunggu semua di atas selesai ditranslasi      |
+|   Battle           | ✅         |                    | Menunggu semua di atas selesai ditranslasi      |
 |   GameState        | ✅         |                    | Menyimpan semua keterangan game dari map player dan musuh2 |
 |   GameState save   | ✅         |                    | Deserialize object gamestate jadi file eksternal seperti json |
 |   GameState load   | ✅         |                    | Serialize file eksternal seperti json menjadi object GameState object|   
 
-Progress: ~85%
+Progress: ~95% (Kurang penyesuaian dengan spek)
 
-Design Progress : ~70%
+Design Progress : ~90% (Inventory blm dihias)
 
 # Tampilan Layar
 ![image](https://user-images.githubusercontent.com/68516528/115685206-38dcc300-a382-11eb-8373-0420f8263759.png)

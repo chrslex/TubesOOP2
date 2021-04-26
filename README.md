@@ -6,10 +6,10 @@ Java SE-1.8
 
 Google gson-2.8.6
 
-# requirements
-OracleJDK-1.8 (run & build) `belum mendukung openJDK`
+# Requirements
+<a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">OracleJDK-1.8</a> (run & build) `belum mendukung OpenJDK`
 
-intelliJ (build)
+<a href="https://www.jetbrains.com/idea/download">IntelliJ</a> (build)
 
 # Run
 double click run.bat (windows) atau jalankan perintah
@@ -22,11 +22,11 @@ double click run.bat (windows) atau jalankan perintah
 
 
 # Build
-Pastikan Java JDK 8 (java SE-1.8) terinstall
+Pastikan Java JDK 8 (Java SE-1.8) telah di-install
 
-Buka Project structure pada intelliJ `ctrl + shift + alt + s` 
+Buka Project Structure pada intelliJ `Ctrl + Shift + Alt + S` 
 
-Pada bagian Project pastikan Project SDK menggunakan java 1.8 dengan SDK Default 8-Lambdas
+Pada bagian Project pastikan Project SDK menggunakan Java 1.8 dengan SDK Default 8-Lambdas
 
 ![image](https://user-images.githubusercontent.com/68516528/114082730-49982e00-98d8-11eb-9394-41c6544e5c41.png)
 

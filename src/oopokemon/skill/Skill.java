@@ -34,8 +34,11 @@ public class Skill implements Comparable<Skill>, Item {
         return this.skillName;
     }
     
-    public final int getBasePower() {
+    public int getBasePower() {
         return this.basePower;
+    }
+    public int getMasteryLevel() {
+        return this.masteryLevel;
     }
     
     public final void printInfo() {
@@ -91,7 +94,7 @@ public class Skill implements Comparable<Skill>, Item {
 //        if (!this.skillType.equals(o.skillType)) {
 //            return this.skillType.compareTo(o.skillType);
 //        } else {
-        return o.masteryLevel - this.masteryLevel;
+        return o.basePower - this.basePower;
 //        }
     }
 

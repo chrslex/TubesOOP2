@@ -23,6 +23,8 @@ import oopokemon.species.Engimon;
 
 import java.util.List;
 
+import static oopokemon.misc.InputBox.inputName;
+
 public class InventoryGUI extends Pane {
     public enum InventoryType{
         ENGIMON,
@@ -155,7 +157,9 @@ public class InventoryGUI extends Pane {
         btnDummy.setOnAction(event -> {
             if (item instanceof Engimon){
                 Engimon engimon = (Engimon) item;
-                engimon.setName(InputBox.inputName("Inventory", "Nama Baru Engimon :"));
+                String case1 = InputBox.inputName("Inventory", "Nama Baru Engimon :");
+                if (case1.equals("")) return;
+                engimon.setName(case1);
                 stage.close();
                 AlertBox.display("Memakai Skill", "Berhasil Memberi Nama Engimon!");
             }

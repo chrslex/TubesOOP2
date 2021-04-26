@@ -32,7 +32,7 @@ public class GameState {
 
 
     public GameState(Pane mapContainer) {
-        String mapFile = "bin/map2.txt";
+        String mapFile = "bin/map1.txt";
         map = new Map(mapFile);
         try {
             player = new Player(3,3, map);
@@ -231,7 +231,7 @@ public class GameState {
                 else throw new NotInitializedException();
             }
             else throw new NotInitializedException();
-            System.out.println("Berhasil load");
+            System.out.println("Berhasil Load Game");
             return new GameState(map, player, enemyHandler, mapContainer);
         }
 
@@ -305,12 +305,12 @@ public class GameState {
             FileWriter myWriter = new FileWriter("bin/savefiles/" + saveDest + ".json");
             myWriter.write(json);
             myWriter.close();
-            AlertBox.display("Saving", "Berhasil Menyimpan");
+            AlertBox.display("Saving", "Berhasil Menyimpan Game");
         } catch (IOException e) {
-            AlertBox.display("Saving", "Gagal saving");
+            AlertBox.display("Saving", "Gagal Menyimpan Game");
             e.printStackTrace();
         } catch (Exception e){
-            AlertBox.display("Saving", "Gagal saving");
+            AlertBox.display("Saving", "Gagal Menyimpan Game");
         }
     }
 

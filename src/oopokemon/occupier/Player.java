@@ -12,9 +12,7 @@ import oopokemon.misc.AlertBox;
 import oopokemon.misc.InputBox;
 import oopokemon.misc.MusicPlayer;
 import javafx.scene.image.Image;
-import oopokemon.skill.SplinterBlast;
-import oopokemon.skill.StaticStorm;
-import oopokemon.skill.Torrent;
+import oopokemon.skill.*;
 import oopokemon.species.*;
 
 import javax.swing.*;
@@ -48,7 +46,7 @@ public class Player extends Occupier {
         inventory.addEngimon(engimon);
         Engimon kyogre = new Kyogre("ogre");
         kyogre.setLevel(5);
-        dragon.setLevel(5);
+        dragon.setLevel(10);
         inventory.addEngimon(kyogre);
         inventory.addEngimon(new Seismotoad("seismo"));
         inventory.addEngimon(new Seismotoad("seismo"));
@@ -63,7 +61,12 @@ public class Player extends Occupier {
         inventory.addEngimon(new Raichu("raisa"));
         inventory.addEngimon(new Raichu("raisa"));
         inventory.addEngimon(new Raichu("raisa"));
-        inventory.addEngimon(new Raichu("raisa"));
+        Raichu raiso = new Raichu("raisa");
+        raiso.setLevel(10);
+        inventory.addEngimon(raiso);
+        Inferail infer = new Inferail("infer");
+        infer.setLevel(10);
+        inventory.addEngimon(infer);
         inventory.addSkill(new SplinterBlast());
         inventory.addSkill(new Torrent());
         inventory.addSkill(new SplinterBlast());
@@ -72,7 +75,14 @@ public class Player extends Occupier {
         inventory.addSkill(new StaticStorm());
         inventory.addSkill(new StaticStorm());
         inventory.addSkill(new StaticStorm());
-
+        inventory.addSkill(new Sunstrike());
+        inventory.addSkill(new IceVortex());
+        inventory.addSkill(new Cataclysm());
+        inventory.addSkill(new Fissure());
+        inventory.addSkill(new Magnetize());
+        inventory.addSkill(new Nimbus());
+        inventory.addSkill(new StaticStorm());
+        inventory.addSkill(new Waveform());
     }
 
     public Player(int x, int y, ActiveEngimon activeEngimon,
@@ -144,6 +154,9 @@ public class Player extends Occupier {
             do {
                 input1 = InputBox.inputPrompt("Breeding", "Pilih Engimon 1");
                 try {
+                    if (input1 == -1) {
+                        return;
+                    }
                     engimon1 = listEngimon.get(input1);
                 }
                 catch (NullPointerException | IndexOutOfBoundsException e){
@@ -154,9 +167,12 @@ public class Player extends Occupier {
             do {
                 input2 = InputBox.inputPrompt("Breeding", "Pilih Engimon 2");
                 try {
+                    if (input2 == -1) {
+                        return;
+                    }
                     engimon2 = listEngimon.get(input2);
                     if (engimon1 == engimon2){
-                        AlertBox.display("Breeding", "Engimon 1 dan Engimon 2 sama\nBreeding dibatalkan");
+                        AlertBox.display("Breeding", "Jenis Engimon 1 dan Engimon 2 Sama\nBreeding Dibatalkan");
                         return;
                     }
                 }
@@ -167,7 +183,7 @@ public class Player extends Occupier {
             }while (input2 == null || engimon2 == null);
 
             if(engimon1.getLevel() <4 || engimon2.getLevel()<4  ){
-                AlertBox.display("Breeding", "Level engimon tidak mencukupi");
+                AlertBox.display("Breeding", "Level Engimon Tidak Mencukupi");
                 return;
             }
             engimon1.setLevel(engimon1.getLevel() - 3);

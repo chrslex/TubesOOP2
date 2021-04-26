@@ -166,7 +166,12 @@ public class Engimon implements Comparable<Engimon>, Item {
             temporaryskill.add(new Skill(other2.monSkills[i]));
         }
         // Sorting skill
-        Collections.sort(temporaryskill);
+        Collections.sort(temporaryskill, new Comparator<Skill>() {
+            @Override
+            public int compare(Skill o1, Skill o2) {
+                return o1.getMasteryLevel()-o2.getMasteryLevel();
+            }
+        });
 
         this.monSkills = new Skill[4];
         for (int i = 0; i < 4; i++) {
@@ -501,7 +506,7 @@ public class Engimon implements Comparable<Engimon>, Item {
 
     @Override
     public String getThirdLine() {
-        return "Exp : " + monExp + "/" + monCtvExp + " Lvl : " + monLevel;
+        return "Exp : " + monExp + "/" + monCtvExp + "\nLvl : " + monLevel + "\nLife : " + monLife;
     }
 
     @Override

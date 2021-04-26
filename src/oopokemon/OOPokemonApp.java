@@ -61,7 +61,7 @@ public class OOPokemonApp extends Application {
         try {
             gameState = loadGame("testing", mapContainer);
         } catch (NotInitializedException e) {
-            AlertBox.display("Load Game", "Gagal Load Game, memulai game baru!");
+            AlertBox.display("Load Game", "Gagal Load Game, Memulai Game Baru!");
             gameState = new GameState(mapContainer);
         }
         return initGameComponents();
@@ -146,15 +146,19 @@ public class OOPokemonApp extends Application {
         mainGame.setOnKeyPressed(event -> {
             switch (event.getCode()){
                 case A:
+                case LEFT:
                     myPlayer.setPositionOcc(myPlayer.position.x - 1, myPlayer.position.y);
                     break;
                 case D:
+                case RIGHT:
                     myPlayer.setPositionOcc(myPlayer.position.x + 1, myPlayer.position.y);
                     break;
                 case W:
+                case UP:
                     myPlayer.setPositionOcc(myPlayer.position.x, myPlayer.position.y - 1);
                     break;
                 case S:
+                case DOWN:
                     myPlayer.setPositionOcc(myPlayer.position.x, myPlayer.position.y + 1);
                     break;
                 case SPACE:
@@ -203,16 +207,18 @@ public class OOPokemonApp extends Application {
         Button btn_load = new Button("Load");
         btn_load.setPrefSize(btnWidth, btnHeight);
         btn_load.setId("button");
+        Button btn_help = new Button("Help");
+        btn_help.setPrefSize(btnWidth, btnHeight);
+        btn_help.setId("button");
         Button btn_main = new Button("Main Menu");
         btn_main.setPrefSize(btnWidth, btnHeight);
         btn_main.setId("button");
 
-
         // Setup layout
-        uiContainer.getChildren().addAll(btn_resume,btn_save,btn_load, btn_main);
+        uiContainer.getChildren().addAll(btn_resume, btn_save, btn_load, btn_help, btn_main);
         pane.getChildren().add(uiContainer);
         uiContainer.setLayoutX((previouseScene.getWidth() - btnWidth)/2);
-        uiContainer.setLayoutY((previouseScene.getHeight() - 4*(btnHeight+10))/2);
+        uiContainer.setLayoutY((previouseScene.getHeight() - 5*(btnHeight+10))/2);
 
         // Setup Tombol
         btn_resume.setOnAction(event -> {
@@ -247,6 +253,10 @@ public class OOPokemonApp extends Application {
             stage.setScene(previouseScene);
         });
 
+        btn_help.setOnAction(event -> {
+            setGameToHelp(stage, pauseScene);
+        });
+
         btn_main.setOnAction(event -> {
             musicPlayer.interrupt();
             musicPlayer = null;
@@ -269,6 +279,7 @@ public class OOPokemonApp extends Application {
 
     private void setGameToMainMenu(Stage stage) {
         musicPlayer = null;
+        stage.centerOnScreen();
         if (enemyHandler != null){
             enemyHandler.interrupt();
         }
@@ -297,7 +308,7 @@ public class OOPokemonApp extends Application {
         Button btn_help = new Button("Help");
         btn_help.setPrefSize(btnWidth, btnHeight);
         btn_help.setId("button");
-        Button btn_setting = new Button("Setting");
+        Button btn_setting = new Button("Settings");
         btn_setting.setPrefSize(btnWidth, btnHeight);
         btn_setting.setId("button");
 
@@ -316,7 +327,7 @@ public class OOPokemonApp extends Application {
         });
 
         btn_help.setOnAction(event -> {
-            setGameToHelp(stage);
+            setGameToHelp(stage, mainMenu);
 //            InventoryGUI.createInventory(null);
         });
 
@@ -330,7 +341,7 @@ public class OOPokemonApp extends Application {
         stage.show();
 
     }
-    private void setGameToHelp(Stage stage){
+    private void setGameToHelp(Stage stage, Scene previousScene){
         Pane helpContainer = new Pane();
         Scene helpScreen = new Scene(helpContainer);
 
@@ -342,25 +353,32 @@ public class OOPokemonApp extends Application {
         helpContainer.getChildren().add(uiContainer);
 
 
-        Label lbl_move = new Label("Bergerak: W/A/S/D");
+        Label lbl_move = new Label("Bergerak: W/A/S/D or ↑/←/↓/→");
         lbl_move.setId("label");
         Label lbl_battle = new Label("Mengajukan Battle: SPACE");
         lbl_battle.setId("label");
-        Label lbl_invetory = new Label("Inventory: B");
-        lbl_invetory.setId("label");
+        Label lbl_inventory = new Label("Inventory: B");
+        lbl_inventory.setId("label");
+        Label lbl_pause = new Label("Pause: Esc");
+        lbl_pause.setId("label");
+        Button btn_back = new Button("Back");
+        btn_back.setPrefSize(175, 50);
+        btn_back.setId("button");
         ImageView imageView = new ImageView();
         imageView.setFitWidth(300);
 
-
-        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_invetory, imageView);
+        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_inventory, lbl_pause, btn_back, imageView);
 
         uiContainer.setTranslateX((getCameraWidth() - 300)/2);
         uiContainer.setTranslateY((getCameraHeight() - 4*(10 + 20))/2);
 
-        helpScreen.setOnKeyPressed(event -> {
-            setGameToMainMenu(stage);
+        btn_back.setOnAction(event -> {
+            stage.setScene(previousScene);
         });
 
+        helpScreen.setOnKeyPressed(event -> {
+            stage.setScene(previousScene);
+        });
 
         stage.setScene(helpScreen);
     }
@@ -468,8 +486,8 @@ public class OOPokemonApp extends Application {
                     (int) slider_vcell.getValue(),
                     slider_music_vol.getValue(),
                     slider_sfx_vol.getValue());
+            setGameToMainMenu(stage);
         });
-
 
         stage.setScene(settingScreen);
 

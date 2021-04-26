@@ -241,16 +241,18 @@ public class OOPokemonApp extends Application {
         });
 
         btn_save.setOnAction(event -> {
-            gameState.saveGame("testing");
+            gameState.saveGame("save1");
         });
 
         btn_load.setOnAction(event -> {
-            renderer.unRender(mapContainer);
-            enemyHandler.interrupt();
             try {
-                gameState = loadGame("testing", mapContainer);
+                gameState = loadGame("save1", mapContainer);
+                renderer.unRender(mapContainer);
+                enemyHandler.interrupt();
             } catch (NotInitializedException e){
                 System.err.println(e.getErrorMessage());
+                AlertBox.display("Load Game", "Gagal Load Game, tidak ada save files");
+                return;
 
             }
             isekai = gameState.map;

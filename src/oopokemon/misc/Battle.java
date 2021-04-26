@@ -10,15 +10,14 @@ import oopokemon.occupier.Player;
 import oopokemon.skill.*;
 import oopokemon.species.Engimon;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 public class Battle {
-	public static Player battle(Player myplayer, EnemyHandler enemyHandler) {
+	public static void battle(Player myplayer, EnemyHandler enemyHandler) {
 		if (myplayer.getEngimon() == null) {
 			AlertBox.display("Battle", "Tidak memakai active engimon");
-			return myplayer;
+			return;
 		}
 		Engimon engimonMusuh = myplayer.getClosestEnemy();
 		if (engimonMusuh != null) {
@@ -43,7 +42,7 @@ public class Battle {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK){
 			} else {
-				return myplayer;
+				return;
 			}
 			if (powerPlayer < powerEnemy) {
 				if (myengimon.getLife() == 1){
@@ -102,7 +101,6 @@ public class Battle {
 		} else {
 			AlertBox.display("Battle", "Tidak Ada Engimon Liar Di Sekitar");
 		}
-		return myplayer;
 	}
 
 

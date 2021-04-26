@@ -225,7 +225,6 @@ public class InventoryGUI extends Pane {
             else if (item instanceof Engimon){
                 Engimon currEngimon = player.getEngimon();
                 Engimon dibuang = player.getInventory().listEngimon().get(id);
-                System.out.println(dibuang);
                 player.getInventory().removeEngimon(id + 1);
                 if (currEngimon == dibuang){
                     player.setActiveEngimon(null);

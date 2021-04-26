@@ -91,11 +91,7 @@ public class Skill implements Comparable<Skill>, Item {
 
     @Override
     public int compareTo(Skill o) {
-//        if (!this.skillType.equals(o.skillType)) {
-//            return this.skillType.compareTo(o.skillType);
-//        } else {
         return o.basePower - this.basePower;
-//        }
     }
 
     @Override

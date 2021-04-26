@@ -166,7 +166,6 @@ public class Player extends Occupier {
                     engimon1 = listEngimon.get(input1);
                 }
                 catch (NullPointerException | IndexOutOfBoundsException e){
-//                    System.out.println("null");
                     engimon1 = null;
                 }
             }while (input1 == null || engimon1 == null);
@@ -183,7 +182,6 @@ public class Player extends Occupier {
                     }
                 }
                 catch (NullPointerException | IndexOutOfBoundsException e){
-//                    System.out.println("null");
                     engimon2 = null;
                 }
             }while (input2 == null || engimon2 == null);
@@ -210,14 +208,12 @@ public class Player extends Occupier {
 //        List<Enemy> enemies = new ArrayList<>();
         for (int i = position.x-1; i <= position.x+1 ; i++) {
             for (int j = position.y-1; j <= position.y+1; j++) {
-                System.out.println("x : " + i + ", y : " + j);
                 if (Position.isValidCoordinate(i,j)){
                     Position position = new Position(i,j);
                     Cell tempCell =  map.getCellAtPosition(position);
                     if (tempCell.occupier != null
                             && tempCell.occupier.occupierType == OccupierType.Enemy_Type){
                         Enemy enemy = (Enemy)tempCell.occupier;
-                        System.out.println("ada engimon");
                         return enemy.getEngimon();
                     }
                 }
@@ -236,7 +232,6 @@ public class Player extends Occupier {
             {
                 map.removeOccupierAtPosition(this.position);
                 if (activeEngimon != null) {
-//                    System.out.println(activeEngimon.getEngimon());
                     activeEngimon.setPositionOcc(this.position.x, this.position.y);
                 }
                 position = posisiBaru;

@@ -36,7 +36,7 @@ public class GameState {
         map = new Map(mapFile);
         try {
             player = new Player(3,3, map);
-            enemyhandler = new EnemyHandler(map, 5, mapContainer);
+            enemyhandler = new EnemyHandler(map, 40, mapContainer);
         } catch (NotInitializedException e) {
             System.err.println(e.getErrorMessage());
         }

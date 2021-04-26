@@ -67,8 +67,13 @@ public class Player extends Occupier {
         Inferail infer = new Inferail("infer");
         infer.setLevel(10);
         inventory.addEngimon(infer);
-        inventory.addSkill(new SplinterBlast());
-        inventory.addSkill(new Torrent());
+        Skill skill1 = new SplinterBlast();
+        skill1.increaseMasteryLevel();
+        skill1.increaseMasteryLevel();
+        inventory.addSkill(skill1);
+        Skill skill2 = new Torrent();
+        skill2.increaseMasteryLevel();
+        inventory.addSkill(skill2);
         inventory.addSkill(new SplinterBlast());
         inventory.addSkill(new SplinterBlast());
         inventory.addSkill(new Torrent());

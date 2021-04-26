@@ -21,7 +21,7 @@ public class EnemyHandler implements Runnable {
     private Player player = null;
 
     private Pane mapPlaceHolder;
-    private volatile int interval = 2000;
+    private volatile int interval = 1000;
 
     public EnemyHandler(Map map, int initialSize, Pane mapPlaceHolder) throws NotInitializedException {
         this.enemyList = new ArrayList<>();

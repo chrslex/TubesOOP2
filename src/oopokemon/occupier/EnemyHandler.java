@@ -72,12 +72,13 @@ public class EnemyHandler implements Runnable {
                     enemyList.forEach(enemy -> {
                         enemy.move(new Random().nextInt(4));
                         int enemyLvl = enemy.getEngimon().getLevel();
-                        float playerMaxElAdv = Engimon.maxElAdv(player.getEngimon(), enemy.getEngimon());
-                        float enemyMaxElAdv = Engimon.maxElAdv(enemy.getEngimon(), player.getEngimon());
-                        float powerPlayer = (playerLvl * playerMaxElAdv) + player.getEngimon().sumSkillPower();
-                        float powerEnemy = (enemyLvl * enemyMaxElAdv) + enemy.getEngimon().sumSkillPower();
-                        enemy.setToLowerSize(powerEnemy < powerPlayer);
-
+                        if (player.getEngimon() != null){
+                            float playerMaxElAdv = Engimon.maxElAdv(player.getEngimon(), enemy.getEngimon());
+                            float enemyMaxElAdv = Engimon.maxElAdv(enemy.getEngimon(), player.getEngimon());
+                            float powerPlayer = (playerLvl * playerMaxElAdv) + player.getEngimon().sumSkillPower();
+                            float powerEnemy = (enemyLvl * enemyMaxElAdv) + enemy.getEngimon().sumSkillPower();
+                            enemy.setToLowerSize(powerEnemy < powerPlayer);
+                        }
                         if ((finalTurnCounter % 10) == 9) {
                             if (!enemy.setExp(100)){
                                 Random rand = new Random();

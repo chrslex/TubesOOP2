@@ -1,124 +1,522 @@
-{"map":"bin/map1.txt","player":{"position":{
-  "x": 2,
-  "y": 1
-}},"enemies":[{"type":"Kyogre", "level":1, "position":{
-  "x": 21,
-  "y": 0
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 43,
-  "y": 2
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 10,
+{
+"map":"bin/map2.txt",
+"player":{
+"position":
+{
+  "x": 8,
   "y": 3
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 16,
-  "y": 4
-}},{"type":"Articuno", "level":1, "position":{
-  "x": 7,
-  "y": 8
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 24,
-  "y": 8
-}},{"type":"Raichu", "level":1, "position":{
-  "x": 21,
-  "y": 9
-}},{"type":"Articuno", "level":1, "position":{
-  "x": 11,
-  "y": 11
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 29,
-  "y": 11
-}},{"type":"Articuno", "level":1, "position":{
+}}, 
+"activeEngimon":{
+"position":
+{
+  "x": 9,
+  "y": 3
+} , 
+"engimon":{
+"nama":"okee", 
+"spesies":"Dragon", 
+"imageSource":"assets/dragon.png", 
+"level":5, 
+"baseLevel":5, 
+"exp":0, 
+"maxExp":2000, 
+"life":2, 
+"elements":[{
+  "elementType": "Fire"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Dragon",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Sunstrike",
+  "skillType": "Fire"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+}}, 
+"inventory":{
+"engimonList":[
+{
+"nama":"ogre", 
+"spesies":"Kyogre", 
+"imageSource":"assets/kyogre.png", 
+"level":5, 
+"baseLevel":5, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Water"
+},{
+  "elementType": "Ice"
+}], 
+"skills":[{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Articuno",
+  "basePower": 13,
+  "masteryLevel": 1,
+  "skillName": "Ice Vortex",
+  "skillType": "Ice"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"seismo", 
+"spesies":"Seismotoad", 
+"imageSource":"assets/seismotoad.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Water"
+},{
+  "elementType": "Ground"
+}], 
+"skills":[{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Excadrill",
+  "basePower": 12,
+  "masteryLevel": 1,
+  "skillName": "Fissure",
+  "skillType": "Ground"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"seismo", 
+"spesies":"Seismotoad", 
+"imageSource":"assets/seismotoad.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Water"
+},{
+  "elementType": "Ground"
+}], 
+"skills":[{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Excadrill",
+  "basePower": 12,
+  "masteryLevel": 1,
+  "skillName": "Fissure",
+  "skillType": "Ground"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"seismo", 
+"spesies":"Seismotoad", 
+"imageSource":"assets/seismotoad.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Water"
+},{
+  "elementType": "Ground"
+}], 
+"skills":[{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Excadrill",
+  "basePower": 12,
+  "masteryLevel": 1,
+  "skillName": "Fissure",
+  "skillType": "Ground"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"seismo", 
+"spesies":"Seismotoad", 
+"imageSource":"assets/seismotoad.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Water"
+},{
+  "elementType": "Ground"
+}], 
+"skills":[{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Excadrill",
+  "basePower": 12,
+  "masteryLevel": 1,
+  "skillName": "Fissure",
+  "skillType": "Ground"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"driller", 
+"spesies":"Excadrill", 
+"imageSource":"assets/excadrill.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Ground"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Excadrill",
+  "basePower": 12,
+  "masteryLevel": 1,
+  "skillName": "Fissure",
+  "skillType": "Ground"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"infer", 
+"spesies":"Inferail", 
+"imageSource":"assets/inferail.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Fire"
+},{
+  "elementType": "Electric"
+}], 
+"skills":[{
+  "species": "Dragon",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Sunstrike",
+  "skillType": "Fire"
+},{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"raisa", 
+"spesies":"Raichu", 
+"imageSource":"assets/raichu.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Electric"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"raisa", 
+"spesies":"Raichu", 
+"imageSource":"assets/raichu.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Electric"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"raisa", 
+"spesies":"Raichu", 
+"imageSource":"assets/raichu.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Electric"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+},{
+"nama":"raisa", 
+"spesies":"Raichu", 
+"imageSource":"assets/raichu.png", 
+"level":1, 
+"baseLevel":1, 
+"exp":0, 
+"maxExp":2000, 
+"life":3, 
+"elements":[{
+  "elementType": "Electric"
+},{
+  "elementType": "None"
+}], 
+"skills":[{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+},{
+  "basePower": 0,
+  "masteryLevel": 0,
+  "skillName": "None",
+  "skillType": "None"
+}]
+}] , 
+"skillList":[
+{
+  "species": "None",
+  "basePower": 16,
+  "masteryLevel": 1,
+  "skillName": "Splinter Blast",
+  "skillType": "Ice"
+},{
+  "species": "None",
+  "basePower": 16,
+  "masteryLevel": 1,
+  "skillName": "Splinter Blast",
+  "skillType": "Ice"
+},{
+  "species": "None",
+  "basePower": 16,
+  "masteryLevel": 1,
+  "skillName": "Splinter Blast",
+  "skillType": "Ice"
+},{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Squirtle",
+  "basePower": 15,
+  "masteryLevel": 1,
+  "skillName": "Torrent",
+  "skillType": "Water"
+},{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+},{
+  "species": "Raichu",
+  "basePower": 14,
+  "masteryLevel": 1,
+  "skillName": "Static Storm",
+  "skillType": "Electric"
+}]},"enemies":[{"type":"Dragon", "level":7, "exp":0, "position":{
   "x": 13,
-  "y": 12
-}},{"type":"Squirtle", "level":1, "position":{
-  "x": 38,
-  "y": 16
-}},{"type":"Squirtle", "level":1, "position":{
-  "x": 40,
-  "y": 16
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 4,
-  "y": 18
-}},{"type":"Raichu", "level":1, "position":{
-  "x": 10,
-  "y": 18
-}},{"type":"Squirtle", "level":1, "position":{
-  "x": 23,
-  "y": 18
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 31,
-  "y": 19
-}},{"type":"Kyogre", "level":1, "position":{
-  "x": 28,
-  "y": 20
-}},{"type":"Kyogre", "level":1, "position":{
-  "x": 1,
-  "y": 21
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 1,
-  "y": 23
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 37,
-  "y": 23
-}},{"type":"Raichu", "level":1, "position":{
-  "x": 1,
-  "y": 24
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 23,
-  "y": 25
-}},{"type":"Inferail", "level":1, "position":{
-  "x": 24,
-  "y": 25
-}},{"type":"Kyogre", "level":1, "position":{
-  "x": 10,
-  "y": 27
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 33,
-  "y": 27
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 37,
-  "y": 27
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 41,
-  "y": 27
-}},{"type":"Kyogre", "level":1, "position":{
-  "x": 10,
-  "y": 28
-}},{"type":"Inferail", "level":1, "position":{
-  "x": 37,
-  "y": 29
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 26,
-  "y": 31
-}},{"type":"Squirtle", "level":1, "position":{
-  "x": 4,
-  "y": 32
-}},{"type":"Raichu", "level":1, "position":{
+  "y": 1
+}},{"type":"Seismotoad", "level":6, "exp":0, "position":{
   "x": 11,
-  "y": 32
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 31,
-  "y": 32
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 11,
-  "y": 33
-}},{"type":"Excadrill", "level":1, "position":{
-  "x": 17,
-  "y": 35
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 5,
-  "y": 37
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 30,
-  "y": 40
-}},{"type":"Seismotoad", "level":1, "position":{
-  "x": 11,
-  "y": 41
-}},{"type":"Dragon", "level":1, "position":{
-  "x": 33,
-  "y": 41
-}},{"type":"Inferail", "level":1, "position":{
-  "x": 42,
-  "y": 41
-}}]}
+  "y": 3
+}},{"type":"Excadrill", "level":6, "exp":0, "position":{
+  "x": 14,
+  "y": 3
+}},{"type":"Articuno", "level":5, "exp":0, "position":{
+  "x": 18,
+  "y": 4
+}},{"type":"Articuno", "level":6, "exp":0, "position":{
+  "x": 19,
+  "y": 4
+}}]
+}

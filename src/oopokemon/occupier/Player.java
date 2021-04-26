@@ -26,7 +26,7 @@ public class Player extends Occupier {
     private final Inventory inventory;
     private final ActiveEngimon activeEngimon;
 
-    public ImageView healthbar = new ImageView(new Image("assets/life3.png"));
+    private ImageView healthbar = new ImageView(new Image("assets/life0.png"));
 
     public Player(Map map) throws NotInitializedException {
         super(0,0, OccupierType.Player_Type, map);
@@ -174,11 +174,14 @@ public class Player extends Occupier {
             engimon1.setLevel(engimon2.getLevel() - 3);
 
 
-            Engimon anak = new Engimon("anak", engimon1, engimon2);
+            Engimon anak = new Engimon(InputBox.inputName("Breeding","Beri Nama Anak :"), engimon1, engimon2);
             //Input nama anak
 //            Engimon anak = new Engimon(input, e1, e2);
             inventory.addEngimon(anak);
         }
+    }
+    public ImageView getHealthbar(){
+        return healthbar;
     }
     
     public Engimon getClosestEnemy(){

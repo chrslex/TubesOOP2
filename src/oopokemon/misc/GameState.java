@@ -252,6 +252,9 @@ public class GameState {
             json += String.format(", \n%s:{\n%s:\n%s , \n%s:%s}",
                     formatter("activeEngimon"), formatter("position"), gson.toJson(activeEngimon.position),
                     formatter("engimon"), activeEngimon.getEngimon().toJson());
+        } else {
+            json += String.format(", \n%s:{\n%s:\n%s}",
+                    formatter("activeEngimon"), formatter("position"), gson.toJson(activeEngimon.position));
         }
         if (!player.getInventory().isEmpty()){
             StringBuilder engimons = new StringBuilder();

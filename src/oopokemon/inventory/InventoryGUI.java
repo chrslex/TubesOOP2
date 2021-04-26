@@ -2,6 +2,7 @@ package oopokemon.inventory;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import oopokemon.misc.AlertBox;
+import oopokemon.misc.InputBox;
 import oopokemon.occupier.Player;
 import oopokemon.skill.Skill;
 import oopokemon.species.Engimon;
@@ -124,6 +126,8 @@ public class InventoryGUI extends Pane {
         Label thirdLine = new Label(item.getThirdLine());
         Label fourthLine = new Label(item.getFourthLine());
         Label fifthLine;
+        Button btnDummy = new Button();
+
         if (item instanceof Skill){
             int count = player.getInventory().getCountSkill((Skill)item);
             fifthLine = new Label("Jumlah : " + count);
@@ -131,6 +135,7 @@ public class InventoryGUI extends Pane {
         else {
             fifthLine = new Label(item.getFifthLine());
         }
+
 
 
         HBox buttonPlaceHolder = new HBox(10);
@@ -142,6 +147,19 @@ public class InventoryGUI extends Pane {
         buttonPlaceHolder.setTranslateX((600-2*(10+60))/2);
         itemInfo.getChildren().addAll(image,idLabel,firstLine,secondLine,thirdLine,fourthLine,fifthLine, buttonPlaceHolder);
 
+
+        if (item instanceof Engimon){
+            btnDummy = new Button("Rename");
+            itemInfo.getChildren().add(btnDummy);
+        }
+        btnDummy.setOnAction(event -> {
+            if (item instanceof Engimon){
+                Engimon engimon = (Engimon) item;
+                engimon.setName(InputBox.inputName("Inventory", "Nama Baru Engimon :"));
+                stage.close();
+                AlertBox.display("Memakai Skill", "Berhasil Memberi Nama Engimon!");
+            }
+        });
 
         useButton.setOnAction(event -> {
             if (item instanceof Skill){
@@ -191,6 +209,7 @@ public class InventoryGUI extends Pane {
 
 
         Scene infoScene =new Scene(itemInfo);
+        infoScene.getStylesheets().add("assets/styles.css");
         itemInfo.setPrefWidth(600);
         stage.getIcons().add(item.getImage());
         stage.setTitle(item.getFirstLine());

@@ -24,7 +24,22 @@ public class InputBox {
                 return null;
             }
         }
-        AlertBox.display("input error", "tidak memasukkan input");
+        AlertBox.display("input error", "Tidak emasukkan input");
         return -1;
+    }
+
+    public static String inputName(String title, String message){
+        TextInputDialog dialog = new TextInputDialog();
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("assets/oopokemon.png"));
+        dialog.setTitle(title);
+        dialog.setHeaderText(message);
+        dialog.setContentText("Input :");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            return result.get();
+        }
+        AlertBox.display("input error", "tidak memasukkan input");
+        return "";
     }
 }

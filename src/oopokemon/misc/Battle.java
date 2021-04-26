@@ -1,5 +1,9 @@
 package oopokemon.misc;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import oopokemon.occupier.Enemy;
 import oopokemon.occupier.EnemyHandler;
 import oopokemon.occupier.Player;
@@ -7,6 +11,7 @@ import oopokemon.skill.*;
 import oopokemon.species.Engimon;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class Battle {
@@ -25,12 +30,21 @@ public class Battle {
 			float enemyMaxElAdv = Engimon.maxElAdv(engimonMusuh, myengimon);
 			float powerPlayer = (playerLvl * playerMaxElAdv) + myengimon.sumSkillPower();
 			float powerEnemy = (enemyLvl * enemyMaxElAdv) + engimonMusuh.sumSkillPower();
-			System.out.print("Power Engimon Anda: ");
-			System.out.print(powerPlayer);
-			System.out.print("\n");
-			System.out.print("Power Engimon Lawan: ");
-			System.out.print(powerEnemy);
-			System.out.print("\n");
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("Battle");
+			alert.setHeaderText("Engimon Liar : " + engimonMusuh.getNamaSpecies() +
+					"\nPower Anda : " + powerPlayer + "\nPower Musuh : " + powerEnemy);
+			alert.setContentText("Lanjutkan?");
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+
+			stage.getIcons().add(new Image("assets/oopokemon.png"));
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK){
+			} else {
+				return myplayer;
+			}
 			if (powerPlayer < powerEnemy) {
 				if (myengimon.getLife() == 1){
 					AlertBox.display("Battle", "Kalah Power, Engimon anda Mati");
@@ -48,17 +62,23 @@ public class Battle {
 				AlertBox.display("Battle", "Menang Power, Engimon Liar menjadi milik anda");
 				if (!myplayer.getInventory().isFull()) {
 					// Buat Input String buuat kasih nama buat engimon baik di inventory maupun battle
-					System.out.print("Engimon Menjadi Milik Anda");
-					System.out.print("\n");
-					System.out.print("Beri Nama Engimon Baru anda : ");
+//					AlertBox.display("Battle");
 //					String nama;
 //					nama = ConsoleInput.readToWhiteSpace(true);
-//					engimonMusuh.setName(nama);
+					String nama = InputBox.inputName("Battle", "Beri Nama Pada Engimon Baru Anda!");
+					engimonMusuh.setName(nama);
 					myplayer.getInventory().addEngimon(engimonMusuh);
 					Skill skillbaru = dropRandomSkill();
-					AlertBox.display("Battle Drop", "Mendapatkan Drop : " + skillbaru.getSkillName());
+					Skill skillBaru2 = new Skill(engimonMusuh.monSkills[0]);
+					AlertBox.display("Battle Drop", "Mendapatkan Drop :\n" + skillBaru2.getSkillName() +
+							"\n" + skillbaru.getSkillName());
 					if (!myplayer.getInventory().isFull()) {
-						myplayer.getInventory().addSkill(skillbaru);
+						myplayer.getInventory().addSkill(skillBaru2);
+						if (!myplayer.getInventory().isFull()) {
+							myplayer.getInventory().addSkill(skillbaru);
+						} else {
+							AlertBox.display("Battle Drop", "Inventory Penuh");
+						}
 					} else {
 						AlertBox.display("Battle Drop", "Inventory Penuh");
 					}

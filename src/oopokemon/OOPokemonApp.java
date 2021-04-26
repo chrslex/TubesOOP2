@@ -50,16 +50,7 @@ public class OOPokemonApp extends Application {
         playBGM();
 
         gameState = new GameState(mapContainer);
-        isekai = gameState.map;
-        myPlayer = gameState.player;
-        enemyHandler = gameState.enemyhandler;
-        healthbar = myPlayer.healthbar;
-
-        renderer = new Renderer(isekai);
-        renderer.render(mapContainer);
-        camera.getChildren().add(healthbar);
-        cameraHandler();
-        return root;
+        return initGameComponents();
     }
 
     private Parent loadGemu() {
@@ -70,18 +61,21 @@ public class OOPokemonApp extends Application {
         try {
             gameState = loadGame("testing", mapContainer);
         } catch (NotInitializedException e) {
-            System.err.println("gagal menload game memuat game baru");
+            AlertBox.display("Load Game", "Gagal Load Game, memulai game baru!");
             gameState = new GameState(mapContainer);
         }
+        return initGameComponents();
+    }
+
+    private Parent initGameComponents() {
         isekai = gameState.map;
         myPlayer = gameState.player;
         enemyHandler = gameState.enemyhandler;
-        healthbar = myPlayer.healthbar;
+        healthbar = myPlayer.getHealthbar();
 
         renderer = new Renderer(isekai);
         renderer.render(mapContainer);
         camera.getChildren().add(healthbar);
-
         cameraHandler();
         return root;
     }
@@ -103,6 +97,22 @@ public class OOPokemonApp extends Application {
         root.setBottom(camera);
     }
 
+    private void setUpCamera() {
+        camera.setMinSize(getCameraWidth(), getCameraHeight());
+        camera.setPrefSize(getCameraWidth(), getCameraHeight());
+        camera.setMaxSize(getCameraWidth(), getCameraHeight());
+        camera.getChildren().add(mapContainer);
+    }
+
+    private void cameraHandler() {
+        mapContainer.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
+        mapContainer.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
+    }
+
+    private enum GameModeType {
+        NewGame,
+        LoadGame
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -227,6 +237,9 @@ public class OOPokemonApp extends Application {
             isekai = gameState.map;
             myPlayer = gameState.player;
             enemyHandler = gameState.enemyhandler;
+            camera.getChildren().remove(healthbar);
+            healthbar = myPlayer.getHealthbar();
+            camera.getChildren().add(healthbar);
             renderer = new Renderer(gameState.map);
             renderer.render(mapContainer);
             cameraHandler();
@@ -333,15 +346,13 @@ public class OOPokemonApp extends Application {
         lbl_move.setId("label");
         Label lbl_battle = new Label("Mengajukan Battle: SPACE");
         lbl_battle.setId("label");
-        Label lbl_invetory = new Label("Inventory: B\ntest\ntest");
+        Label lbl_invetory = new Label("Inventory: B");
         lbl_invetory.setId("label");
-        Label lbl_breed = new Label("Mengajukan Breed: M");
-        lbl_breed.setId("label");
         ImageView imageView = new ImageView();
         imageView.setFitWidth(300);
 
 
-        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_invetory, lbl_breed, imageView);
+        uiContainer.getChildren().addAll(lbl_move, lbl_battle, lbl_invetory, imageView);
 
         uiContainer.setTranslateX((getCameraWidth() - 300)/2);
         uiContainer.setTranslateY((getCameraHeight() - 4*(10 + 20))/2);
@@ -467,24 +478,6 @@ public class OOPokemonApp extends Application {
         });
 
         stage.show();
-    }
-
-    private void setUpCamera() {
-        camera.setMinSize(getCameraWidth(), getCameraHeight());
-        camera.setPrefSize(getCameraWidth(), getCameraHeight());
-        camera.setMaxSize(getCameraWidth(), getCameraHeight());
-        camera.getChildren().add(mapContainer);
-    }
-
-    private void cameraHandler() {
-//        System.out.println(myPlayer.position.x + ", "+  myPlayer.position.y);
-        mapContainer.setTranslateX(-getCameraWidth() * (myPlayer.position.x / getNumOfCellHoriz()));
-        mapContainer.setTranslateY(-getCameraHeight() * (myPlayer.position.y / getNumOfCellVert()));
-    }
-
-    private enum GameModeType {
-        NewGame,
-        LoadGame
     }
 
     public static void main(String[] args) {

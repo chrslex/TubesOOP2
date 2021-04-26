@@ -3,6 +3,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import oopokemon.inventory.InventoryGUI;
 import oopokemon.inventory.InventroyItem;
@@ -15,9 +16,6 @@ import oopokemon.exception.NotInitializedException;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -167,7 +165,7 @@ public class OOPokemonApp extends Application {
                 case DOWN:
                     myPlayer.setPositionOcc(myPlayer.position.x, myPlayer.position.y + 1);
                     break;
-                case SPACE:
+                case C:
                     enemyHandler.suspend();
                     myPlayer = Battle.battle(myPlayer, enemyHandler);
                     enemyHandler.resume();
@@ -335,7 +333,21 @@ public class OOPokemonApp extends Application {
         uiContainer.setTranslateY((getCameraHeight() - 4*(btnHeight+10))/2);
 
         // Setup Tombol
-        btn_new.setOnAction(event -> setGameToMainGame(stage, GameModeType.NewGame));
+        btn_new.setOnAction(event -> {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle("New Game");
+            confirmation.setContentText("Do You Want To Start a New Game?");
+            ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+            confirmation.getButtonTypes().setAll(okButton, noButton);
+            confirmation.showAndWait().ifPresent(type -> {
+                if (type == ButtonType.OK) {
+                    setGameToMainGame(stage, GameModeType.NewGame);
+                }
+            });
+        });
+            setGameToMainGame(stage, GameModeType.NewGame)
+        });
 
         btn_load.setOnAction(event -> {
             setGameToMainGame(stage, GameModeType.LoadGame);
@@ -367,15 +379,15 @@ public class OOPokemonApp extends Application {
         helpContainer.getChildren().add(uiContainer);
 
 
-        Label lbl_move = new Label("Bergerak: W/A/S/D or ↑/←/↓/→");
+        Label lbl_move = new Label("Move: W/A/S/D or ↑/←/↓/→");
         lbl_move.setId("label");
-        Label lbl_battle = new Label("Mengajukan Battle: SPACE");
+        Label lbl_battle = new Label("Battle: C");
         lbl_battle.setId("label");
         Label lbl_inventory = new Label("Inventory: B");
         lbl_inventory.setId("label");
         Label lbl_interaction = new Label("Interaction: I");
         lbl_interaction.setId("label");
-        Label lbl_pause = new Label("Pause: Esc");
+        Label lbl_pause = new Label("Pause: ESC or SPACE");
         lbl_pause.setId("label");
         Button btn_back = new Button("Back");
         btn_back.setPrefSize(175, 50);

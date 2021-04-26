@@ -138,8 +138,6 @@ public class InventoryGUI extends Pane {
             fifthLine = new Label(item.getFifthLine());
         }
 
-
-
         HBox buttonPlaceHolder = new HBox(10);
         Button useButton = new Button("Gunakan");
         useButton.setPrefWidth(65);
@@ -191,9 +189,20 @@ public class InventoryGUI extends Pane {
 
         delButton.setOnAction(event -> {
             if (item instanceof Skill){
-                player.getInventory().removeSkill(id + 1);
+                Integer input1 = InputBox.inputPrompt("Buang Skill", "Jumlah Skill Untuk Dibuang :");
+                int count = player.getInventory().getCountSkill((Skill)item);
+                if (input1 == -1) {
+                    return;
+                }
+                if (input1 > count){
+                    AlertBox.display("Buang Skill", "Jumlah Skill untuk dibuang melebihi jumlah yang dimiliki!");
+                    return;
+                }
+                for (int i = 0; i < input1; i++) {
+                    player.getInventory().removeSkill(id + 1);
+                }
                 stage.close();
-                AlertBox.display("Buang Skill", item.getFirstLine() +" berhasil dibuang");
+                AlertBox.display("Buang Skill", item.getFirstLine() + " berhasil dibuang sebanyak : " + input1);
                 prevStage.setScene(createInventoryScene(player, InventoryType.SKILL, prevStage));
             }
             else if (item instanceof Engimon){

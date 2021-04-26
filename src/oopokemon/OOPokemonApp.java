@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import oopokemon.inventory.InventoryGUI;
+import oopokemon.inventory.InventroyItem;
 import oopokemon.map.Map;
 
 import oopokemon.misc.*;
@@ -39,6 +40,7 @@ public class OOPokemonApp extends Application {
     private EnemyHandler enemyHandler;
     private Renderer renderer;
     private ImageView healthbar;
+    private InventroyItem pauseButton = new InventroyItem(100,100);
     private GameState gameState;
     private Map isekai;
     private Player myPlayer;
@@ -72,10 +74,13 @@ public class OOPokemonApp extends Application {
         myPlayer = gameState.player;
         enemyHandler = gameState.enemyhandler;
         healthbar = myPlayer.getHealthbar();
+//        pauseButton.setImage(new Image("assets/pause.png"));
+        pauseButton.setTranslateX(getCameraWidth()-120);
+        pauseButton.setTranslateY(20);
 
         renderer = new Renderer(isekai);
         renderer.render(mapContainer);
-        camera.getChildren().add(healthbar);
+        camera.getChildren().addAll(healthbar, pauseButton);
         cameraHandler();
         return root;
     }
@@ -135,6 +140,7 @@ public class OOPokemonApp extends Application {
         else {
             mainGame = new Scene(newGame());
         }
+        mainGame.getStylesheets().add("assets/styles.css");
 //        mapContainer.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 //        camera.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
@@ -181,6 +187,12 @@ public class OOPokemonApp extends Application {
             cameraHandler();
 
         });
+
+        Button pbtn = pauseButton.getButton();
+        pbtn.setOnAction(event -> {
+            setGameToPause(stage, mainGame);
+        });
+
         if (myPlayer == null){
             musicPlayer.interrupt();
             AlertBox.display("GAME OVER", "ANDA KALAH");

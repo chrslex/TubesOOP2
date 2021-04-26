@@ -13,12 +13,10 @@ public class InventroyItem extends Pane {
     private final ImageView center;
     public final Button button;
     public final int id;
-    private final Item item = null;
-    private final Player player;
+
     public InventroyItem(int id, Item item, Player player, Stage prevStage){
         super();
         this.id = id;
-        this.player = player;
         setMaxSize(150, 150);
         center = new ImageView();
         button = new Button();
@@ -38,8 +36,32 @@ public class InventroyItem extends Pane {
         });
     }
 
+    public InventroyItem(int width, int length){
+        super();
+        id = 0;
+        setMaxSize(width,length);
+        center = new ImageView();
+        button = new Button();
+        center.setX(0);
+        center.setY(0);
+        center.setFitWidth(width);
+        center.setFitHeight(length);
+
+        button.setPrefSize(width, length);
+        button.setTranslateX(0);
+        button.setTranslateY(0);
+        button.setId("pauseItem");
+        getChildren().addAll(center, button);
+        button.setId("inventoryitem");
+        setImage(new Image("assets/pause.png"));
+
+    }
+
     public void setImage(Image image){
         center.setImage(image);
     }
 
+    public Button getButton(){
+        return button;
+    }
 }

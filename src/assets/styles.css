@@ -22,6 +22,23 @@
     -fx-transition-delay: 1s;
 }
 
+#button2{
+    -fx-background-color: #0D2B4D;
+    /*-fx-text-fill: #84D0F0;*/
+    -fx-text-fill: #FFF;
+    -fx-opacity: 70%;
+    -fx-font-family: consolas;
+    -fx-letter-spacing: 4px;
+    -fx-transition: 0.2s;
+    -fx-font-size: 15px;
+}
+
+#button2:hover{
+    -fx-opacity: 50%;
+    -fx-transition-delay: 1s;
+}
+
+
 #label{
     /*-fx-padding: 0px;
     -fx-background-color: #0D2B4D;*/
@@ -31,6 +48,16 @@
     -fx-letter-spacing: 4px;
     -fx-font-weight: 900;
     -fx-padding-top: 20px;
+}
+
+#label2{
+    /*-fx-padding: 0px;
+    -fx-background-color: #0D2B4D;*/
+    -fx-text-fill: #0D2B4D;
+    -fx-font-size: 15px;
+    -fx-font-family: consolas;
+    -fx-letter-spacing: 2px;
+    -fx-font-weight: 500;
 }
 
 #inventoryitem{

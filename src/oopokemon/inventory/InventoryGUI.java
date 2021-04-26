@@ -1,5 +1,6 @@
 package oopokemon.inventory;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -7,12 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import oopokemon.misc.AlertBox;
@@ -43,11 +44,16 @@ public class InventoryGUI extends Pane {
     }
 
     private static Scene createInventoryScene(Player player, InventoryType type, Stage stage) {
+        StackPane inventMother = new StackPane();
         HBox inventoryLayout = new HBox();
+        inventMother.getChildren().add(inventoryLayout);
         inventoryLayout.setAlignment(Pos.CENTER);
-        Scene invScene = new Scene(inventoryLayout);
+        Scene invScene = new Scene(inventMother);
+//        invScene.setFill(Color.TRANSPARENT);
+//        Platform.setImplicitExit(false);
+
         invScene.getStylesheets().add("assets/styles.css");
-        inventoryLayout.setId("scene");
+//        inventoryLayout.setId("scene");
         inventoryLayout.toBack();
         GridPane inventoryItems;
         if (type == InventoryType.ENGIMON){
@@ -57,7 +63,7 @@ public class InventoryGUI extends Pane {
             inventoryItems = populateItem(player.getInventory().listSkill(), player, stage);
         }
         ScrollPane invScrollItem = new ScrollPane(inventoryItems);
-        invScrollItem.setId("inventoryBackground");
+//        invScrollItem.setId("inventoryBackground");
         inventoryItems.toFront();
         invScrollItem.setFitToWidth(true);
         invScrollItem.setMaxHeight(650);
@@ -118,18 +124,23 @@ public class InventoryGUI extends Pane {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         VBox itemInfo = new VBox(10);
-        itemInfo.setPadding(new Insets(10,0,15,0));
+        itemInfo.setPadding(new Insets(10,25,15,25));
         itemInfo.setAlignment(Pos.CENTER);
 //        itemInfo.setPrefSize(300, 600);;
         ImageView image = new ImageView(item.getImage());
         image.setFitWidth(150);
         image.setFitHeight(150);
         image.setPreserveRatio(true);
-        Label idLabel = new Label("id : "+id);
+        Label idLabel = new Label("ID : "+id);
+        idLabel.setId("label2");
         Label firstLine = new Label(item.getFirstLine());
+        firstLine.setId("label2");
         Label secondLine = new Label(item.getSecondLine());
+        secondLine.setId("label2");
         Label thirdLine = new Label(item.getThirdLine());
+        thirdLine.setId("label2");
         Label fourthLine = new Label(item.getFourthLine());
+        fourthLine.setId("label2");
         Label fifthLine;
         Button btnDummy = new Button();
 
@@ -140,19 +151,22 @@ public class InventoryGUI extends Pane {
         else {
             fifthLine = new Label(item.getFifthLine());
         }
+        fifthLine.setId("label2");
 
-        HBox buttonPlaceHolder = new HBox(10);
-        Button useButton = new Button("Gunakan");
-        useButton.setPrefWidth(65);
-        Button delButton = new Button("Buang");
-        delButton.setPrefWidth(65);
-        buttonPlaceHolder.getChildren().addAll(useButton,delButton);
-        buttonPlaceHolder.setTranslateX((600-2*(10+60))/2);
-        itemInfo.getChildren().addAll(image,idLabel,firstLine,secondLine,thirdLine,fourthLine,fifthLine, buttonPlaceHolder);
-
+//        HBox buttonPlaceHolder = new HBox(10);
+        Button useButton = new Button("Use");
+        useButton.setId("button2");
+        useButton.setPrefWidth(75);
+        Button delButton = new Button("Throw");
+        delButton.setId("button2");
+        delButton.setPrefWidth(75);
+//        buttonPlaceHolder.getChildren().addAll(useButton,delButton);
+        itemInfo.getChildren().addAll(image,idLabel,firstLine,secondLine,thirdLine,fourthLine,fifthLine, useButton, delButton);
 
         if (item instanceof Engimon){
             btnDummy = new Button("Rename");
+            btnDummy.setId("button2");
+            btnDummy.setPrefWidth(75);
             itemInfo.getChildren().add(btnDummy);
         }
         btnDummy.setOnAction(event -> {
@@ -226,11 +240,15 @@ public class InventoryGUI extends Pane {
 
         Scene infoScene =new Scene(itemInfo);
         infoScene.getStylesheets().add("assets/styles.css");
-        itemInfo.setPrefWidth(600);
+        itemInfo.setMinWidth(400);
+
         stage.getIcons().add(item.getImage());
         stage.setTitle(item.getFirstLine());
         stage.setScene(infoScene);
         stage.setResizable(false);
         stage.showAndWait();
+        //-2*(10+75))/2
+//        buttonPlaceHolder.setTranslateX(itemInfo.getWidth());
+
     }
 }

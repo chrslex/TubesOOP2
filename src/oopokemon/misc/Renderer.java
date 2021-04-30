@@ -1,5 +1,6 @@
 package oopokemon.misc;
 
+import javafx.application.Platform;
 import oopokemon.map.Map;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -50,7 +51,7 @@ public class Renderer {
     }
 
     public static void renderNode(Node toRender, Pane mapPlaceHolder) {
-        mapPlaceHolder.getChildren().add(toRender);
+        Platform.runLater(() -> mapPlaceHolder.getChildren().add(toRender));
     }
 
     /**

@@ -22,6 +22,7 @@ public class EnemyHandler implements Runnable {
 
     private Pane mapPlaceHolder;
     private volatile int interval = 1000;
+    public static final int MAX_SIZE = 100;
 
     public EnemyHandler(Map map, int initialSize, Pane mapPlaceHolder) throws NotInitializedException {
         this.enemyList = new ArrayList<>();
@@ -87,19 +88,19 @@ public class EnemyHandler implements Runnable {
                             }
                         }
                     });
-//                    if (finalTurnCounter % 5 == 4){
-//                        Random rand = new Random();
-//                        int lvl = player.getHighestLevel();
-//                        Enemy newENemy = new Enemy(player.getMap(), rand.nextInt(8), rand.nextInt(3) + lvl);
-//                        enemyList.add(newENemy);
-//                        Renderer.renderNode(newENemy.getToRender(), mapPlaceHolder);
-//                        System.out.println("spawning");
-//                    }
+                    if (finalTurnCounter % 5 == 4 && enemyList.size() < MAX_SIZE){
+                        Random rand = new Random();
+                        int lvl = player.getHighestLevel();
+                        Enemy newENemy = new Enemy(player.getMap(), rand.nextInt(8), rand.nextInt(3) + lvl);
+                        enemyList.add(newENemy);
+                        Renderer.renderNode(newENemy.getToRender(), mapPlaceHolder);
+                        System.out.println("spawning");
+                    }
                     turnCounter++;
                 }
 
             }
-            catch (InterruptedException ignored) {}
+            catch (InterruptedException | NotInitializedException ignored) {}
         }
     }
     public synchronized void suspend() {
